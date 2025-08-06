@@ -1039,8 +1039,8 @@ deg_0.1 <- bind_rows(
     Entrez_ID = as.character(Entrez_ID),
     Response_Group = case_when(
       Entrez_ID %in% prob_1_0.1 ~ "Non response\n(0.1 µM)",
-      Entrez_ID %in% prob_2_0.1 ~ "CX-DOX mid-late response\n(0.1 µM)",
-      Entrez_ID %in% prob_3_0.1 ~ "DOX only mid-late response\n(0.1 µM)",
+      Entrez_ID %in% prob_2_0.1 ~ "CX_DOX_1",
+      Entrez_ID %in% prob_3_0.1 ~ "DOX_sp_1",
       TRUE ~ NA_character_
     )
   ) %>%
@@ -1053,8 +1053,8 @@ deg_0.1 <- deg_0.1 %>%
     Timepoint = factor(Timepoint, levels = c(3, 24, 48)),
     Response_Group = factor(Response_Group, levels = c(
       "Non response\n(0.1 µM)",
-      "CX-DOX mid-late response\n(0.1 µM)",
-      "DOX only mid-late response\n(0.1 µM)"
+      "CX_DOX_1",
+      "DOX_sp_1"
     ))
   )
 
@@ -1118,10 +1118,10 @@ deg_0.5 <- bind_rows(
     Entrez_ID = as.character(Entrez_ID),
     Response_Group = case_when(
       Entrez_ID %in% prob_1_0.5 ~ "Non response\n(0.5 µM)",
-      Entrez_ID %in% prob_2_0.5 ~ "DOX-specific\nresponse (0.5 µM)",
-      Entrez_ID %in% prob_3_0.5 ~ "DOX only mid-late\nresponse (0.5 µM)",
-      Entrez_ID %in% prob_4_0.5 ~ "CX + DOX (early)\nresponse (0.5 µM)",
-      Entrez_ID %in% prob_5_0.5 ~ "DOX + CX (mid-late)\nresponse (0.5 µM)",
+      Entrez_ID %in% prob_2_0.5 ~ "DOX_sp_2",
+      Entrez_ID %in% prob_3_0.5 ~ "DOX_sp_3",
+      Entrez_ID %in% prob_4_0.5 ~ "CX_DOX_2",
+      Entrez_ID %in% prob_5_0.5 ~ "CX_DOX_3",
       TRUE ~ NA_character_
     )
   ) %>%
@@ -1134,10 +1134,10 @@ deg_0.5 <- deg_0.5 %>%
     Timepoint = factor(Timepoint, levels = c(3, 24, 48)),
     Response_Group = factor(Response_Group, levels = c(
       "Non response\n(0.5 µM)",
-      "DOX-specific\nresponse (0.5 µM)",
-      "DOX only mid-late\nresponse (0.5 µM)",
-      "CX + DOX (early)\nresponse (0.5 µM)",
-      "DOX + CX (mid-late)\nresponse (0.5 µM)"
+      "DOX_sp_2",
+      "DOX_sp_3",
+      "CX_DOX_2",
+      "CX_DOX_3"
     ))
   )
 
