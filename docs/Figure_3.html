@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Figure_3</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Paul_CX_2025</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Figure_3</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2025-08-06
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Paul_CX_2025/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20250129code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20250129)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20250129code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20250129)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025tree62fa4cfff0aa3594443f582c774412fd945240bbtargetblank62fa4cfa">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/62fa4cfff0aa3594443f582c774412fd945240bb" target="_blank">62fa4cf</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025tree62fa4cfff0aa3594443f582c774412fd945240bbtargetblank62fa4cfa"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/62fa4cfff0aa3594443f582c774412fd945240bb" target="_blank">62fa4cf</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .RData
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    0.1 box.svg
+    Ignored:    Rplot04.svg
+
+Untracked files:
+    Untracked:  analysis/Figure_3.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="dna-damage-marker-expression-changes-between-cx5461-and-dox"
+class="section level2">
+<h2><strong>📌 DNA Damage Marker expression changes between CX5461 and
+DOX</strong></h2>
+<pre class="r"><code># 📌 DDR Gene Expression Heatmap — CX-5461 and DOX (68 genes, with categories)
+
+# Load Required Libraries
+library(tidyverse)
+library(ComplexHeatmap)
+library(circlize)
+library(grid)
+library(org.Hs.eg.db)
+library(reshape2)
+
+# Load DEG files
+load_deg &lt;- function(path) read.csv(path)
+
+CX_0.1_3 &lt;- load_deg(&quot;data/DEGs/Toptable_CX_0.1_3.csv&quot;)
+CX_0.1_24 &lt;- load_deg(&quot;data/DEGs/Toptable_CX_0.1_24.csv&quot;)
+CX_0.1_48 &lt;- load_deg(&quot;data/DEGs/Toptable_CX_0.1_48.csv&quot;)
+CX_0.5_3 &lt;- load_deg(&quot;data/DEGs/Toptable_CX_0.5_3.csv&quot;)
+CX_0.5_24 &lt;- load_deg(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+CX_0.5_48 &lt;- load_deg(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.1_3 &lt;- load_deg(&quot;data/DEGs/Toptable_DOX_0.1_3.csv&quot;)
+DOX_0.1_24 &lt;- load_deg(&quot;data/DEGs/Toptable_DOX_0.1_24.csv&quot;)
+DOX_0.1_48 &lt;- load_deg(&quot;data/DEGs/Toptable_DOX_0.1_48.csv&quot;)
+DOX_0.5_3 &lt;- load_deg(&quot;data/DEGs/Toptable_DOX_0.5_3.csv&quot;)
+DOX_0.5_24 &lt;- load_deg(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+DOX_0.5_48 &lt;- load_deg(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+# 📌 Define Entrez IDs and Categories (excluding DOX Cardiotoxicity genes)
+entrez_category &lt;- tribble(
+  ~ENTREZID, ~Category,
+  317, &quot;Apoptosis&quot;, 355, &quot;Apoptosis&quot;, 581, &quot;Apoptosis&quot;, 637, &quot;Apoptosis&quot;,
+  836, &quot;Apoptosis&quot;, 841, &quot;Apoptosis&quot;, 842, &quot;Apoptosis&quot;, 27113, &quot;Apoptosis&quot;,
+  5366, &quot;Apoptosis&quot;, 54205, &quot;Apoptosis&quot;, 55367, &quot;Apoptosis&quot;, 8795, &quot;Apoptosis&quot;,
+  1026, &quot;Cell Cycle / Checkpoint&quot;, 1027, &quot;Cell Cycle / Checkpoint&quot;, 595, &quot;Cell Cycle / Checkpoint&quot;,
+  894, &quot;Cell Cycle / Checkpoint&quot;, 896, &quot;Cell Cycle / Checkpoint&quot;, 898, &quot;Cell Cycle / Checkpoint&quot;,
+  9133, &quot;Cell Cycle / Checkpoint&quot;, 9134, &quot;Cell Cycle / Checkpoint&quot;, 891, &quot;Cell Cycle / Checkpoint&quot;,
+  983, &quot;Cell Cycle / Checkpoint&quot;, 1017, &quot;Cell Cycle / Checkpoint&quot;, 1019, &quot;Cell Cycle / Checkpoint&quot;,
+  1020, &quot;Cell Cycle / Checkpoint&quot;, 1021, &quot;Cell Cycle / Checkpoint&quot;, 993, &quot;Cell Cycle / Checkpoint&quot;,
+  995, &quot;Cell Cycle / Checkpoint&quot;, 1869, &quot;Cell Cycle / Checkpoint&quot;, 4609, &quot;Cell Cycle / Checkpoint&quot;,
+  5925, &quot;Cell Cycle / Checkpoint&quot;, 9874, &quot;Cell Cycle / Checkpoint&quot;, 11011, &quot;Cell Cycle / Checkpoint&quot;,
+  1385, &quot;Cell Cycle / Checkpoint&quot;,
+  472, &quot;Damage Sensors / Signal Transducers&quot;, 545, &quot;Damage Sensors / Signal Transducers&quot;,
+  5591, &quot;Damage Sensors / Signal Transducers&quot;, 5810, &quot;Damage Sensors / Signal Transducers&quot;,
+  5883, &quot;Damage Sensors / Signal Transducers&quot;, 5884, &quot;Damage Sensors / Signal Transducers&quot;,
+  6118, &quot;Damage Sensors / Signal Transducers&quot;, 4361, &quot;Damage Sensors / Signal Transducers&quot;,
+  10111, &quot;Damage Sensors / Signal Transducers&quot;, 4683, &quot;Damage Sensors / Signal Transducers&quot;,
+  84126, &quot;Damage Sensors / Signal Transducers&quot;, 3014, &quot;Damage Sensors / Signal Transducers&quot;,
+  672, &quot;DNA Repair&quot;, 2177, &quot;DNA Repair&quot;, 5888, &quot;DNA Repair&quot;, 5893, &quot;DNA Repair&quot;,
+  1647, &quot;DNA Repair&quot;, 4616, &quot;DNA Repair&quot;, 10912, &quot;DNA Repair&quot;, 1111, &quot;DNA Repair&quot;,
+  11200, &quot;DNA Repair&quot;, 1643, &quot;DNA Repair&quot;, 8243, &quot;DNA Repair&quot;, 5981, &quot;DNA Repair&quot;,
+  7157, &quot;p53 Regulators / Targets&quot;, 4193, &quot;p53 Regulators / Targets&quot;, 5371, &quot;p53 Regulators / Targets&quot;,
+  27244, &quot;p53 Regulators / Targets&quot;, 50484, &quot;p53 Regulators / Targets&quot;,
+  207, &quot;Miscellaneous / Broad&quot;, 25, &quot;Miscellaneous / Broad&quot;
+)
+
+entrez_ids &lt;- entrez_category$ENTREZID
+
+# 📌 Extract Data Function
+extract_data &lt;- function(df, name) {
+  df %&gt;%
+    filter(Entrez_ID %in% entrez_ids) %&gt;%
+    mutate(
+      Gene = mapIds(org.Hs.eg.db, as.character(Entrez_ID),
+                    column = &quot;SYMBOL&quot;, keytype = &quot;ENTREZID&quot;, multiVals = &quot;first&quot;),
+      Condition = name,
+      Signif = ifelse(adj.P.Val &lt; 0.05, &quot;*&quot;, &quot;&quot;)
+    )
+}
+
+# DEG list
+deg_list &lt;- list(
+  &quot;CX_0.1_3&quot; = CX_0.1_3, &quot;CX_0.1_24&quot; = CX_0.1_24, &quot;CX_0.1_48&quot; = CX_0.1_48,
+  &quot;CX_0.5_3&quot; = CX_0.5_3, &quot;CX_0.5_24&quot; = CX_0.5_24, &quot;CX_0.5_48&quot; = CX_0.5_48,
+  &quot;DOX_0.1_3&quot; = DOX_0.1_3, &quot;DOX_0.1_24&quot; = DOX_0.1_24, &quot;DOX_0.1_48&quot; = DOX_0.1_48,
+  &quot;DOX_0.5_3&quot; = DOX_0.5_3, &quot;DOX_0.5_24&quot; = DOX_0.5_24, &quot;DOX_0.5_48&quot; = DOX_0.5_48
+)
+
+#Combine and Annotate
+all_data &lt;- bind_rows(mapply(extract_data, deg_list, names(deg_list), SIMPLIFY = FALSE)) %&gt;%
+  left_join(entrez_category, by = c(&quot;Entrez_ID&quot; = &quot;ENTREZID&quot;))
+
+# Create matrices
+logFC_mat &lt;- acast(all_data, Gene ~ Condition, value.var = &quot;logFC&quot;)
+signif_mat &lt;- acast(all_data, Gene ~ Condition, value.var = &quot;Signif&quot;)
+
+# Set column order
+desired_order &lt;- c(&quot;CX_0.1_3&quot;, &quot;CX_0.1_24&quot;, &quot;CX_0.1_48&quot;,
+                   &quot;CX_0.5_3&quot;, &quot;CX_0.5_24&quot;, &quot;CX_0.5_48&quot;,
+                   &quot;DOX_0.1_3&quot;, &quot;DOX_0.1_24&quot;, &quot;DOX_0.1_48&quot;,
+                   &quot;DOX_0.5_3&quot;, &quot;DOX_0.5_24&quot;, &quot;DOX_0.5_48&quot;)
+
+logFC_mat &lt;- logFC_mat[, desired_order, drop = FALSE]
+signif_mat &lt;- signif_mat[, desired_order, drop = FALSE]
+
+#  Column annotations
+meta &lt;- str_split_fixed(colnames(logFC_mat), &quot;_&quot;, 3)
+col_annot &lt;- HeatmapAnnotation(
+  Drug = meta[, 1],
+  Conc = meta[, 2],
+  Time = meta[, 3],
+  col = list(
+    Drug = c(&quot;CX&quot; = &quot;blue&quot;, &quot;DOX&quot; = &quot;red&quot;),
+    Conc = c(&quot;0.1&quot; = &quot;lightgreen&quot;, &quot;0.5&quot; = &quot;darkgreen&quot;),
+    Time = c(&quot;3&quot; = &quot;yellow&quot;, &quot;24&quot; = &quot;orange&quot;, &quot;48&quot; = &quot;purple&quot;)
+  ),
+  annotation_height = unit(c(1, 1, 1), &quot;cm&quot;)
+)
+
+# Row annotations
+gene_order_df &lt;- all_data %&gt;%
+  distinct(Gene, Category) %&gt;%
+  arrange(factor(Category, levels = sort(unique(entrez_category$Category))), Gene)
+
+ordered_genes &lt;- gene_order_df$Gene
+logFC_mat &lt;- logFC_mat[ordered_genes, ]
+signif_mat &lt;- signif_mat[ordered_genes, ]
+
+# Category color mapping
+category_colors_named &lt;- c(
+  &quot;Apoptosis&quot; = &quot;darkorange&quot;,
+  &quot;Cell Cycle / Checkpoint&quot; = &quot;steelblue&quot;,
+  &quot;Damage Sensors / Signal Transducers&quot; = &quot;darkgreen&quot;,
+  &quot;DNA Repair&quot; = &quot;firebrick&quot;,
+  &quot;p53 Regulators / Targets&quot; = &quot;gold&quot;,
+  &quot;Miscellaneous / Broad&quot; = &quot;gray60&quot;
+)
+
+gene_order_df$Category &lt;- factor(gene_order_df$Category, levels = names(category_colors_named))
+
+ha_left &lt;- rowAnnotation(
+  Category = gene_order_df$Category,
+  col = list(Category = category_colors_named),
+  annotation_name_side = &quot;top&quot;
+)
+
+# Final Heatmap
+Heatmap(logFC_mat,
+        name = &quot;logFC&quot;,
+        top_annotation = col_annot,
+        left_annotation = ha_left,
+        cluster_columns = FALSE,
+        cluster_rows = FALSE,
+        show_row_names = TRUE,
+        show_column_names = FALSE,
+        row_names_gp = gpar(fontsize = 10),
+        column_title = &quot;DDR Gene Expression Response (n = 65)\nCX-5461 and DOX&quot;,
+        column_title_gp = gpar(fontsize = 14, fontface = &quot;bold&quot;),
+        cell_fun = function(j, i, x, y, width, height, fill) {
+          grid.text(signif_mat[i, j], x, y, gp = gpar(fontsize = 9))
+        }
+)</code></pre>
+<p><img src="figure/Figure_3.Rmd/DNA-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="log2cpm-boxplots-for-top2-genes-and-tp53"
+class="section level2">
+<h2><strong>📌 Log2CPM Boxplots for TOP2 Genes and TP53</strong></h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(org.Hs.eg.db)
+library(clusterProfiler)</code></pre>
+<pre><code>Warning: package &#39;clusterProfiler&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code># Load feature count matrix
+boxplot1 &lt;- read.csv(&quot;data/Feature_count_Matrix_Log2CPM_filtered.csv&quot;) %&gt;% as.data.frame()
+
+# Ensure column names are cleaned
+colnames(boxplot1) &lt;- trimws(gsub(&quot;^X&quot;, &quot;&quot;, colnames(boxplot1)))  
+
+## **📌 Define Genes of Interest**
+
+# Define the genes of interest
+top2_genes &lt;- c(&quot;TOP2A&quot;, &quot;TOP2B&quot;)
+
+dna_damage_genes &lt;- c(&quot;TP53&quot;)  # Using correct gene symbol TP53
+
+# Load Toptables
+deg_files &lt;- list.files(&quot;data/DEGs&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+deg_list &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;data/DEGs/Toptable_|\\.csv&quot;, &quot;&quot;, deg_files)  
+
+# Function to check significance based on **Entrez_ID in the correct sample**
+is_significant &lt;- function(gene, drug, conc, timepoint) {
+  condition &lt;- paste(drug, conc, timepoint, sep = &quot;_&quot;)
+  if (!condition %in% names(deg_list)) return(FALSE)
+  
+  toptable &lt;- deg_list[[condition]]
+  gene_entrez &lt;- boxplot1$ENTREZID[boxplot1$SYMBOL == gene]
+  
+  if (length(gene_entrez) == 0) return(FALSE)
+  
+  return(any(gene_entrez %in% toptable$Entrez_ID[toptable$adj.P.Val &lt; 0.05]))
+}
+
+process_gene_data &lt;- function(gene) {
+  # Filter log2CPM data for the gene
+  gene_data &lt;- boxplot1 %&gt;% filter(SYMBOL == gene)
+  
+  # Reshape data
+  long_data &lt;- gene_data %&gt;%
+    pivot_longer(cols = -c(ENTREZID, SYMBOL, GENENAME), names_to = &quot;Sample&quot;, values_to = &quot;log2CPM&quot;) %&gt;%
+    mutate(
+      Indv = case_when(
+        grepl(&quot;75.1&quot;, Sample) ~ &quot;1&quot;,
+        grepl(&quot;78.1&quot;, Sample) ~ &quot;2&quot;,
+        grepl(&quot;87.1&quot;, Sample) ~ &quot;3&quot;,
+        grepl(&quot;17.3&quot;, Sample) ~ &quot;4&quot;,
+        grepl(&quot;84.1&quot;, Sample) ~ &quot;5&quot;,
+        grepl(&quot;90.1&quot;, Sample) ~ &quot;6&quot;,
+        TRUE ~ NA_character_
+      ),
+      Drug = case_when(
+        grepl(&quot;CX.5461&quot;, Sample) ~ &quot;CX&quot;,
+        grepl(&quot;DOX&quot;, Sample) ~ &quot;DOX&quot;,
+        grepl(&quot;VEH&quot;, Sample) ~ &quot;VEH&quot;,
+        TRUE ~ NA_character_
+      ),
+      Conc. = case_when(
+        grepl(&quot;_0.1_&quot;, Sample) ~ &quot;0.1&quot;,
+        grepl(&quot;_0.5_&quot;, Sample) ~ &quot;0.5&quot;,
+        TRUE ~ NA_character_
+      ),
+      Timepoint = case_when(
+        grepl(&quot;_3$&quot;, Sample) ~ &quot;3&quot;,
+        grepl(&quot;_24$&quot;, Sample) ~ &quot;24&quot;,
+        grepl(&quot;_48$&quot;, Sample) ~ &quot;48&quot;,
+        TRUE ~ NA_character_
+      ),
+      Condition = paste(Drug, Conc., Timepoint, sep = &quot;_&quot;)
+    )
+
+  # **Ensure Condition is Ordered Correctly**
+  long_data$Condition &lt;- factor(
+    long_data$Condition, 
+    levels = c(
+      &quot;CX_0.1_3&quot;, &quot;CX_0.1_24&quot;, &quot;CX_0.1_48&quot;, &quot;CX_0.5_3&quot;, &quot;CX_0.5_24&quot;, &quot;CX_0.5_48&quot;,
+      &quot;DOX_0.1_3&quot;, &quot;DOX_0.1_24&quot;, &quot;DOX_0.1_48&quot;, &quot;DOX_0.5_3&quot;, &quot;DOX_0.5_24&quot;, &quot;DOX_0.5_48&quot;,
+      &quot;VEH_0.1_3&quot;, &quot;VEH_0.1_24&quot;, &quot;VEH_0.1_48&quot;, &quot;VEH_0.5_3&quot;, &quot;VEH_0.5_24&quot;, &quot;VEH_0.5_48&quot;
+    )
+  )
+  
+  # Identify significant conditions **per Drug, Conc, and Timepoint**
+  significance_labels &lt;- long_data %&gt;%
+    distinct(Drug, Conc., Timepoint, Condition) %&gt;%
+    rowwise() %&gt;%
+    mutate(
+      max_log2CPM = max(long_data$log2CPM[long_data$Condition == Condition], na.rm = TRUE),
+      Significance = ifelse(is_significant(gene, Drug, Conc., Timepoint), &quot;*&quot;, &quot;&quot;)
+    ) %&gt;%
+    filter(Significance != &quot;&quot;) %&gt;% ungroup()
+  
+  list(long_data = long_data, significance_labels = significance_labels)
+}
+
+for (gene in top2_genes) {
+  data_info &lt;- process_gene_data(gene)
+  p &lt;- ggplot(data_info$long_data, aes(x = Condition, y = log2CPM, fill = Drug)) +
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_manual(values = c(&quot;CX&quot; = &quot;#0000FF&quot;, &quot;DOX&quot; = &quot;#e6d800&quot;, &quot;VEH&quot; = &quot;#FF00FF&quot;)) +
+    geom_point(aes(color = Indv), size = 2, alpha = 0.5, position = position_jitter(width = -1, height = 0)) +
+    geom_text(data = data_info$significance_labels, aes(x = Condition, y = max_log2CPM + 0.5, label = Significance),
+              inherit.aes = FALSE, size = 6, color = &quot;black&quot;) +
+    ggtitle(paste(&quot;Log2CPM Expression of&quot;, gene)) +
+    labs(x = &quot;Treatment&quot;, y = &quot;log2CPM&quot;) +
+    theme_bw() +
+    theme(plot.title = element_text(size = rel(2), hjust = 0.5),
+          axis.title = element_text(size = 15, color = &quot;black&quot;),
+          axis.text.x = element_text(size = 10, color = &quot;black&quot;, angle = 90, hjust = 1))
+  
+  print(p)
+}</code></pre>
+<p><img src="figure/Figure_3.Rmd/load_libraries-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/Figure_3.Rmd/load_libraries-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for (gene in dna_damage_genes) {
+  data_info &lt;- process_gene_data(gene)
+  p &lt;- ggplot(data_info$long_data, aes(x = Condition, y = log2CPM, fill = Drug)) +
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_manual(values = c(&quot;CX&quot; = &quot;#0000FF&quot;, &quot;DOX&quot; = &quot;#e6d800&quot;, &quot;VEH&quot; = &quot;#FF00FF&quot;)) +
+    geom_point(aes(color = Indv), size = 2, alpha = 0.5, position = position_jitter(width = -1, height = 0)) +
+    geom_text(data = data_info$significance_labels, aes(x = Condition, y = max_log2CPM + 0.5, label = Significance),
+              inherit.aes = FALSE, size = 6, color = &quot;black&quot;) +
+    ggtitle(paste(&quot;Log2CPM Expression of&quot;, gene)) +
+    labs(x = &quot;Treatment&quot;, y = &quot;log2CPM&quot;) +
+    theme_bw() +
+    theme(plot.title = element_text(size = rel(2), hjust = 0.5),
+          axis.title = element_text(size = 15, color = &quot;black&quot;),
+          axis.text.x = element_text(size = 10, color = &quot;black&quot;, angle = 90, hjust = 1))
+  
+  print(p)
+}</code></pre>
+<p><img src="figure/Figure_3.Rmd/load_libraries-3.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.3.0 (2023-04-21 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 11 x64 (build 26100)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    grid      stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] clusterProfiler_4.10.1 reshape2_1.4.4         org.Hs.eg.db_3.18.0   
+ [4] AnnotationDbi_1.64.1   IRanges_2.36.0         S4Vectors_0.40.2      
+ [7] Biobase_2.62.0         BiocGenerics_0.48.1    circlize_0.4.16       
+[10] ComplexHeatmap_2.18.0  lubridate_1.9.4        forcats_1.0.0         
+[13] stringr_1.5.1          dplyr_1.1.4            purrr_1.0.4           
+[16] readr_2.1.5            tidyr_1.3.1            tibble_3.2.1          
+[19] ggplot2_3.5.2          tidyverse_2.0.0       
+
+loaded via a namespace (and not attached):
+  [1] RColorBrewer_1.1-3      rstudioapi_0.17.1       jsonlite_2.0.0         
+  [4] shape_1.4.6.1           magrittr_2.0.3          magick_2.8.6           
+  [7] farver_2.1.2            rmarkdown_2.29          GlobalOptions_0.1.2    
+ [10] fs_1.6.3                zlibbioc_1.48.2         vctrs_0.6.5            
+ [13] memoise_2.0.1           Cairo_1.6-2             RCurl_1.98-1.17        
+ [16] ggtree_3.10.1           htmltools_0.5.8.1       gridGraphics_0.5-1     
+ [19] sass_0.4.10             bslib_0.9.0             plyr_1.8.9             
+ [22] cachem_1.1.0            igraph_2.1.4            lifecycle_1.0.4        
+ [25] iterators_1.0.14        pkgconfig_2.0.3         gson_0.1.0             
+ [28] Matrix_1.6-1.1          R6_2.6.1                fastmap_1.2.0          
+ [31] GenomeInfoDbData_1.2.11 clue_0.3-66             digest_0.6.34          
+ [34] aplot_0.2.5             enrichplot_1.22.0       colorspace_2.1-0       
+ [37] patchwork_1.3.0         rprojroot_2.0.4         RSQLite_2.3.9          
+ [40] labeling_0.4.3          timechange_0.3.0        httr_1.4.7             
+ [43] polyclip_1.10-7         compiler_4.3.0          bit64_4.6.0-1          
+ [46] withr_3.0.2             doParallel_1.0.17       BiocParallel_1.36.0    
+ [49] viridis_0.6.5           DBI_1.2.3               ggforce_0.4.2          
+ [52] MASS_7.3-60             rjson_0.2.23            HDO.db_0.99.1          
+ [55] tools_4.3.0             scatterpie_0.2.4        ape_5.8-1              
+ [58] httpuv_1.6.15           glue_1.7.0              nlme_3.1-168           
+ [61] GOSemSim_2.28.1         promises_1.3.2          shadowtext_0.1.4       
+ [64] cluster_2.1.8.1         fgsea_1.28.0            generics_0.1.3         
+ [67] gtable_0.3.6            tzdb_0.5.0              data.table_1.17.0      
+ [70] hms_1.1.3               tidygraph_1.3.1         XVector_0.42.0         
+ [73] ggrepel_0.9.6           foreach_1.5.2           pillar_1.10.2          
+ [76] yulab.utils_0.2.0       later_1.3.2             splines_4.3.0          
+ [79] tweenr_2.0.3            treeio_1.26.0           lattice_0.22-7         
+ [82] bit_4.6.0               tidyselect_1.2.1        GO.db_3.18.0           
+ [85] Biostrings_2.70.3       knitr_1.50              git2r_0.36.2           
+ [88] gridExtra_2.3           xfun_0.52               graphlayouts_1.2.2     
+ [91] matrixStats_1.5.0       stringi_1.8.3           lazyeval_0.2.2         
+ [94] workflowr_1.7.1         ggfun_0.1.8             yaml_2.3.10            
+ [97] evaluate_1.0.3          codetools_0.2-20        ggraph_2.2.1           
+[100] qvalue_2.34.0           ggplotify_0.1.2         cli_3.6.1              
+[103] munsell_0.5.1           jquerylib_0.1.4         Rcpp_1.0.12            
+[106] GenomeInfoDb_1.38.8     png_0.1-8               parallel_4.3.0         
+[109] blob_1.2.4              DOSE_3.28.2             bitops_1.0-9           
+[112] viridisLite_0.4.2       tidytree_0.4.6          scales_1.3.0           
+[115] crayon_1.5.3            GetoptLong_1.0.5        rlang_1.1.3            
+[118] cowplot_1.1.3           fastmatch_1.1-6         KEGGREST_1.42.0        </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

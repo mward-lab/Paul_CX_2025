@@ -1,0 +1,297 @@
+---
+title: "Figure_3"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+## **📌 DNA Damage Marker expression changes between CX5461 and DOX**
+```{r DNA, echo=TRUE, message=FALSE, warning=FALSE, fig.height=12, fig.width=10}
+# 📌 DDR Gene Expression Heatmap — CX-5461 and DOX (68 genes, with categories)
+
+# Load Required Libraries
+library(tidyverse)
+library(ComplexHeatmap)
+library(circlize)
+library(grid)
+library(org.Hs.eg.db)
+library(reshape2)
+
+# Load DEG files
+load_deg <- function(path) read.csv(path)
+
+CX_0.1_3 <- load_deg("data/DEGs/Toptable_CX_0.1_3.csv")
+CX_0.1_24 <- load_deg("data/DEGs/Toptable_CX_0.1_24.csv")
+CX_0.1_48 <- load_deg("data/DEGs/Toptable_CX_0.1_48.csv")
+CX_0.5_3 <- load_deg("data/DEGs/Toptable_CX_0.5_3.csv")
+CX_0.5_24 <- load_deg("data/DEGs/Toptable_CX_0.5_24.csv")
+CX_0.5_48 <- load_deg("data/DEGs/Toptable_CX_0.5_48.csv")
+DOX_0.1_3 <- load_deg("data/DEGs/Toptable_DOX_0.1_3.csv")
+DOX_0.1_24 <- load_deg("data/DEGs/Toptable_DOX_0.1_24.csv")
+DOX_0.1_48 <- load_deg("data/DEGs/Toptable_DOX_0.1_48.csv")
+DOX_0.5_3 <- load_deg("data/DEGs/Toptable_DOX_0.5_3.csv")
+DOX_0.5_24 <- load_deg("data/DEGs/Toptable_DOX_0.5_24.csv")
+DOX_0.5_48 <- load_deg("data/DEGs/Toptable_DOX_0.5_48.csv")
+
+# 📌 Define Entrez IDs and Categories (excluding DOX Cardiotoxicity genes)
+entrez_category <- tribble(
+  ~ENTREZID, ~Category,
+  317, "Apoptosis", 355, "Apoptosis", 581, "Apoptosis", 637, "Apoptosis",
+  836, "Apoptosis", 841, "Apoptosis", 842, "Apoptosis", 27113, "Apoptosis",
+  5366, "Apoptosis", 54205, "Apoptosis", 55367, "Apoptosis", 8795, "Apoptosis",
+  1026, "Cell Cycle / Checkpoint", 1027, "Cell Cycle / Checkpoint", 595, "Cell Cycle / Checkpoint",
+  894, "Cell Cycle / Checkpoint", 896, "Cell Cycle / Checkpoint", 898, "Cell Cycle / Checkpoint",
+  9133, "Cell Cycle / Checkpoint", 9134, "Cell Cycle / Checkpoint", 891, "Cell Cycle / Checkpoint",
+  983, "Cell Cycle / Checkpoint", 1017, "Cell Cycle / Checkpoint", 1019, "Cell Cycle / Checkpoint",
+  1020, "Cell Cycle / Checkpoint", 1021, "Cell Cycle / Checkpoint", 993, "Cell Cycle / Checkpoint",
+  995, "Cell Cycle / Checkpoint", 1869, "Cell Cycle / Checkpoint", 4609, "Cell Cycle / Checkpoint",
+  5925, "Cell Cycle / Checkpoint", 9874, "Cell Cycle / Checkpoint", 11011, "Cell Cycle / Checkpoint",
+  1385, "Cell Cycle / Checkpoint",
+  472, "Damage Sensors / Signal Transducers", 545, "Damage Sensors / Signal Transducers",
+  5591, "Damage Sensors / Signal Transducers", 5810, "Damage Sensors / Signal Transducers",
+  5883, "Damage Sensors / Signal Transducers", 5884, "Damage Sensors / Signal Transducers",
+  6118, "Damage Sensors / Signal Transducers", 4361, "Damage Sensors / Signal Transducers",
+  10111, "Damage Sensors / Signal Transducers", 4683, "Damage Sensors / Signal Transducers",
+  84126, "Damage Sensors / Signal Transducers", 3014, "Damage Sensors / Signal Transducers",
+  672, "DNA Repair", 2177, "DNA Repair", 5888, "DNA Repair", 5893, "DNA Repair",
+  1647, "DNA Repair", 4616, "DNA Repair", 10912, "DNA Repair", 1111, "DNA Repair",
+  11200, "DNA Repair", 1643, "DNA Repair", 8243, "DNA Repair", 5981, "DNA Repair",
+  7157, "p53 Regulators / Targets", 4193, "p53 Regulators / Targets", 5371, "p53 Regulators / Targets",
+  27244, "p53 Regulators / Targets", 50484, "p53 Regulators / Targets",
+  207, "Miscellaneous / Broad", 25, "Miscellaneous / Broad"
+)
+
+entrez_ids <- entrez_category$ENTREZID
+
+# 📌 Extract Data Function
+extract_data <- function(df, name) {
+  df %>%
+    filter(Entrez_ID %in% entrez_ids) %>%
+    mutate(
+      Gene = mapIds(org.Hs.eg.db, as.character(Entrez_ID),
+                    column = "SYMBOL", keytype = "ENTREZID", multiVals = "first"),
+      Condition = name,
+      Signif = ifelse(adj.P.Val < 0.05, "*", "")
+    )
+}
+
+# DEG list
+deg_list <- list(
+  "CX_0.1_3" = CX_0.1_3, "CX_0.1_24" = CX_0.1_24, "CX_0.1_48" = CX_0.1_48,
+  "CX_0.5_3" = CX_0.5_3, "CX_0.5_24" = CX_0.5_24, "CX_0.5_48" = CX_0.5_48,
+  "DOX_0.1_3" = DOX_0.1_3, "DOX_0.1_24" = DOX_0.1_24, "DOX_0.1_48" = DOX_0.1_48,
+  "DOX_0.5_3" = DOX_0.5_3, "DOX_0.5_24" = DOX_0.5_24, "DOX_0.5_48" = DOX_0.5_48
+)
+
+#Combine and Annotate
+all_data <- bind_rows(mapply(extract_data, deg_list, names(deg_list), SIMPLIFY = FALSE)) %>%
+  left_join(entrez_category, by = c("Entrez_ID" = "ENTREZID"))
+
+# Create matrices
+logFC_mat <- acast(all_data, Gene ~ Condition, value.var = "logFC")
+signif_mat <- acast(all_data, Gene ~ Condition, value.var = "Signif")
+
+# Set column order
+desired_order <- c("CX_0.1_3", "CX_0.1_24", "CX_0.1_48",
+                   "CX_0.5_3", "CX_0.5_24", "CX_0.5_48",
+                   "DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48",
+                   "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48")
+
+logFC_mat <- logFC_mat[, desired_order, drop = FALSE]
+signif_mat <- signif_mat[, desired_order, drop = FALSE]
+
+#  Column annotations
+meta <- str_split_fixed(colnames(logFC_mat), "_", 3)
+col_annot <- HeatmapAnnotation(
+  Drug = meta[, 1],
+  Conc = meta[, 2],
+  Time = meta[, 3],
+  col = list(
+    Drug = c("CX" = "blue", "DOX" = "red"),
+    Conc = c("0.1" = "lightgreen", "0.5" = "darkgreen"),
+    Time = c("3" = "yellow", "24" = "orange", "48" = "purple")
+  ),
+  annotation_height = unit(c(1, 1, 1), "cm")
+)
+
+# Row annotations
+gene_order_df <- all_data %>%
+  distinct(Gene, Category) %>%
+  arrange(factor(Category, levels = sort(unique(entrez_category$Category))), Gene)
+
+ordered_genes <- gene_order_df$Gene
+logFC_mat <- logFC_mat[ordered_genes, ]
+signif_mat <- signif_mat[ordered_genes, ]
+
+# Category color mapping
+category_colors_named <- c(
+  "Apoptosis" = "darkorange",
+  "Cell Cycle / Checkpoint" = "steelblue",
+  "Damage Sensors / Signal Transducers" = "darkgreen",
+  "DNA Repair" = "firebrick",
+  "p53 Regulators / Targets" = "gold",
+  "Miscellaneous / Broad" = "gray60"
+)
+
+gene_order_df$Category <- factor(gene_order_df$Category, levels = names(category_colors_named))
+
+ha_left <- rowAnnotation(
+  Category = gene_order_df$Category,
+  col = list(Category = category_colors_named),
+  annotation_name_side = "top"
+)
+
+# Final Heatmap
+Heatmap(logFC_mat,
+        name = "logFC",
+        top_annotation = col_annot,
+        left_annotation = ha_left,
+        cluster_columns = FALSE,
+        cluster_rows = FALSE,
+        show_row_names = TRUE,
+        show_column_names = FALSE,
+        row_names_gp = gpar(fontsize = 10),
+        column_title = "DDR Gene Expression Response (n = 65)\nCX-5461 and DOX",
+        column_title_gp = gpar(fontsize = 14, fontface = "bold"),
+        cell_fun = function(j, i, x, y, width, height, fill) {
+          grid.text(signif_mat[i, j], x, y, gp = gpar(fontsize = 9))
+        }
+)
+```
+
+
+## **📌 Log2CPM Boxplots for TOP2 Genes and TP53**
+```{r load_libraries, echo=TRUE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(org.Hs.eg.db)
+library(clusterProfiler)
+
+# Load feature count matrix
+boxplot1 <- read.csv("data/Feature_count_Matrix_Log2CPM_filtered.csv") %>% as.data.frame()
+
+# Ensure column names are cleaned
+colnames(boxplot1) <- trimws(gsub("^X", "", colnames(boxplot1)))  
+
+## **📌 Define Genes of Interest**
+
+# Define the genes of interest
+top2_genes <- c("TOP2A", "TOP2B")
+
+dna_damage_genes <- c("TP53")  # Using correct gene symbol TP53
+
+# Load Toptables
+deg_files <- list.files("data/DEGs", pattern = "Toptable_.*\\.csv", full.names = TRUE)
+deg_list <- lapply(deg_files, read.csv)
+names(deg_list) <- gsub("data/DEGs/Toptable_|\\.csv", "", deg_files)  
+
+# Function to check significance based on **Entrez_ID in the correct sample**
+is_significant <- function(gene, drug, conc, timepoint) {
+  condition <- paste(drug, conc, timepoint, sep = "_")
+  if (!condition %in% names(deg_list)) return(FALSE)
+  
+  toptable <- deg_list[[condition]]
+  gene_entrez <- boxplot1$ENTREZID[boxplot1$SYMBOL == gene]
+  
+  if (length(gene_entrez) == 0) return(FALSE)
+  
+  return(any(gene_entrez %in% toptable$Entrez_ID[toptable$adj.P.Val < 0.05]))
+}
+
+process_gene_data <- function(gene) {
+  # Filter log2CPM data for the gene
+  gene_data <- boxplot1 %>% filter(SYMBOL == gene)
+  
+  # Reshape data
+  long_data <- gene_data %>%
+    pivot_longer(cols = -c(ENTREZID, SYMBOL, GENENAME), names_to = "Sample", values_to = "log2CPM") %>%
+    mutate(
+      Indv = case_when(
+        grepl("75.1", Sample) ~ "1",
+        grepl("78.1", Sample) ~ "2",
+        grepl("87.1", Sample) ~ "3",
+        grepl("17.3", Sample) ~ "4",
+        grepl("84.1", Sample) ~ "5",
+        grepl("90.1", Sample) ~ "6",
+        TRUE ~ NA_character_
+      ),
+      Drug = case_when(
+        grepl("CX.5461", Sample) ~ "CX",
+        grepl("DOX", Sample) ~ "DOX",
+        grepl("VEH", Sample) ~ "VEH",
+        TRUE ~ NA_character_
+      ),
+      Conc. = case_when(
+        grepl("_0.1_", Sample) ~ "0.1",
+        grepl("_0.5_", Sample) ~ "0.5",
+        TRUE ~ NA_character_
+      ),
+      Timepoint = case_when(
+        grepl("_3$", Sample) ~ "3",
+        grepl("_24$", Sample) ~ "24",
+        grepl("_48$", Sample) ~ "48",
+        TRUE ~ NA_character_
+      ),
+      Condition = paste(Drug, Conc., Timepoint, sep = "_")
+    )
+
+  # **Ensure Condition is Ordered Correctly**
+  long_data$Condition <- factor(
+    long_data$Condition, 
+    levels = c(
+      "CX_0.1_3", "CX_0.1_24", "CX_0.1_48", "CX_0.5_3", "CX_0.5_24", "CX_0.5_48",
+      "DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48", "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48",
+      "VEH_0.1_3", "VEH_0.1_24", "VEH_0.1_48", "VEH_0.5_3", "VEH_0.5_24", "VEH_0.5_48"
+    )
+  )
+  
+  # Identify significant conditions **per Drug, Conc, and Timepoint**
+  significance_labels <- long_data %>%
+    distinct(Drug, Conc., Timepoint, Condition) %>%
+    rowwise() %>%
+    mutate(
+      max_log2CPM = max(long_data$log2CPM[long_data$Condition == Condition], na.rm = TRUE),
+      Significance = ifelse(is_significant(gene, Drug, Conc., Timepoint), "*", "")
+    ) %>%
+    filter(Significance != "") %>% ungroup()
+  
+  list(long_data = long_data, significance_labels = significance_labels)
+}
+
+for (gene in top2_genes) {
+  data_info <- process_gene_data(gene)
+  p <- ggplot(data_info$long_data, aes(x = Condition, y = log2CPM, fill = Drug)) +
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_manual(values = c("CX" = "#0000FF", "DOX" = "#e6d800", "VEH" = "#FF00FF")) +
+    geom_point(aes(color = Indv), size = 2, alpha = 0.5, position = position_jitter(width = -1, height = 0)) +
+    geom_text(data = data_info$significance_labels, aes(x = Condition, y = max_log2CPM + 0.5, label = Significance),
+              inherit.aes = FALSE, size = 6, color = "black") +
+    ggtitle(paste("Log2CPM Expression of", gene)) +
+    labs(x = "Treatment", y = "log2CPM") +
+    theme_bw() +
+    theme(plot.title = element_text(size = rel(2), hjust = 0.5),
+          axis.title = element_text(size = 15, color = "black"),
+          axis.text.x = element_text(size = 10, color = "black", angle = 90, hjust = 1))
+  
+  print(p)
+}
+
+
+for (gene in dna_damage_genes) {
+  data_info <- process_gene_data(gene)
+  p <- ggplot(data_info$long_data, aes(x = Condition, y = log2CPM, fill = Drug)) +
+    geom_boxplot(outlier.shape = NA) +
+    scale_fill_manual(values = c("CX" = "#0000FF", "DOX" = "#e6d800", "VEH" = "#FF00FF")) +
+    geom_point(aes(color = Indv), size = 2, alpha = 0.5, position = position_jitter(width = -1, height = 0)) +
+    geom_text(data = data_info$significance_labels, aes(x = Condition, y = max_log2CPM + 0.5, label = Significance),
+              inherit.aes = FALSE, size = 6, color = "black") +
+    ggtitle(paste("Log2CPM Expression of", gene)) +
+    labs(x = "Treatment", y = "log2CPM") +
+    theme_bw() +
+    theme(plot.title = element_text(size = rel(2), hjust = 0.5),
+          axis.title = element_text(size = 15, color = "black"),
+          axis.text.x = element_text(size = 10, color = "black", angle = 90, hjust = 1))
+  
+  print(p)
+}
+```
