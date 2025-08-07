@@ -21,6 +21,7 @@ Welcome to my research website.
 
 - **[Figure 5](https://mward-lab.github.io/Paul_CX_2025/Figure_5.html)**
 
+- **[Figure 6](https://mward-lab.github.io/Paul_CX_2025/Figure_6.html)**
 
 ### **Cardiomyocyte Purity**  
 
