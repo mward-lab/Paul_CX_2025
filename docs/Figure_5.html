@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Figure_5</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Paul_CX_2025</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Figure_5</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2025-08-07
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Paul_CX_2025/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20250129code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20250129)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20250129code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20250129)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treec62890894c49933d3809ee8a4a8b4a0d7423fabetargetblankc628908a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/c62890894c49933d3809ee8a4a8b4a0d7423fabe" target="_blank">c628908</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treec62890894c49933d3809ee8a4a8b4a0d7423fabetargetblankc628908a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/c62890894c49933d3809ee8a4a8b4a0d7423fabe" target="_blank">c628908</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .RData
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    0.1 box.svg
+    Ignored:    Rplot04.svg
+    Ignored:    analysis/figure/
+
+Untracked files:
+    Untracked:  analysis/Figure_5.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="top-bp-cluster-profiler" class="section level2">
+<h2><strong>📌 Top BP (Cluster Profiler)</strong></h2>
+<pre class="r"><code>### 📦 Load Required Libraries
+library(tidyverse)</code></pre>
+<pre><code>Warning: package &#39;tidyverse&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;tidyr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>Warning: package &#39;readr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>Warning: package &#39;purrr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>Warning: package &#39;dplyr&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;stringr&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;lubridate&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code>library(ComplexHeatmap)</code></pre>
+<pre><code>Warning: package &#39;ComplexHeatmap&#39; was built under R version 4.3.1</code></pre>
+<pre class="r"><code>library(circlize)</code></pre>
+<pre><code>Warning: package &#39;circlize&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code>library(grid)
+
+### 📁 Define CorMotif GO Enrichment Files
+go_files &lt;- list(
+  &quot;Non response (0.1)&quot;                         = &quot;data/BP/CorMotif_Terms/GO_BP_Non_response_(0.1).csv&quot;,
+  &quot;CX_DOX_1&quot;             = &quot;data/BP/CorMotif_Terms/GO_BP_CX-DOX_mid-late_response_(0.1).csv&quot;,
+  &quot;DOX_sp_1&quot;                    = &quot;data/BP/CorMotif_Terms/GO_BP_DOX_only_mid-late_(0.1).csv&quot;,
+  &quot;Non response (0.5)&quot;                         = &quot;data/BP/CorMotif_Terms/GO_BP_Non_response_(0.5).csv&quot;,
+  &quot;DOX_sp_2&quot;                = &quot;data/BP/CorMotif_Terms/GO_BP_DOX_specific_response_(0.5).csv&quot;,
+  &quot;DOX_sp_3&quot;           = &quot;data/BP/CorMotif_Terms/GO_BP_DOX_only_mid-late_response_(0.5).csv&quot;,
+  &quot;CX_DOX_2&quot;        = &quot;data/BP/CorMotif_Terms/GO_BP_CX_total_+_DOX_early_response_(0.5).csv&quot;,
+  &quot;CX_DOX_3&quot; = &quot;data/BP/CorMotif_Terms/GO_BP_DOX_early_+_CX-DOX_mid-late_response_(0.5).csv&quot;
+)
+
+### 🔍 Step 1: Extract Top 5 GO Terms Per Group Based on Adjusted P-value
+top_go_terms &lt;- map(go_files, function(file) {
+  df &lt;- tryCatch(read.csv(file), error = function(e) return(NULL))
+  if (!is.null(df) &amp;&amp; nrow(df) &gt; 0 &amp;&amp; all(c(&quot;Description&quot;, &quot;p.adjust&quot;) %in% colnames(df))) {
+    df %&gt;%
+      as_tibble() %&gt;%
+      filter(p.adjust &lt; 0.05) %&gt;%
+      arrange(p.adjust) %&gt;%
+      dplyr::select(Description) %&gt;%
+      slice_head(n = 5) %&gt;%
+      pull(Description) %&gt;%
+      unique()
+  } else {
+    character(0)
+  }
+}) %&gt;% unlist() %&gt;% unique()
+
+### 🔁 Step 2: Collect All Matrix Values for Top GO Terms
+go_matrix_df &lt;- map_dfr(names(go_files), function(group) {
+  file &lt;- go_files[[group]]
+  df &lt;- tryCatch(read.csv(file), error = function(e) return(tibble()))
+
+  if (nrow(df) == 0 || !all(c(&quot;Description&quot;, &quot;pvalue&quot;, &quot;p.adjust&quot;) %in% colnames(df))) {
+    tibble(Description = top_go_terms, pvalue = NA, p.adjust = NA, log10p = NA, Group = group)
+  } else {
+    df_filtered &lt;- df %&gt;%
+      as_tibble() %&gt;%
+      dplyr::select(Description, pvalue, p.adjust) %&gt;%
+      filter(Description %in% top_go_terms)
+
+    tibble(Description = top_go_terms) %&gt;%
+      left_join(df_filtered, by = &quot;Description&quot;) %&gt;%
+      mutate(
+        log10p = ifelse(!is.na(pvalue), -log10(pvalue), NA),
+        Group = group
+      )
+  }
+})
+
+### 🧱 Step 3: Pivot to Heatmap Matrices
+heatmap_data &lt;- go_matrix_df %&gt;%
+  dplyr::select(Description, Group, log10p) %&gt;%
+  pivot_wider(names_from = Group, values_from = log10p) %&gt;%
+  column_to_rownames(&quot;Description&quot;) %&gt;%
+  as.matrix()
+
+pval_matrix &lt;- go_matrix_df %&gt;%
+  dplyr::select(Description, Group, pvalue) %&gt;%
+  pivot_wider(names_from = Group, values_from = pvalue) %&gt;%
+  column_to_rownames(&quot;Description&quot;) %&gt;%
+  as.matrix()
+
+p_adj_matrix &lt;- go_matrix_df %&gt;%
+  dplyr::select(Description, Group, p.adjust) %&gt;%
+  pivot_wider(names_from = Group, values_from = p.adjust) %&gt;%
+  column_to_rownames(&quot;Description&quot;) %&gt;%
+  as.matrix()
+
+### 🎨 Step 4: Define Heatmap Color Gradient
+breaks &lt;- seq(0, 20, by = 2.5)
+palette &lt;- colorRampPalette(c(&quot;white&quot;, &quot;#fde0dd&quot;, &quot;#fa9fb5&quot;, &quot;#f768a1&quot;, &quot;#c51b8a&quot;, &quot;#7a0177&quot;, &quot;#49006a&quot;))(length(breaks))
+col_fun &lt;- colorRamp2(breaks, palette)
+
+### 🔥 Step 5: Draw Heatmap with Stars for p.adjust &lt; 0.05
+ht &lt;- Heatmap(
+  heatmap_data,
+  name = &quot;-log10(p)&quot;,
+  col = col_fun,
+  na_col = &quot;white&quot;,
+  rect_gp = gpar(col = &quot;black&quot;, lwd = 0.5),
+  cluster_rows = FALSE,
+  cluster_columns = FALSE,
+  row_names_gp = gpar(fontsize = 9),
+  column_names_gp = gpar(fontsize = 9),
+  column_names_rot = 45,
+  cell_fun = function(j, i, x, y, width, height, fill) {
+    adj_p &lt;- p_adj_matrix[i, j]
+    if (!is.na(adj_p) &amp;&amp; adj_p &lt; 0.05) {
+      grid.text(&quot;*&quot;, x, y, gp = gpar(fontsize = 12))
+    }
+  },
+  heatmap_legend_param = list(
+    title = &quot;-log10(p value)&quot;,
+    at = breaks,
+    labels = as.character(breaks),
+    legend_width = unit(5, &quot;cm&quot;),
+    direction = &quot;horizontal&quot;,
+    title_gp = gpar(fontsize = 10, fontface = &quot;bold&quot;),
+    labels_gp = gpar(fontsize = 9)
+  )
+)
+
+### 🖼️ Final Output
+draw(ht, heatmap_legend_side = &quot;top&quot;)</code></pre>
+<p><img src="figure/Figure_5.Rmd/GO%20comp-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="proportion-of-heart-specific-genes-combined"
+class="section level2">
+<h2><strong>📌 Proportion of Heart Specific Genes
+(Combined)</strong></h2>
+<pre class="r"><code># ----------------- Load Required Libraries -----------------
+library(dplyr)
+library(ggplot2)
+library(org.Hs.eg.db)</code></pre>
+<pre><code>Warning: package &#39;AnnotationDbi&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;BiocGenerics&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;Biobase&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;IRanges&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;S4Vectors&#39; was built under R version 4.3.2</code></pre>
+<pre class="r"><code>library(AnnotationDbi)
+
+# ----------------- Load Heart-Specific Genes -----------------
+heart_genes &lt;- read.csv(&quot;data/Human_Heart_Genes.csv&quot;, stringsAsFactors = FALSE)
+heart_genes$Entrez_ID &lt;- mapIds(
+  org.Hs.eg.db,
+  keys = heart_genes$Gene,
+  column = &quot;ENTREZID&quot;,
+  keytype = &quot;SYMBOL&quot;,
+  multiVals = &quot;first&quot;
+)
+heart_entrez_ids &lt;- na.omit(heart_genes$Entrez_ID)
+
+# ----------------- Load CorrMotif Groups -----------------
+# 0.1 µM
+prob_1_0.1 &lt;- as.character(read.csv(&quot;data/prob_1_0.1.csv&quot;)$Entrez_ID)
+prob_2_0.1 &lt;- as.character(read.csv(&quot;data/prob_2_0.1.csv&quot;)$Entrez_ID)
+prob_3_0.1 &lt;- as.character(read.csv(&quot;data/prob_3_0.1.csv&quot;)$Entrez_ID)
+
+# 0.5 µM
+prob_1_0.5 &lt;- as.character(read.csv(&quot;data/prob_1_0.5.csv&quot;)$Entrez_ID)
+prob_2_0.5 &lt;- as.character(read.csv(&quot;data/prob_2_0.5.csv&quot;)$Entrez_ID)
+prob_3_0.5 &lt;- as.character(read.csv(&quot;data/prob_3_0.5.csv&quot;)$Entrez_ID)
+prob_4_0.5 &lt;- as.character(read.csv(&quot;data/prob_4_0.5.csv&quot;)$Entrez_ID)
+prob_5_0.5 &lt;- as.character(read.csv(&quot;data/prob_5_0.5.csv&quot;)$Entrez_ID)
+
+# ----------------- Annotate CorrMotif Groups -----------------
+df_0.1 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.1, prob_2_0.1, prob_3_0.1))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.1 ~ &quot;Non response (0.1)&quot;,
+      Entrez_ID %in% prob_2_0.1 ~ &quot;CX_DOX_1&quot;,
+      Entrez_ID %in% prob_3_0.1 ~ &quot;DOX_sp_1&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% heart_entrez_ids, &quot;Heart-specific Genes&quot;, &quot;Non-Heart-specific Genes&quot;),
+    Concentration = &quot;0.1&quot;
+  )
+
+df_0.5 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.5, prob_2_0.5, prob_3_0.5, prob_4_0.5, prob_5_0.5))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.5 ~ &quot;Non response (0.5)&quot;,
+      Entrez_ID %in% prob_2_0.5 ~ &quot;DOX_sp_2&quot;,
+      Entrez_ID %in% prob_3_0.5 ~ &quot;DOX_sp_3&quot;,
+      Entrez_ID %in% prob_4_0.5 ~ &quot;CX_DOX_2&quot;,
+      Entrez_ID %in% prob_5_0.5 ~ &quot;CX_DOX_3&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% heart_entrez_ids, &quot;Heart-specific Genes&quot;, &quot;Non-Heart-specific Genes&quot;),
+    Concentration = &quot;0.5&quot;
+  )
+
+# ----------------- Combine Data -----------------
+df_combined &lt;- bind_rows(df_0.1, df_0.5)
+
+# ----------------- Calculate Proportions -----------------
+proportion_data &lt;- df_combined %&gt;%
+  group_by(Concentration, Response_Group, Category) %&gt;%
+  summarise(Count = n(), .groups = &quot;drop&quot;) %&gt;%
+  group_by(Concentration, Response_Group) %&gt;%
+  mutate(Percentage = Count / sum(Count) * 100)
+
+# ----------------- Fisher&#39;s Exact Test -----------------
+run_fisher_test &lt;- function(df, ref_group) {
+  ref_counts &lt;- df %&gt;%
+    filter(Response_Group == ref_group) %&gt;%
+    dplyr::select(Category, Count) %&gt;%
+    {setNames(.$Count, .$Category)}
+  
+  df %&gt;%
+    filter(Response_Group != ref_group) %&gt;%
+    group_by(Response_Group) %&gt;%
+    summarise(
+      p_value = {
+        group_counts &lt;- Count[Category %in% c(&quot;Heart-specific Genes&quot;, &quot;Non-Heart-specific Genes&quot;)]
+        if (length(group_counts) &lt; 2) group_counts &lt;- c(group_counts, 0)
+        contingency_table &lt;- matrix(c(
+          group_counts[1], group_counts[2],
+          ref_counts[&quot;Heart-specific Genes&quot;], ref_counts[&quot;Non-Heart-specific Genes&quot;]
+        ), nrow = 2)
+        fisher.test(contingency_table)$p.value
+      },
+      .groups = &quot;drop&quot;
+    ) %&gt;%
+    mutate(Significance = ifelse(!is.na(p_value) &amp; p_value &lt; 0.05, &quot;*&quot;, &quot;&quot;))
+}
+
+# Run Fisher&#39;s test for each concentration
+fisher_0.1 &lt;- run_fisher_test(proportion_data %&gt;% filter(Concentration == &quot;0.1&quot;), &quot;Non response (0.1)&quot;)
+fisher_0.5 &lt;- run_fisher_test(proportion_data %&gt;% filter(Concentration == &quot;0.5&quot;), &quot;Non response (0.5)&quot;)
+
+# Combine results
+fisher_all &lt;- bind_rows(
+  fisher_0.1 %&gt;% mutate(Concentration = &quot;0.1&quot;),
+  fisher_0.5 %&gt;% mutate(Concentration = &quot;0.5&quot;)
+)
+
+# ----------------- Merge Fisher Results -----------------
+proportion_data &lt;- proportion_data %&gt;%
+  left_join(fisher_all, by = c(&quot;Concentration&quot;, &quot;Response_Group&quot;))
+
+# ----------------- Reorder Factor Levels -----------------
+proportion_data$Response_Group &lt;- factor(proportion_data$Response_Group, levels = c(
+  &quot;Non response (0.1)&quot;, &quot;CX_DOX_1&quot;, &quot;DOX_sp_1&quot;,
+  &quot;Non response (0.5)&quot;, &quot;DOX_sp_2&quot;, &quot;DOX_sp_3&quot;, &quot;CX_DOX_2&quot;, &quot;CX_DOX_3&quot;
+))
+
+# ----------------- Significance Star Labels -----------------
+label_data &lt;- proportion_data %&gt;%
+  group_by(Concentration, Response_Group) %&gt;%
+  summarise(Significance = dplyr::first(Significance), .groups = &quot;drop&quot;) %&gt;%
+  filter(!is.na(Significance)) %&gt;%
+  mutate(y_pos = 100)
+
+# ----------------- Final Plot -----------------
+ggplot(proportion_data, aes(x = Response_Group, y = Percentage, fill = Category)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;) +
+  geom_text(
+    data = label_data,
+    aes(x = Response_Group, y = y_pos, label = Significance),
+    inherit.aes = FALSE,
+    size = 5,
+    color = &quot;black&quot;
+  ) +
+  facet_wrap(~ Concentration, scales = &quot;free_x&quot;) +
+  scale_fill_manual(values = c(
+    &quot;Heart-specific Genes&quot; = &quot;#4daf4a&quot;,
+    &quot;Non-Heart-specific Genes&quot; = &quot;#377eb8&quot;
+  )) +
+  scale_y_continuous(limits = c(0, 110), expand = c(0, 0)) +
+  labs(
+    title = &quot;Heart-Specific Gene Proportions Across CorrMotif Groups&quot;,
+    x = &quot;Response Groups&quot;,
+    y = &quot;Percentage of Genes&quot;,
+    fill = &quot;Gene Category&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(size = 16, hjust = 0.5, face = &quot;bold&quot;),
+    axis.title.x = element_text(size = 14, face = &quot;bold&quot;),
+    axis.title.y = element_text(size = 14, face = &quot;bold&quot;),
+    axis.text.x = element_text(size = 11, angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 13),
+    legend.text = element_text(size = 12),
+    strip.text = element_text(size = 14, face = &quot;bold&quot;),
+    panel.border = element_rect(color = &quot;black&quot;, fill = NA, linewidth = 1.2),
+    panel.spacing = unit(1.2, &quot;lines&quot;)
+  )</code></pre>
+<p><img src="figure/Figure_5.Rmd/prop%20heart%20comb-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tissue-specificity-score" class="section level2">
+<h2><strong>📌 Tissue Specificity Score</strong></h2>
+<pre class="r"><code># 📦 Load Required Libraries
+library(ggplot2)
+library(dplyr)
+
+# ✅ Step 1: Load CorrMotif group assignments
+grouped_files &lt;- list(
+  &quot;data/prob_1_0.1.csv&quot; = &quot;Non response 0.1&quot;,
+  &quot;data/prob_2_0.1.csv&quot; = &quot;CX_DOX_1&quot;,
+  &quot;data/prob_3_0.1.csv&quot; = &quot;DOX_sp_1&quot;,
+  &quot;data/prob_1_0.5.csv&quot; = &quot;Non response 0.5&quot;,
+  &quot;data/prob_2_0.5.csv&quot; = &quot;DOX_sp_2&quot;,
+  &quot;data/prob_3_0.5.csv&quot; = &quot;DOX_sp_3&quot;,
+  &quot;data/prob_4_0.5.csv&quot; = &quot;CX_DOX_2&quot;,
+  &quot;data/prob_5_0.5.csv&quot; = &quot;CX_DOX_3&quot;
+)
+
+group_order &lt;- unname(unlist(grouped_files))  # group order for consistent plotting
+
+all_groups &lt;- bind_rows(lapply(names(grouped_files), function(f) {
+  read.csv(f) %&gt;% mutate(Group = grouped_files[[f]])
+})) %&gt;% mutate(Entrez_ID = as.character(Entrez_ID))
+
+# ✅ Step 2: Load TS data
+ts_data &lt;- read.csv(&quot;data/TS.csv&quot;) %&gt;%
+  mutate(Entrez_ID = as.character(Entrez_ID))
+
+# ✅ Step 3: Merge and clean
+merged_data &lt;- all_groups %&gt;%
+  left_join(ts_data, by = &quot;Entrez_ID&quot;) %&gt;%
+  mutate(
+    Heart_Ventricle = as.numeric(Heart_Ventricle),
+    Group = factor(Group, levels = group_order)
+  ) %&gt;%
+  filter(!is.na(Heart_Ventricle))</code></pre>
+<pre><code>Warning in left_join(., ts_data, by = &quot;Entrez_ID&quot;): Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 803 of `x` matches multiple rows in `y`.
+ℹ Row 10933 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  &quot;many-to-many&quot;` to silence this warning.</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Heart_Ventricle = as.numeric(Heart_Ventricle)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre class="r"><code># ✅ Step 4: Define ALL comparisons
+comparison_map_1 &lt;- list(
+  &quot;CX_DOX_1&quot; = &quot;Non response 0.1&quot;,
+  &quot;DOX_sp_1&quot; = &quot;Non response 0.1&quot;,
+  &quot;DOX_sp_2&quot; = &quot;Non response 0.5&quot;,
+  &quot;DOX_sp_3&quot; = &quot;Non response 0.5&quot;,
+  &quot;CX_DOX_2&quot; = &quot;Non response 0.5&quot;,
+  &quot;CX_DOX_3&quot; = &quot;Non response 0.5&quot;
+)
+
+comparison_table_2 &lt;- data.frame(
+  resp_group = c(
+    &quot;DOX_sp_1&quot;,
+    &quot;DOX_sp_2&quot;,
+    &quot;DOX_sp_3&quot;,
+    &quot;DOX_sp_2&quot;,
+    &quot;DOX_sp_3&quot;
+  ),
+  control_group = c(
+    &quot;CX_DOX_1&quot;,
+    &quot;CX_DOX_2&quot;,
+    &quot;CX_DOX_2&quot;,
+    &quot;CX_DOX_3&quot;,
+    &quot;CX_DOX_3&quot;
+  ),
+  stringsAsFactors = FALSE
+)
+
+# ✅ Step 5: Run Wilcoxon test for both comparison sets
+star_df_1 &lt;- lapply(names(comparison_map_1), function(resp_group) {
+  control_group &lt;- comparison_map_1[[resp_group]]
+  resp_vals &lt;- merged_data$Heart_Ventricle[merged_data$Group == resp_group]
+  control_vals &lt;- merged_data$Heart_Ventricle[merged_data$Group == control_group]
+  test_result &lt;- wilcox.test(resp_vals, control_vals)
+  pval &lt;- test_result$p.value
+  
+  if (pval &lt; 0.05) {
+    label &lt;- case_when(pval &lt; 0.001 ~ &quot;***&quot;, pval &lt; 0.01 ~ &quot;**&quot;, TRUE ~ &quot;*&quot;)
+    y_pos &lt;- max(c(resp_vals, control_vals), na.rm = TRUE) + 0.4
+    data.frame(control_group, resp_group, y_pos, label, P_Value = signif(pval, 4))
+  } else {
+    NULL
+  }
+}) %&gt;% bind_rows()
+
+star_df_2 &lt;- lapply(1:nrow(comparison_table_2), function(i) {
+  resp_group &lt;- comparison_table_2$resp_group[i]
+  control_group &lt;- comparison_table_2$control_group[i]
+  resp_vals &lt;- merged_data$Heart_Ventricle[merged_data$Group == resp_group]
+  control_vals &lt;- merged_data$Heart_Ventricle[merged_data$Group == control_group]
+  test_result &lt;- wilcox.test(resp_vals, control_vals)
+  pval &lt;- test_result$p.value
+  
+  if (pval &lt; 0.05) {
+    label &lt;- case_when(pval &lt; 0.001 ~ &quot;***&quot;, pval &lt; 0.01 ~ &quot;**&quot;, TRUE ~ &quot;*&quot;)
+    y_pos &lt;- max(c(resp_vals, control_vals), na.rm = TRUE) + 0.4
+    data.frame(control_group, resp_group, y_pos, label, P_Value = signif(pval, 4))
+  } else {
+    NULL
+  }
+}) %&gt;% bind_rows()
+
+star_df &lt;- bind_rows(star_df_1, star_df_2) %&gt;%
+  mutate(
+    x = as.numeric(factor(control_group, levels = levels(merged_data$Group))),
+    xend = as.numeric(factor(resp_group, levels = levels(merged_data$Group))),
+    bump = 0.8 * (row_number() - 1),
+    y_pos = y_pos + bump
+  )
+
+# ✅ Step 6: Define group colors
+group_colors &lt;- c(
+  &quot;Non response 0.1&quot; = &quot;#33FF33&quot;,
+  &quot;CX_DOX_1&quot; = &quot;#228B22&quot;,
+  &quot;DOX_sp_1&quot; = &quot;#003366&quot;,
+  &quot;Non response 0.5&quot; = &quot;#FF6666&quot;,
+  &quot;DOX_sp_2&quot; = &quot;#B22222&quot;,
+  &quot;DOX_sp_3&quot; = &quot;#FF8C00&quot;,
+  &quot;CX_DOX_2&quot; = &quot;#4682B4&quot;,
+  &quot;CX_DOX_3&quot; = &quot;#8B008B&quot;
+)
+
+# ✅ Step 7: Violin + boxplot with all significance annotations
+p &lt;- ggplot(merged_data, aes(x = Group, y = Heart_Ventricle, fill = Group)) +
+  geom_violin(trim = FALSE, scale = &quot;width&quot;, color = &quot;black&quot;, alpha = 0.8) +
+  geom_boxplot(width = 0.2, color = &quot;black&quot;, fill = &quot;white&quot;, outlier.shape = NA) +
+  scale_fill_manual(values = group_colors) +
+  scale_y_continuous(
+    limits = c(-10, max(star_df$y_pos, na.rm = TRUE) + 1),
+    breaks = seq(-10, 25, 5)
+  ) +
+  geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  geom_segment(data = star_df, aes(x = x, xend = xend, y = y_pos, yend = y_pos),
+               inherit.aes = FALSE, color = &quot;black&quot;, size = 0.7) +
+  geom_text(data = star_df, aes(x = (x + xend)/2, y = y_pos + 0.3, label = label),
+            inherit.aes = FALSE, size = 6, fontface = &quot;bold&quot;) +
+  labs(
+    title = &quot;Violin-Boxplot: Heart Ventricle TS (All Comparisons)&quot;,
+    y = &quot;Tissue specificity score (Heart Ventricle)&quot;,
+    x = &quot;&quot;
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(size = 14, face = &quot;bold&quot;, hjust = 0.5),
+    legend.position = &quot;none&quot;
+  )</code></pre>
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<pre class="r"><code># ✅ Step 8: Show plot
+print(p)</code></pre>
+<p><img src="figure/Figure_5.Rmd/TS_Score-1.png" width="960" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.3.0 (2023-04-21 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 11 x64 (build 26100)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    grid      stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] org.Hs.eg.db_3.18.0   AnnotationDbi_1.64.1  IRanges_2.36.0       
+ [4] S4Vectors_0.40.2      Biobase_2.62.0        BiocGenerics_0.48.1  
+ [7] circlize_0.4.16       ComplexHeatmap_2.18.0 lubridate_1.9.4      
+[10] forcats_1.0.0         stringr_1.5.1         dplyr_1.1.4          
+[13] purrr_1.0.4           readr_2.1.5           tidyr_1.3.1          
+[16] tibble_3.2.1          ggplot2_3.5.2         tidyverse_2.0.0      
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.1        farver_2.1.2            blob_1.2.4             
+ [4] bitops_1.0-9            Biostrings_2.70.3       RCurl_1.98-1.17        
+ [7] fastmap_1.2.0           promises_1.3.2          digest_0.6.34          
+[10] timechange_0.3.0        lifecycle_1.0.4         cluster_2.1.8.1        
+[13] Cairo_1.6-2             KEGGREST_1.42.0         RSQLite_2.3.9          
+[16] magrittr_2.0.3          compiler_4.3.0          rlang_1.1.3            
+[19] sass_0.4.10             tools_4.3.0             yaml_2.3.10            
+[22] knitr_1.50              labeling_0.4.3          bit_4.6.0              
+[25] RColorBrewer_1.1-3      workflowr_1.7.1         withr_3.0.2            
+[28] git2r_0.36.2            colorspace_2.1-0        scales_1.3.0           
+[31] iterators_1.0.14        cli_3.6.1               rmarkdown_2.29         
+[34] crayon_1.5.3            generics_0.1.3          rstudioapi_0.17.1      
+[37] httr_1.4.7              tzdb_0.5.0              rjson_0.2.23           
+[40] DBI_1.2.3               cachem_1.1.0            zlibbioc_1.48.2        
+[43] parallel_4.3.0          XVector_0.42.0          matrixStats_1.5.0      
+[46] vctrs_0.6.5             jsonlite_2.0.0          hms_1.1.3              
+[49] GetoptLong_1.0.5        bit64_4.6.0-1           clue_0.3-66            
+[52] magick_2.8.6            foreach_1.5.2           jquerylib_0.1.4        
+[55] glue_1.7.0              codetools_0.2-20        stringi_1.8.3          
+[58] gtable_0.3.6            shape_1.4.6.1           GenomeInfoDb_1.38.8    
+[61] later_1.3.2             munsell_0.5.1           pillar_1.10.2          
+[64] htmltools_0.5.8.1       GenomeInfoDbData_1.2.11 R6_2.6.1               
+[67] doParallel_1.0.17       rprojroot_2.0.4         evaluate_1.0.3         
+[70] png_0.1-8               memoise_2.0.1           httpuv_1.6.15          
+[73] bslib_0.9.0             Rcpp_1.0.12             xfun_0.52              
+[76] fs_1.6.3                pkgconfig_2.0.3         GlobalOptions_0.1.2    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
