@@ -23,6 +23,11 @@ Welcome to my research website.
 
 - **[Figure 6](https://mward-lab.github.io/Paul_CX_2025/Figure_6.html)**
 
+
+### **Supplementary Figures**
+
+- **[Figure S1](https://mward-lab.github.io/Paul_CX_2025/Figure_S1.html)**
+
 ### **Cardiomyocyte Purity**  
 
 - **[Cardiomyocyte Purity](https://mward-lab.github.io/Paul_CX_2025/Flow.html)**
