@@ -1,0 +1,73 @@
+---
+title: "Figure_S2"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 DRC boxplots**
+```{r box, echo=TRUE, message=FALSE, fig.width=10, fig.height=6}
+
+# Load libraries
+library(ggplot2)
+library(dplyr)
+
+# Read data
+cx_data <- read.csv("data/CX-5461.csv")
+dox_data <- read.csv("data/DOX.csv")
+
+# Label the drugs
+cx_data$Drug <- "CX.5461"
+dox_data$Drug <- "DOX"
+
+# Combine datasets
+combined_data <- bind_rows(cx_data, dox_data)
+
+# Rename individuals (from 75-1 etc. to 1, 2, 3)
+combined_data$Indv <- recode(combined_data$Indv,
+                             "75-1" = "1",
+                             "78-1" = "2",
+                             "87-1" = "3")
+
+# Filter to 0–10 µM concentrations only
+combined_data <- combined_data %>% filter(Conc <= 10)
+
+# Convert Conc to ordered factor
+combined_data$Conc <- factor(combined_data$Conc, levels = c(0, 0.1, 0.5, 1, 5, 10))
+
+# Define drug colors
+drug_colors <- c("CX.5461" = "#08306B", "DOX" = "#E7298A")
+
+# Plot
+ggplot(combined_data, aes(x = Drug, y = Ratio, fill = Drug)) +
+  geom_boxplot(width = 0.5, outlier.shape = NA) +
+  geom_point(
+    aes(color = Indv),
+    position = position_jitter(width = 0, height = 0),
+    size = 2.5,
+    alpha = 0.8
+  ) +
+  scale_fill_manual(values = drug_colors) +
+  scale_y_continuous(
+    limits = c(-0.5, 1.7),  # adjust based on your data
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  facet_wrap(~ Conc, nrow = 1, labeller = label_both) +
+  labs(
+    title = "Cell Viability: CX-5461 vs DOX",
+    x = "Drug",
+    y = "Proportion of Viable Cells",
+    fill = "Drug",
+    color = "Individual"
+  ) +
+  theme_bw() +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    axis.title = element_text(size = 14, color = "black"),
+    axis.text = element_text(size = 12, color = "black"),
+    legend.title = element_text(face = "bold"),
+    legend.position = "right",
+    strip.text = element_text(face = "bold", size = 12),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1.2)
+  )
+```
