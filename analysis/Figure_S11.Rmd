@@ -1,0 +1,59 @@
+---
+title: "Figure_S11"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌Overlapping of BP terms across all samples Upset plot**
+```{r Upset1, echo=TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+
+# 📦 Load Required Libraries
+library(UpSetR)
+library(dplyr)
+library(tidyr)
+
+# ✅ Define GO Enrichment Files (Combined_Terms structure, but now All_Terms paths)
+go_files <- list(
+  "CX_0.1_24"  = "data/BP/All_Terms/GO_BP_CX_0.1_24.csv",
+  "CX_0.1_48"  = "data/BP/All_Terms/GO_BP_CX_0.1_48.csv",
+  "CX_0.5_3"   = "data/BP/All_Terms/GO_BP_CX_0.5_3.csv",
+  "CX_0.5_24"  = "data/BP/All_Terms/GO_BP_CX_0.5_24.csv",
+  "CX_0.5_48"  = "data/BP/All_Terms/GO_BP_CX_0.5_48.csv",
+  "DOX_0.1_3"  = "data/BP/All_Terms/GO_BP_DOX_0.1_3.csv",
+  "DOX_0.1_24" = "data/BP/All_Terms/GO_BP_DOX_0.1_24.csv",
+  "DOX_0.1_48" = "data/BP/All_Terms/GO_BP_DOX_0.1_48.csv",
+  "DOX_0.5_3"  = "data/BP/All_Terms/GO_BP_DOX_0.5_3.csv"
+)
+
+# ✅ Read and filter (p.adjust < 0.05), extract GO term IDs
+gene_sets <- lapply(go_files, function(file) {
+  read.csv(file) %>%
+    filter(p.adjust < 0.05) %>%
+    pull(ID) %>%
+    as.character()
+})
+
+# 🧮 Build binary matrix
+all_ids <- unique(unlist(gene_sets))
+binary_matrix <- data.frame(GO_ID = all_ids)
+
+for (name in names(gene_sets)) {
+  binary_matrix[[name]] <- as.integer(binary_matrix$GO_ID %in% gene_sets[[name]])
+}
+
+# ✅ Prepare matrix for UpSetR
+upset_input <- binary_matrix[, -1]
+colnames(upset_input) <- names(gene_sets)
+
+# 🎯 Plot UpSet
+par(mar = c(10, 4, 2, 2))
+upset(upset_input,
+      sets = colnames(upset_input),
+      order.by = "freq",
+      sets.bar.color = "#56B4E9",
+      mainbar.y.label = "Number of Shared BP (p.adjust < 0.05)",
+      sets.x.label = "BP per Condition",
+      text.scale = 1.2,
+      nintersects = 30)
+```
