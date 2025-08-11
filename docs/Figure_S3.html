@@ -357,7 +357,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -368,8 +368,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -382,9 +382,9 @@ aria-hidden="true"></span> </a>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Paul_CX_2025/</code> <span
@@ -407,21 +407,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R
-Markdown file created these results, you’ll want to first commit it to
-the Git repo. If you’re still working on the analysis, you can ignore
-this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -512,15 +509,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treec28c90f9261a1afade8ff80f7fedbd3f382a3179targetblankc28c90fa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025tree537cc5b130fe8ac8a7b2dfaebdfa11c7ce797566targetblank537cc5ba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/mward-lab/Paul_CX_2025/tree/c28c90f9261a1afade8ff80f7fedbd3f382a3179" target="_blank">c28c90f</a>
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/537cc5b130fe8ac8a7b2dfaebdfa11c7ce797566" target="_blank">537cc5b</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treec28c90f9261a1afade8ff80f7fedbd3f382a3179targetblankc28c90fa"
+id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025tree537cc5b130fe8ac8a7b2dfaebdfa11c7ce797566targetblank537cc5ba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -530,7 +527,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/mward-lab/Paul_CX_2025/tree/c28c90f9261a1afade8ff80f7fedbd3f382a3179" target="_blank">c28c90f</a>.
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/537cc5b130fe8ac8a7b2dfaebdfa11c7ce797566" target="_blank">537cc5b</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -551,12 +548,6 @@ Ignored files:
     Ignored:    0.1 box.svg
     Ignored:    Rplot04.svg
 
-Untracked files:
-    Untracked:  analysis/Figure_S3.Rmd
-
-Unstaged changes:
-    Modified:   analysis/index.Rmd
-
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -570,10 +561,74 @@ have uncommitted changes.
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with
-<code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/Figure_S3.Rmd</code>) and HTML
+(<code>docs/Figure_S3.html</code>) files. If you’ve configured a remote
+Git repository (see <code>?wflow_git_remote</code>), click on the
+hyperlinks in the table below to view the files as they were in that
+past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/mward-lab/Paul_CX_2025/blob/f12bb7164e00bd4b4a8676c15bc3ae63c284f7f9/analysis/Figure_S3.Rmd" target="_blank">f12bb71</a>
+</td>
+<td>
+sayanpaul01
+</td>
+<td>
+2025-08-10
+</td>
+<td>
+Commit
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/mward-lab/Paul_CX_2025/f12bb7164e00bd4b4a8676c15bc3ae63c284f7f9/docs/Figure_S3.html" target="_blank">f12bb71</a>
+</td>
+<td>
+sayanpaul01
+</td>
+<td>
+2025-08-10
+</td>
+<td>
+Commit
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -606,6 +661,43 @@ ggplot(data, aes(x = Timepoint, y = Value, fill = Group)) +
   theme_minimal() +
   scale_fill_brewer(palette = &quot;Set1&quot;)</code></pre>
 <p><img src="figure/Figure_S3.Rmd/box-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-box-1">
+Past versions of box-1.png
+</button>
+</p>
+<div id="fig-box-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/mward-lab/Paul_CX_2025/blob/f12bb7164e00bd4b4a8676c15bc3ae63c284f7f9/docs/figure/Figure_S3.Rmd/box-1.png" target="_blank">f12bb71</a>
+</td>
+<td>
+sayanpaul01
+</td>
+<td>
+2025-08-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -649,8 +741,9 @@ loaded via a namespace (and not attached):
 [29] httpuv_1.6.15      xfun_0.52          fs_1.6.3           sass_0.4.10       
 [33] cli_3.6.1          withr_3.0.2        magrittr_2.0.3     digest_0.6.34     
 [37] grid_4.3.0         rstudioapi_0.17.1  lifecycle_1.0.4    vctrs_0.6.5       
-[41] evaluate_1.0.3     glue_1.7.0         farver_2.1.2       colorspace_2.1-0  
-[45] rmarkdown_2.29     tools_4.3.0        pkgconfig_2.0.3    htmltools_0.5.8.1 </code></pre>
+[41] evaluate_1.0.3     glue_1.7.0         farver_2.1.2       whisker_0.4.1     
+[45] colorspace_2.1-0   rmarkdown_2.29     tools_4.3.0        pkgconfig_2.0.3   
+[49] htmltools_0.5.8.1 </code></pre>
 </div>
 </div>
 
