@@ -1,0 +1,322 @@
+---
+title: "Figure_S10"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 logFC Correlation heatmap (Colorectal, CX and DOX dataset)**
+```{r colr2, echo=TRUE, message=FALSE, fig.width=10, fig.height=8}
+
+# 📦 Load Required Libraries
+library(data.table)
+library(tidyverse)
+library(janitor)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+library(ComplexHeatmap)
+library(circlize)
+library(RColorBrewer)
+library(grid)
+
+# 🧠 Function to map gene SYMBOL to Entrez ID for colorectal datasets
+map_entrez <- function(df) {
+  df %>%
+    mutate(entrez_id = mapIds(
+      org.Hs.eg.db,
+      keys = Symbol,
+      column = "ENTREZID",
+      keytype = "SYMBOL",
+      multiVals = "first"
+    )) %>%
+    mutate(entrez_id = as.character(entrez_id))
+}
+
+# 📁 Define All logFC Input Files (CX-5461, DOX, Colorectal)
+logfc_files <- list(
+  "CX_0.1_3"   = "data/DEGs/Toptable_CX_0.1_3.csv",
+  "CX_0.1_24"  = "data/DEGs/Toptable_CX_0.1_24.csv",
+  "CX_0.1_48"  = "data/DEGs/Toptable_CX_0.1_48.csv",
+  "CX_0.5_3"   = "data/DEGs/Toptable_CX_0.5_3.csv",
+  "CX_0.5_24"  = "data/DEGs/Toptable_CX_0.5_24.csv",
+  "CX_0.5_48"  = "data/DEGs/Toptable_CX_0.5_48.csv",
+  "DOX_0.1_3"  = "data/DEGs/Toptable_DOX_0.1_3.csv",
+  "DOX_0.1_24" = "data/DEGs/Toptable_DOX_0.1_24.csv",
+  "DOX_0.1_48" = "data/DEGs/Toptable_DOX_0.1_48.csv",
+  "DOX_0.5_3"  = "data/DEGs/Toptable_DOX_0.5_3.csv",
+  "DOX_0.5_24" = "data/DEGs/Toptable_DOX_0.5_24.csv",
+  "DOX_0.5_48" = "data/DEGs/Toptable_DOX_0.5_48.csv",
+  "Colorectal_6hr"  = "data/Colorectal/6hrlogFC.csv",
+  "Colorectal_24hr" = "data/Colorectal/24hrlogFC.csv",
+  "Colorectal_72hr" = "data/Colorectal/72hrlogFC.csv"
+)
+
+# 🔁 Process All Files: Extract clean (Entrez_ID, logFC) tibble per sample
+logfc_list <- map2(names(logfc_files), logfc_files, function(name, path) {
+  df <- fread(path, data.table = FALSE) %>% as_tibble()
+
+  # Map Entrez ID for colorectal
+  if (grepl("colorectal", tolower(name))) {
+    df <- map_entrez(df)
+  }
+
+  # Auto-detect columns
+  logfc_col <- names(df)[str_detect(names(df), regex("^logfc$", ignore_case = TRUE))][1]
+  entrez_col <- names(df)[str_detect(names(df), regex("entrez.*id", ignore_case = TRUE))][1]
+
+  if (is.na(logfc_col) || is.na(entrez_col)) {
+    stop(paste("Missing columns in:", name,
+               "\nAvailable columns:", paste(names(df), collapse = ", ")))
+  }
+
+  df %>%
+    filter(!is.na(.data[[logfc_col]]), !is.na(.data[[entrez_col]])) %>%
+    mutate(entrez_id = as.character(.data[[entrez_col]])) %>%
+    distinct(entrez_id, .keep_all = TRUE) %>%
+    dplyr::select(entrez_id, logFC = all_of(logfc_col)) %>%
+    dplyr::rename(!!name := logFC)
+})
+
+
+
+
+# 🧬 Identify Common Entrez_IDs Across All Datasets
+common_ids <- purrr::reduce(logfc_list, inner_join, by = "entrez_id") %>%
+  pull(entrez_id) %>%
+  unique()
+
+
+# 🧱 Build Final logFC Matrix (Entrez_ID × Sample)
+logfc_matrix <- map(logfc_list, ~ filter(.x, entrez_id %in% common_ids)) %>%
+  purrr::reduce(inner_join, by = "entrez_id") %>%
+  column_to_rownames("entrez_id") %>%
+  as.matrix()
+
+# ✅ Assume logfc_matrix is already created
+# Rows = Entrez_IDs, Columns = Samples
+sample_names <- colnames(logfc_matrix)
+
+# 📁 Create Metadata Inline
+metadata <- tibble(Sample = sample_names) %>%
+  mutate(
+    Drug = case_when(
+      str_detect(Sample, "CX") ~ "CX-5461",
+      str_detect(Sample, "DOX") ~ "DOX",
+      str_detect(Sample, "Colorectal") ~ "CX-5461"
+    ),
+    Tissue = case_when(
+      str_detect(Sample, "Colorectal") ~ "Colorectal",
+      TRUE ~ "Cardiomyocyte"
+    ),
+    Time = case_when(
+      str_detect(Sample, "6hr") ~ "6",
+      str_detect(Sample, "24") ~ "24",
+      str_detect(Sample, "72") ~ "72",
+      str_detect(Sample, "48") ~ "48",
+      str_detect(Sample, "3") ~ "3",
+      TRUE ~ NA_character_
+    ),
+    Conc = case_when(
+      str_detect(Sample, "Colorectal") ~ "0.5",
+      str_detect(Sample, "0.1") ~ "0.1",
+      str_detect(Sample, "0.5") ~ "0.5",
+      TRUE ~ NA_character_
+    )
+  )
+
+metadata <- metadata %>%
+  mutate(Time = factor(Time, levels = c("3", "6", "24", "48", "72")))
+
+# 🎨 Define Annotation Colors
+time_colors <- c("3" = "purple", "6" = "blue", "24" = "pink", "48" = "tomato3", "72" = "orange")
+drug_colors <- c("CX-5461" = "gold", "DOX" = "magenta4")
+conc_colors <- c("0.1" = "lightblue", "0.5" = "lightcoral")
+tissue_colors <- c("Cardiomyocyte" = "forestgreen", "Colorectal" = "steelblue")
+
+# 🔝 Top Annotation Track
+top_annot <- HeatmapAnnotation(
+  Tissue = metadata$Tissue,
+  Drug = metadata$Drug,
+  Timepoint = metadata$Time,
+  Concentration = metadata$Conc,
+  col = list(
+    Tissue = tissue_colors,
+    Drug = drug_colors,
+    Timepoint = time_colors,
+    Concentration = conc_colors
+  ),
+  annotation_legend_param = list(
+    Tissue = list(title = "Tissue"),
+    Drug = list(title = "Drug"),
+    Timepoint = list(title = "Timepoint (hr)"),
+    Concentration = list(title = "Conc (µM)")
+  )
+)
+
+# 📊 Compute Pearson Correlation Matrix
+pearson_matrix <- cor(logfc_matrix, method = "pearson")
+
+# 🎨 Color Function for Pearson r
+col_fun <- colorRamp2(c(-1, 0, 1), c("blue", "white", "red"))
+
+
+# 🔥 Draw Pearson Correlation Heatmap
+Heatmap(
+  pearson_matrix,
+  name = "Pearson\nCorrelation",
+  col = col_fun,
+  top_annotation = top_annot,
+  cluster_rows = TRUE,
+  cluster_columns = TRUE,
+  row_names_gp = gpar(fontsize = 9),
+  column_names_gp = gpar(fontsize = 9),
+  column_names_rot = 45,
+  rect_gp = gpar(col = "white", lwd = 0.5),
+  cell_fun = function(j, i, x, y, w, h, fill) {
+    grid.text(sprintf("%.2f", pearson_matrix[i, j]), x, y, gp = gpar(fontsize = 6.5))
+  },
+  heatmap_legend_param = list(
+    title = "Correlation",
+    at = c(-1, -0.5, 0, 0.5, 1),
+    labels = c("-1", "-0.5", "0", "0.5", "1"),
+    direction = "vertical"
+  )
+)
+```
+
+## **📌 Proportion of Colorectal cancer DEGs in CX and DOX treated samples**
+```{r Col_DEGs, echo=TRUE, message=FALSE}
+# 📦 Load Required Libraries
+# 📦 Load Required Libraries
+library(tidyverse)
+library(org.Hs.eg.db)
+
+# 📁 Load Consolidated Gene Symbols and convert to Entrez
+col_symbols <- read.csv("data/Col_DEGs.csv") %>%
+  pull(Symbol) %>%
+  unique()
+
+col_entrez <- mapIds(
+  org.Hs.eg.db,
+  keys = col_symbols,
+  column = "ENTREZID",
+  keytype = "SYMBOL",
+  multiVals = "first"
+) %>%
+  na.omit() %>%
+  unique() %>%
+  as.character()
+
+# 🧬 Load DEG Data
+deg_list <- list(
+  "CX_0.1_3"   = read.csv("data/DEGs/Toptable_CX_0.1_3.csv"),
+  "CX_0.1_24"  = read.csv("data/DEGs/Toptable_CX_0.1_24.csv"),
+  "CX_0.1_48"  = read.csv("data/DEGs/Toptable_CX_0.1_48.csv"),
+  "CX_0.5_3"   = read.csv("data/DEGs/Toptable_CX_0.5_3.csv"),
+  "CX_0.5_24"  = read.csv("data/DEGs/Toptable_CX_0.5_24.csv"),
+  "CX_0.5_48"  = read.csv("data/DEGs/Toptable_CX_0.5_48.csv"),
+  "DOX_0.1_3"  = read.csv("data/DEGs/Toptable_DOX_0.1_3.csv"),
+  "DOX_0.1_24" = read.csv("data/DEGs/Toptable_DOX_0.1_24.csv"),
+  "DOX_0.1_48" = read.csv("data/DEGs/Toptable_DOX_0.1_48.csv"),
+  "DOX_0.5_3"  = read.csv("data/DEGs/Toptable_DOX_0.5_3.csv"),
+  "DOX_0.5_24" = read.csv("data/DEGs/Toptable_DOX_0.5_24.csv"),
+  "DOX_0.5_48" = read.csv("data/DEGs/Toptable_DOX_0.5_48.csv")
+)
+
+# ✅ Extract Significant DEGs and Calculate Overlap
+proportion_data <- map_dfr(names(deg_list), function(sample) {
+  sig_df <- deg_list[[sample]] %>%
+    filter(adj.P.Val < 0.05)
+  sample_degs <- unique(as.character(sig_df$Entrez_ID))
+  
+  yes <- sum(sample_degs %in% col_entrez)
+  no <- length(sample_degs) - yes
+  
+  data.frame(
+    Sample = sample,
+    Category = c("Yes", "No"),
+    Count = c(yes, no)
+  )
+}) %>%
+  group_by(Sample) %>%
+  mutate(Proportion = Count / sum(Count) * 100)
+
+# 🔁 Reorder Sample Levels
+proportion_data$Sample <- factor(proportion_data$Sample, levels = c(
+  "CX_0.1_3", "CX_0.1_24", "CX_0.1_48",
+  "CX_0.5_3", "CX_0.5_24", "CX_0.5_48",
+  "DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48",
+  "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48"
+))
+
+# ✅ Set Yes on top
+proportion_data$Category <- factor(proportion_data$Category, levels = c("Yes", "No"))
+
+# 🔬 Chi-square Test for CX vs DOX matched conditions
+matched_pairs <- list(
+  "0.1_3"  = c("CX_0.1_3", "DOX_0.1_3"),
+  "0.1_24" = c("CX_0.1_24", "DOX_0.1_24"),
+  "0.1_48" = c("CX_0.1_48", "DOX_0.1_48"),
+  "0.5_3"  = c("CX_0.5_3", "DOX_0.5_3"),
+  "0.5_24" = c("CX_0.5_24", "DOX_0.5_24"),
+  "0.5_48" = c("CX_0.5_48", "DOX_0.5_48")
+)
+
+# Compute p-values
+chi_results <- map_dfr(names(matched_pairs), function(label) {
+  cx <- matched_pairs[[label]][1]
+  dox <- matched_pairs[[label]][2]
+  
+  cx_df <- deg_list[[cx]] %>% filter(adj.P.Val < 0.05)
+  dox_df <- deg_list[[dox]] %>% filter(adj.P.Val < 0.05)
+  
+  a1 <- sum(cx_df$Entrez_ID %in% col_entrez)
+  b1 <- nrow(cx_df) - a1
+  a2 <- sum(dox_df$Entrez_ID %in% col_entrez)
+  b2 <- nrow(dox_df) - a2
+  
+  chisq <- chisq.test(matrix(c(a1, b1, a2, b2), nrow = 2, byrow = TRUE))
+  
+  data.frame(
+    Comparison = label,
+    CX_sample = cx,
+    DOX_sample = dox,
+    P_value = chisq$p.value,
+    Star = ifelse(chisq$p.value < 0.05, "*", "")
+  )
+})
+
+# ✏️ Label placement
+# 🆙 Place stars only above CX samples where p < 0.05
+# Ensure dplyr functions are used explicitly
+annot_df <- chi_results %>%
+  dplyr::filter(Star == "*") %>%
+  dplyr::select(CX_sample, Star) %>%
+  dplyr::rename(Sample = CX_sample) %>%
+  dplyr::mutate(y_pos = 102)
+
+
+
+ggplot(proportion_data, aes(x = Sample, y = Proportion, fill = Category)) +
+  geom_bar(stat = "identity", position = "stack") +
+  geom_text(data = annot_df, aes(x = Sample, y = y_pos, label = Star),
+            inherit.aes = FALSE, size = 6) +
+  scale_fill_manual(
+    values = c("Yes" = "#e41a1c", "No" = "#377eb8"),
+    guide = guide_legend(reverse = TRUE)
+  ) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1), limits = c(0, 105)) +
+  labs(
+    title = "Proportion of Colorectal Cancer DEGs\nin CX and DOX treated samples",
+    x = "Sample",
+    y = "Percentage of DEGs",
+    fill = "Overlap"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    legend.title = element_blank(),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 1)
+  )
+```
