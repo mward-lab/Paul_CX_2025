@@ -1,0 +1,96 @@
+---
+title: "Figure_S9"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 Differential Gene Expression Analysis **
+
+### **📌 Load Required Libraries**
+```{r load_libraries, echo=TRUE, message=FALSE}
+# Load necessary packages
+library(edgeR)
+library(limma)
+library(data.table)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(biomaRt)
+library(Homo.sapiens)
+```
+
+
+## **📌 Volcano Plots for Differential Expression Analysis**
+```{r volcano plot, echo=TRUE, message=FALSE}
+
+library(ggplot2)
+
+# Function to generate volcano plot with counts in legend
+generate_volcano_plot <- function(toptable, title) {
+  
+  # Annotate significance
+  toptable$Significance <- "Not Significant"
+  toptable$Significance[toptable$logFC > 0 & toptable$adj.P.Val < 0.05] <- "Upregulated"
+  toptable$Significance[toptable$logFC < 0 & toptable$adj.P.Val < 0.05] <- "Downregulated"
+  
+  # Count per category
+  count_table <- table(toptable$Significance)
+  up_count <- count_table["Upregulated"]
+  down_count <- count_table["Downregulated"]
+  ns_count <- count_table["Not Significant"]
+  
+  # Handle missing counts
+  if (is.na(up_count)) up_count <- 0
+  if (is.na(down_count)) down_count <- 0
+  if (is.na(ns_count)) ns_count <- 0
+  
+  # Labels with counts
+  custom_labels <- c(
+    paste0("Downregulated (", down_count, ")"),
+    paste0("Not Significant (", ns_count, ")"),
+    paste0("Upregulated (", up_count, ")")
+  )
+  names(custom_labels) <- c("Downregulated", "Not Significant", "Upregulated")
+  
+  # Plot
+  ggplot(toptable, aes(x = logFC, y = -log10(P.Value), color = Significance)) +
+    geom_point(alpha = 0.4, size = 2) +
+    scale_color_manual(
+      values = c(
+        "Downregulated" = "red",
+        "Upregulated" = "blue",
+        "Not Significant" = "gray"
+      ),
+      labels = custom_labels
+    ) +
+    xlim(-5, 5) +
+    labs(
+      title = title,
+      x = "log2 Fold Change",
+      y = "-log10 P-value",
+      color = "Gene Status"
+    ) +
+    theme_bw() +
+    theme(
+      legend.position = "right",
+      plot.title = element_text(size = rel(1.5), hjust = 0.5),
+      axis.title = element_text(size = rel(1.25)),
+      legend.title = element_text(size = 11, face = "bold"),
+      legend.text = element_text(size = 10)
+    )
+}
+
+# Load all Toptable CSV files
+deg_files <- list.files("data/DEGs/", pattern = "^Toptable_.*\\.csv$", full.names = TRUE)
+
+# Loop through files and show plots
+for (file in deg_files) {
+  df <- read.csv(file)
+  plot_title <- gsub("^Toptable_|\\.csv$", "", basename(file))
+  p <- generate_volcano_plot(df, paste("Volcano Plot:", plot_title))
+  print(p)
+}
+
+```
