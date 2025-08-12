@@ -1,0 +1,40 @@
+---
+title: "Figure_S16"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 Overlap of CX associate groups**
+```{r 0verlap_CX., echo=TRUE, message=FALSE, warning=FALSE}
+# Load required library
+library(ggVennDiagram)
+library(ggplot2)
+
+# Load gene sets
+prob_2_0.1 <- as.character(read.csv("data/prob_2_0.1.csv")$Entrez_ID)
+prob_4_0.5 <- as.character(read.csv("data/prob_4_0.5.csv")$Entrez_ID)
+prob_5_0.5 <- as.character(read.csv("data/prob_5_0.5.csv")$Entrez_ID)
+
+# Define gene sets with exact labels
+venn_list <- list(
+  `CX_DOX_1` = prob_2_0.1,
+  `CX_DOX_2` = prob_4_0.5,
+  `CX_DOX_3` = prob_5_0.5
+)
+
+# Build plot object
+p <- ggVennDiagram(
+  venn_list,
+  label_alpha = 0.6,
+  label = "count"
+) +
+  scale_fill_gradient(low = "#08306B", high = "#6BAED6") +
+  theme(legend.position = "right")
+
+# Manually reduce set label size (layer 3 is usually the set label layer)
+p$layers[[3]]$aes_params$size <- 2.5
+
+# Render the final plot
+p
+```
