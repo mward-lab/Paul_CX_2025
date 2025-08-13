@@ -14,7 +14,7 @@ library(ggplot2)
 data <- data.frame(
   Group        = rep(c("CX", "Dox", "Veh"), each = 2),
   Concentration = rep(c("5", "10"), times = 3),
-  Value        = c(5.7, 8.3,   # CX
+  Value        = c(5.3, 9.4,   # CX
                    96.8, 97.9, # Dox
                    3.7, 3.7)   # Veh
 )
