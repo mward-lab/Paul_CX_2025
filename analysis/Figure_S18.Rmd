@@ -1,0 +1,172 @@
+---
+title: "Figure_S18"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 AC Cardiotoxicity**
+
+## **📌 Load Required Libraries**
+```{r load_libraries, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse) 
+library(ggfortify)
+library(cluster)
+library(edgeR)
+library(limma)
+library(Homo.sapiens)
+library(BiocParallel)
+library(qvalue)
+library(pheatmap)
+library(clusterProfiler)
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(RColorBrewer)
+library(readr)
+library(TxDb.Hsapiens.UCSC.hg38.knownGene)
+library(ComplexHeatmap)
+library(circlize)
+library(grid)
+library(reshape2)
+library(dplyr)
+
+# Load UCSC transcript database
+txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
+```
+
+## **📌 Read and Process DEG Data**
+```{r load_DEGs, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
+Entrez_IDs <- c(
+  6272, 8029, 11128, 79899, 54477, 121665, 5095, 22863, 57161, 4692,
+  8214, 23151, 56606, 108, 22999, 56895, 9603, 3181, 4023, 10499,
+  92949, 4363, 10057, 5243, 5244, 5880, 1535, 2950, 847, 5447,
+  3038, 3077, 4846, 3958, 23327, 29899, 23155, 80856, 55020, 78996,
+  23262, 150383, 9620, 79730, 344595, 5066, 6251, 3482, 9588, 339416,
+  7292, 55157, 87769, 23409, 720, 3107, 54535, 1590, 80059, 7991,
+  57110, 8803, 323, 54826, 5916, 23371, 283337, 64078, 80010, 1933,
+  10818, 51020
+)
+
+# Load DEG data
+load_deg <- function(name) {
+  read.csv(paste0("data/DEGs/Toptable_", name, ".csv"))
+}
+
+samples <- c("CX_0.1_3", "CX_0.1_24", "CX_0.1_48", 
+             "CX_0.5_3", "CX_0.5_24", "CX_0.5_48",
+             "DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48", 
+             "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48")
+
+deg_list <- lapply(samples, load_deg)
+names(deg_list) <- samples
+
+# Subset and annotate DEG tables
+get_subset <- function(df, name) {
+  parts <- strsplit(name, "_")[[1]]
+  df %>%
+    filter(Entrez_ID %in% Entrez_IDs) %>%
+    dplyr::select(Entrez_ID, logFC, adj.P.Val) %>%
+    mutate(Drug = parts[1], Conc = parts[2], Time = parts[3])
+}
+
+combined_data <- bind_rows(mapply(get_subset, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# Add Gene symbol and significance
+combined_data <- combined_data %>%
+  mutate(Gene = mapIds(org.Hs.eg.db, keys = as.character(Entrez_ID),
+                       column = "SYMBOL", keytype = "ENTREZID", multiVals = "first"),
+         Significance = ifelse(adj.P.Val < 0.05, "*", ""))
+```
+
+## **📌 rsID + Study annotation **
+```{r Read mapping counts, echo=FALSE, results='hide', include=FALSE}
+# Load rsID + Study annotation
+rsid_study <- read.csv("data/Cardiotox_mapped.csv")
+rsid_study$Entrez_ID <- as.integer(rsid_study$Entrez_ID)
+
+# Join and keep only one rsID per Entrez_ID (for display)
+rsid_study_clean <- rsid_study %>%
+  distinct(Entrez_ID, .keep_all = TRUE)
+
+combined_data <- combined_data %>%
+  left_join(rsid_study_clean, by = "Entrez_ID")
+
+# Create logFC and Significance matrices
+logFC_matrix <- acast(combined_data, Gene ~ paste(Drug, Conc, Time, sep = "_"), value.var = "logFC")
+signif_matrix <- acast(combined_data, Gene ~ paste(Drug, Conc, Time, sep = "_"), value.var = "Significance")
+
+# Match column order
+desired_order <- c("CX_0.1_3", "CX_0.1_24", "CX_0.1_48", 
+                   "CX_0.5_3", "CX_0.5_24", "CX_0.5_48",
+                   "DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48", 
+                   "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48")
+logFC_matrix <- logFC_matrix[, desired_order]
+signif_matrix <- signif_matrix[, desired_order]
+
+# Create row order based on study groups
+rsid_info <- combined_data %>%
+  distinct(Gene, Entrez_ID, rsID, Study) %>%
+  filter(Gene %in% rownames(logFC_matrix)) %>%
+  arrange(factor(Study, levels = c("GWAS1", "GWAS2", "TWAS")))
+
+logFC_matrix <- logFC_matrix[rsid_info$Gene, ]
+signif_matrix <- signif_matrix[rsid_info$Gene, ]
+
+# Column annotation
+split_cols <- strsplit(colnames(logFC_matrix), "_")
+drug <- sapply(split_cols, `[`, 1)
+conc <- sapply(split_cols, `[`, 2)
+time <- sapply(split_cols, `[`, 3)
+```
+
+
+## **📌Create a matrix and heatmap**
+```{r Data_prep, echo=TRUE, message=FALSE, fig.height=16, fig.width=10}
+ha_top <- HeatmapAnnotation(
+  Drug = drug,
+  Conc = conc,
+  Time = time,
+  col = list(
+    Drug = c("CX" = "blue", "DOX" = "red"),
+    Conc = c("0.1" = "lightgreen", "0.5" = "darkgreen"),
+    Time = c("3" = "yellow", "24" = "orange", "48" = "purple")
+  ),
+  annotation_height = unit(c(2, 2, 2), "cm")
+)
+
+# Row annotation
+rsid_factor <- factor(rsid_info$rsID)
+study_factor <- factor(rsid_info$Study, levels = c("GWAS1", "GWAS2", "TWAS"))
+
+rsid_colors <- setNames(rainbow(length(levels(rsid_factor))), levels(rsid_factor))
+study_colors <- setNames(RColorBrewer::brewer.pal(length(levels(study_factor)), "Set2"), levels(study_factor))
+
+ha_left <- rowAnnotation(
+  rsID = anno_text(rsid_info$rsID, location = 0, just = "left", gp = gpar(fontsize = 9)),
+  rsID_color = rsid_factor,
+  Study = study_factor,
+  col = list(
+    rsID_color = rsid_colors,
+    Study = study_colors
+  ),
+  show_legend = c(rsID = FALSE, rsID_color = FALSE, Study = TRUE),
+  annotation_name_side = "top",
+  annotation_width = unit(c(4.3, 0.25, 0.25), "cm")
+)
+
+# Draw final heatmap
+Heatmap(logFC_matrix,
+        name = "logFC",
+        top_annotation = ha_top,
+        left_annotation = ha_left,
+        cluster_columns = FALSE,
+        cluster_rows = FALSE,
+        show_row_names = TRUE,
+        show_column_names = FALSE,
+        cell_fun = function(j, i, x, y, width, height, fill) {
+          grid.text(signif_matrix[i, j], x, y, gp = gpar(fontsize = 9))
+        },
+        column_title = "AC Toxicity-Associated Genes: CX-5461 vs DOX",
+        column_title_gp = gpar(fontsize = 14, fontface = "bold")
+)
+```
