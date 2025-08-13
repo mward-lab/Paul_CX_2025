@@ -1,0 +1,34 @@
+---
+title: "Figure_S4"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 IF Quantification (5 and 10 micromolar)**
+```{r box, echo=TRUE, message=FALSE}
+# Load necessary library
+library(ggplot2)
+
+# Create the dataset in the same style
+data <- data.frame(
+  Group        = rep(c("CX", "Dox", "Veh"), each = 2),
+  Concentration = rep(c("5", "10"), times = 3),
+  Value        = c(5.7, 8.3,   # CX
+                   96.8, 97.9, # Dox
+                   3.7, 3.7)   # Veh
+)
+
+# Ensure the order of groups and concentrations
+data$Group <- factor(data$Group, levels = c("Veh", "CX", "Dox"))
+data$Concentration <- factor(data$Concentration, levels = c("5", "10"))
+
+# Create the side-by-side bar chart (no error bars)
+ggplot(data, aes(x = Concentration, y = Value, fill = Group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Cell viability at 5 and 10",
+       x = "Concentration",
+       y = "Value") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set1")
+```

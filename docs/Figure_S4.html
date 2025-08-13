@@ -11,7 +11,7 @@
 
 
 
-<title>Figure_S19</title>
+<title>Figure_S4</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -349,7 +349,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Figure_S19</h1>
+<h1 class="title toc-ignore">Figure_S4</h1>
 
 </div>
 
@@ -357,7 +357,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -368,8 +368,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -382,9 +382,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Paul_CX_2025/</code> <span
@@ -407,18 +407,21 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
@@ -548,6 +551,9 @@ Ignored files:
     Ignored:    0.1 box.svg
     Ignored:    Rplot04.svg
 
+Untracked files:
+    Untracked:  analysis/Figure_S4.Rmd
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not
@@ -564,8 +570,8 @@ have uncommitted changes.
 
 <p>
 These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/Figure_S19.Rmd</code>) and HTML
-(<code>docs/Figure_S19.html</code>) files. If you’ve configured a remote
+made to the R Markdown (<code>analysis/Figure_S4.Rmd</code>) and HTML
+(<code>docs/Figure_S4.html</code>) files. If you’ve configured a remote
 Git repository (see <code>?wflow_git_remote</code>), click on the
 hyperlinks in the table below to view the files as they were in that
 past version.
@@ -597,13 +603,13 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/mward-lab/Paul_CX_2025/blob/170df7251944c42b7214b513c7c224892cfe8544/analysis/Figure_S19.Rmd" target="_blank">170df72</a>
+<a href="https://github.com/mward-lab/Paul_CX_2025/blob/6e218b7f8a4392f449f5e77826ffd874f7c07648/analysis/Figure_S4.Rmd" target="_blank">6e218b7</a>
 </td>
 <td>
 sayanpaul01
 </td>
 <td>
-2025-08-13
+2025-08-10
 </td>
 <td>
 Commit
@@ -611,16 +617,16 @@ Commit
 </tr>
 <tr>
 <td>
-html
+Rmd
 </td>
 <td>
-<a href="https://rawcdn.githack.com/mward-lab/Paul_CX_2025/170df7251944c42b7214b513c7c224892cfe8544/docs/Figure_S19.html" target="_blank">170df72</a>
+<a href="https://github.com/mward-lab/Paul_CX_2025/blob/537cc5b130fe8ac8a7b2dfaebdfa11c7ce797566/analysis/Figure_S4.Rmd" target="_blank">537cc5b</a>
 </td>
 <td>
 sayanpaul01
 </td>
 <td>
-2025-08-13
+2025-08-10
 </td>
 <td>
 Commit
@@ -633,174 +639,33 @@ Commit
 </div>
 </div>
 </div>
-<div id="logfc-boxplots-of-heart-failure-gwas-genes"
-class="section level2">
-<h2><strong>📌 LogFC boxplots of Heart Failure GWAS genes</strong></h2>
-<pre class="r"><code># ----------------- Load Libraries -----------------
-library(tidyverse)
-library(org.Hs.eg.db)
+<div id="if-quantification-5-and-10-micromolar" class="section level2">
+<h2><strong>📌 IF Quantification (5 and 10 micromolar)</strong></h2>
+<pre class="r"><code># Load necessary library
+library(ggplot2)
 
-# ----------------- DEG File Paths -----------------
-deg_files &lt;- list(
-  &quot;CX_0.1_3&quot; = &quot;data/DEGs/Toptable_CX_0.1_3.csv&quot;,
-  &quot;CX_0.1_24&quot; = &quot;data/DEGs/Toptable_CX_0.1_24.csv&quot;,
-  &quot;CX_0.1_48&quot; = &quot;data/DEGs/Toptable_CX_0.1_48.csv&quot;,
-  &quot;CX_0.5_3&quot; = &quot;data/DEGs/Toptable_CX_0.5_3.csv&quot;,
-  &quot;CX_0.5_24&quot; = &quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;,
-  &quot;CX_0.5_48&quot; = &quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;,
-  &quot;DOX_0.1_3&quot; = &quot;data/DEGs/Toptable_DOX_0.1_3.csv&quot;,
-  &quot;DOX_0.1_24&quot; = &quot;data/DEGs/Toptable_DOX_0.1_24.csv&quot;,
-  &quot;DOX_0.1_48&quot; = &quot;data/DEGs/Toptable_DOX_0.1_48.csv&quot;,
-  &quot;DOX_0.5_3&quot; = &quot;data/DEGs/Toptable_DOX_0.5_3.csv&quot;,
-  &quot;DOX_0.5_24&quot; = &quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;,
-  &quot;DOX_0.5_48&quot; = &quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;
+# Create the dataset in the same style
+data &lt;- data.frame(
+  Group        = rep(c(&quot;CX&quot;, &quot;Dox&quot;, &quot;Veh&quot;), each = 2),
+  Concentration = rep(c(&quot;5&quot;, &quot;10&quot;), times = 3),
+  Value        = c(5.7, 8.3,   # CX
+                   96.8, 97.9, # Dox
+                   3.7, 3.7)   # Veh
 )
 
-# ----------------- Heart Failure Entrez IDs -----------------
-entrez_ids &lt;- c(
-  9709, 8882, 4023, 29959, 5496, 3992, 9415, 5308, 1026, 54437, 79068, 10221,
-  9031, 1187, 1952, 3705, 84722, 7273, 23293, 155382, 9531, 602, 27258, 84163,
-  81846, 79933, 56911, 64753, 93210, 1021, 283450, 5998, 57602, 114991, 7073,
-  3156, 100101267, 22996, 285025, 11080, 11124, 54810, 7531, 27241, 4774, 57794,
-  463, 91319, 6598, 9640, 2186, 26010, 80816, 571, 88, 51652, 64788, 90523, 2969,
-  7781, 80777, 10725, 23387, 817, 134728, 8842, 949, 6934, 129787, 10327, 202052,
-  2318, 5578, 6801, 6311, 10019, 80724, 217, 84909, 388591, 55101, 9839, 27161,
-  5310, 387119, 4641, 5587, 55188, 222553, 9960, 22852, 10087, 9570, 54497,
-  200942, 26249, 4137, 375056, 5409, 64116, 8291, 22876, 339855, 4864, 5142,
-  221692, 55023, 51426, 6146, 84251, 8189, 27332, 57099, 1869, 1112, 23327,
-  11264, 6001
-) %&gt;% as.character()
+# Ensure the order of groups and concentrations
+data$Group &lt;- factor(data$Group, levels = c(&quot;Veh&quot;, &quot;CX&quot;, &quot;Dox&quot;))
+data$Concentration &lt;- factor(data$Concentration, levels = c(&quot;5&quot;, &quot;10&quot;))
 
-# ----------------- Load and Filter DEGs -----------------
-hf_data_list &lt;- map2_dfr(deg_files, names(deg_files), function(file, label) {
-  read_csv(file, show_col_types = FALSE) %&gt;%
-    mutate(
-      Entrez_ID = as.character(Entrez_ID),
-      Condition = label,
-      Drug = ifelse(str_detect(label, &quot;CX&quot;), &quot;CX.5461&quot;, &quot;DOX&quot;)
-    ) %&gt;%
-    filter(Entrez_ID %in% entrez_ids)
-})
-
-# ----------------- Complete Combinations -----------------
-all_conditions &lt;- names(deg_files)
-all_combos &lt;- crossing(
-  Entrez_ID = entrez_ids,
-  Condition = all_conditions
-) %&gt;%
-  mutate(
-    Drug = ifelse(str_detect(Condition, &quot;CX&quot;), &quot;CX.5461&quot;, &quot;DOX&quot;)
-  )
-
-# ----------------- Merge with Data -----------------
-complete_hf &lt;- all_combos %&gt;%
-  left_join(hf_data_list, by = c(&quot;Entrez_ID&quot;, &quot;Condition&quot;, &quot;Drug&quot;)) %&gt;%
-  mutate(
-    logFC = ifelse(is.na(logFC), 0, logFC),
-    adj.P.Val = ifelse(is.na(adj.P.Val), 1, adj.P.Val)
-  )
-
-# ----------------- Gene Symbol Mapping -----------------
-complete_hf &lt;- complete_hf %&gt;%
-  mutate(
-    Gene = mapIds(org.Hs.eg.db, keys = Entrez_ID,
-                  column = &quot;SYMBOL&quot;, keytype = &quot;ENTREZID&quot;, multiVals = &quot;first&quot;)
-  )
-
-# ----------------- Order Conditions -----------------
-complete_hf$Condition &lt;- factor(complete_hf$Condition, levels = c(
-  &quot;CX_0.1_3&quot;, &quot;CX_0.1_24&quot;, &quot;CX_0.1_48&quot;,
-  &quot;CX_0.5_3&quot;, &quot;CX_0.5_24&quot;, &quot;CX_0.5_48&quot;,
-  &quot;DOX_0.1_3&quot;, &quot;DOX_0.1_24&quot;, &quot;DOX_0.1_48&quot;,
-  &quot;DOX_0.5_3&quot;, &quot;DOX_0.5_24&quot;, &quot;DOX_0.5_48&quot;
-))
-
-# ----------------- Wilcoxon Tests -----------------
-condition_pairs &lt;- tibble(
-  cx = c(&quot;CX_0.1_3&quot;, &quot;CX_0.1_24&quot;, &quot;CX_0.1_48&quot;, &quot;CX_0.5_3&quot;, &quot;CX_0.5_24&quot;, &quot;CX_0.5_48&quot;),
-  dox = c(&quot;DOX_0.1_3&quot;, &quot;DOX_0.1_24&quot;, &quot;DOX_0.1_48&quot;, &quot;DOX_0.5_3&quot;, &quot;DOX_0.5_24&quot;, &quot;DOX_0.5_48&quot;)
-)
-
-wilcox_results &lt;- map2_dfr(condition_pairs$cx, condition_pairs$dox, function(cx_label, dox_label) {
-  cx_vals &lt;- complete_hf %&gt;% filter(Condition == cx_label) %&gt;% pull(logFC)
-  dox_vals &lt;- complete_hf %&gt;% filter(Condition == dox_label) %&gt;% pull(logFC)
-  
-  test &lt;- tryCatch(wilcox.test(cx_vals, dox_vals), error = function(e) NULL)
-  pval &lt;- if (!is.null(test)) test$p.value else NA
-  
-  tibble(
-    Condition = dox_label,
-    p_value = signif(pval, 3),
-    label = case_when(
-      pval &lt; 0.001 ~ &quot;***&quot;,
-      pval &lt; 0.01  ~ &quot;**&quot;,
-      pval &lt; 0.05  ~ &quot;*&quot;,
-      TRUE         ~ &quot;&quot;
-    ),
-    y_pos = max(c(cx_vals, dox_vals), na.rm = TRUE) + 0.5
-  )
-})
-
-# ----------------- Final Plot -----------------
-ggplot(complete_hf, aes(x = Condition, y = logFC, fill = Drug)) +
-  geom_boxplot(outlier.size = 0.6) +
-  geom_text(data = wilcox_results,
-            aes(x = Condition, y = y_pos, label = label),
-            inherit.aes = FALSE,
-            size = 4, vjust = 0) +
-  scale_fill_manual(values = c(&quot;CX.5461&quot; = &quot;blue&quot;, &quot;DOX&quot; = &quot;red&quot;)) +
-  labs(
-    title = &quot;LogFC of Heart Failure-Associated Genes&quot;,
-    x = &quot;Condition&quot;,
-    y = &quot;logFC&quot;,
-    fill = &quot;Drug&quot;
-  ) +
-  theme_bw(base_size = 14) +
-  theme(
-    plot.title = element_text(size = rel(1.5), hjust = 0.5),
-    axis.title = element_text(size = 14),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    legend.title = element_text(size = 14),
-    legend.text = element_text(size = 12)
-  )</code></pre>
-<p><img src="figure/Figure_S19.Rmd/HF_box-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-HF_box-1">
-Past versions of HF_box-1.png
-</button>
-</p>
-<div id="fig-HF_box-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/mward-lab/Paul_CX_2025/blob/170df7251944c42b7214b513c7c224892cfe8544/docs/figure/Figure_S19.Rmd/HF_box-1.png" target="_blank">170df72</a>
-</td>
-<td>
-sayanpaul01
-</td>
-<td>
-2025-08-13
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+# Create the side-by-side bar chart (no error bars)
+ggplot(data, aes(x = Concentration, y = Value, fill = Group)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+  labs(title = &quot;Cell viability at 5 and 10&quot;,
+       x = &quot;Concentration&quot;,
+       y = &quot;Value&quot;) +
+  theme_minimal() +
+  scale_fill_brewer(palette = &quot;Set1&quot;)</code></pre>
+<p><img src="figure/Figure_S4.Rmd/box-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -828,41 +693,25 @@ time zone: America/Chicago
 tzcode source: internal
 
 attached base packages:
-[1] stats4    stats     graphics  grDevices utils     datasets  methods  
-[8] base     
+[1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] org.Hs.eg.db_3.18.0  AnnotationDbi_1.64.1 IRanges_2.36.0      
- [4] S4Vectors_0.40.2     Biobase_2.62.0       BiocGenerics_0.48.1 
- [7] lubridate_1.9.4      forcats_1.0.0        stringr_1.5.1       
-[10] dplyr_1.1.4          purrr_1.0.4          readr_2.1.5         
-[13] tidyr_1.3.1          tibble_3.2.1         ggplot2_3.5.2       
-[16] tidyverse_2.0.0     
+[1] ggplot2_3.5.2
 
 loaded via a namespace (and not attached):
- [1] KEGGREST_1.42.0         gtable_0.3.6            xfun_0.52              
- [4] bslib_0.9.0             tzdb_0.5.0              bitops_1.0-9           
- [7] vctrs_0.6.5             tools_4.3.0             generics_0.1.3         
-[10] parallel_4.3.0          RSQLite_2.3.9           blob_1.2.4             
-[13] pkgconfig_2.0.3         GenomeInfoDbData_1.2.11 lifecycle_1.0.4        
-[16] farver_2.1.2            compiler_4.3.0          git2r_0.36.2           
-[19] Biostrings_2.70.3       munsell_0.5.1           GenomeInfoDb_1.38.8    
-[22] httpuv_1.6.15           htmltools_0.5.8.1       sass_0.4.10            
-[25] RCurl_1.98-1.17         yaml_2.3.10             later_1.3.2            
-[28] pillar_1.10.2           crayon_1.5.3            jquerylib_0.1.4        
-[31] whisker_0.4.1           cachem_1.1.0            tidyselect_1.2.1       
-[34] digest_0.6.34           stringi_1.8.3           labeling_0.4.3         
-[37] rprojroot_2.0.4         fastmap_1.2.0           grid_4.3.0             
-[40] colorspace_2.1-0        cli_3.6.1               magrittr_2.0.3         
-[43] withr_3.0.2             scales_1.3.0            promises_1.3.2         
-[46] bit64_4.6.0-1           timechange_0.3.0        XVector_0.42.0         
-[49] rmarkdown_2.29          httr_1.4.7              bit_4.6.0              
-[52] workflowr_1.7.1         png_0.1-8               hms_1.1.3              
-[55] memoise_2.0.1           evaluate_1.0.3          knitr_1.50             
-[58] rlang_1.1.3             Rcpp_1.0.12             glue_1.7.0             
-[61] DBI_1.2.3               vroom_1.6.5             rstudioapi_0.17.1      
-[64] jsonlite_2.0.0          R6_2.6.1                zlibbioc_1.48.2        
-[67] fs_1.6.3               </code></pre>
+ [1] gtable_0.3.6       jsonlite_2.0.0     dplyr_1.1.4        compiler_4.3.0    
+ [5] promises_1.3.2     tidyselect_1.2.1   Rcpp_1.0.12        stringr_1.5.1     
+ [9] git2r_0.36.2       later_1.3.2        jquerylib_0.1.4    scales_1.3.0      
+[13] yaml_2.3.10        fastmap_1.2.0      R6_2.6.1           labeling_0.4.3    
+[17] generics_0.1.3     workflowr_1.7.1    knitr_1.50         tibble_3.2.1      
+[21] munsell_0.5.1      rprojroot_2.0.4    RColorBrewer_1.1-3 bslib_0.9.0       
+[25] pillar_1.10.2      rlang_1.1.3        cachem_1.1.0       stringi_1.8.3     
+[29] httpuv_1.6.15      xfun_0.52          fs_1.6.3           sass_0.4.10       
+[33] cli_3.6.1          withr_3.0.2        magrittr_2.0.3     digest_0.6.34     
+[37] grid_4.3.0         rstudioapi_0.17.1  lifecycle_1.0.4    vctrs_0.6.5       
+[41] evaluate_1.0.3     glue_1.7.0         farver_2.1.2       whisker_0.4.1     
+[45] colorspace_2.1-0   rmarkdown_2.29     tools_4.3.0        pkgconfig_2.0.3   
+[49] htmltools_0.5.8.1 </code></pre>
 </div>
 </div>
 

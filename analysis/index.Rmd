@@ -31,6 +31,8 @@ Welcome to my research website.
 
 - **[Figure S3](https://mward-lab.github.io/Paul_CX_2025/Figure_S3.html)**
 
+- **[Figure S4](https://mward-lab.github.io/Paul_CX_2025/Figure_S4.html)**
+
 - **[Figure S5](https://mward-lab.github.io/Paul_CX_2025/Figure_S5.html)**
 
 - **[Figure S6](https://mward-lab.github.io/Paul_CX_2025/Figure_S6.html)**
