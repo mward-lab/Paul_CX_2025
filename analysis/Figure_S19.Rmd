@@ -1,0 +1,138 @@
+---
+title: "Figure_S19"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## **📌 LogFC boxplots of Heart Failure GWAS genes**
+```{r HF_box, echo=TRUE, message=FALSE, warning=FALSE}
+
+# ----------------- Load Libraries -----------------
+library(tidyverse)
+library(org.Hs.eg.db)
+
+# ----------------- DEG File Paths -----------------
+deg_files <- list(
+  "CX_0.1_3" = "data/DEGs/Toptable_CX_0.1_3.csv",
+  "CX_0.1_24" = "data/DEGs/Toptable_CX_0.1_24.csv",
+  "CX_0.1_48" = "data/DEGs/Toptable_CX_0.1_48.csv",
+  "CX_0.5_3" = "data/DEGs/Toptable_CX_0.5_3.csv",
+  "CX_0.5_24" = "data/DEGs/Toptable_CX_0.5_24.csv",
+  "CX_0.5_48" = "data/DEGs/Toptable_CX_0.5_48.csv",
+  "DOX_0.1_3" = "data/DEGs/Toptable_DOX_0.1_3.csv",
+  "DOX_0.1_24" = "data/DEGs/Toptable_DOX_0.1_24.csv",
+  "DOX_0.1_48" = "data/DEGs/Toptable_DOX_0.1_48.csv",
+  "DOX_0.5_3" = "data/DEGs/Toptable_DOX_0.5_3.csv",
+  "DOX_0.5_24" = "data/DEGs/Toptable_DOX_0.5_24.csv",
+  "DOX_0.5_48" = "data/DEGs/Toptable_DOX_0.5_48.csv"
+)
+
+# ----------------- Heart Failure Entrez IDs -----------------
+entrez_ids <- c(
+  9709, 8882, 4023, 29959, 5496, 3992, 9415, 5308, 1026, 54437, 79068, 10221,
+  9031, 1187, 1952, 3705, 84722, 7273, 23293, 155382, 9531, 602, 27258, 84163,
+  81846, 79933, 56911, 64753, 93210, 1021, 283450, 5998, 57602, 114991, 7073,
+  3156, 100101267, 22996, 285025, 11080, 11124, 54810, 7531, 27241, 4774, 57794,
+  463, 91319, 6598, 9640, 2186, 26010, 80816, 571, 88, 51652, 64788, 90523, 2969,
+  7781, 80777, 10725, 23387, 817, 134728, 8842, 949, 6934, 129787, 10327, 202052,
+  2318, 5578, 6801, 6311, 10019, 80724, 217, 84909, 388591, 55101, 9839, 27161,
+  5310, 387119, 4641, 5587, 55188, 222553, 9960, 22852, 10087, 9570, 54497,
+  200942, 26249, 4137, 375056, 5409, 64116, 8291, 22876, 339855, 4864, 5142,
+  221692, 55023, 51426, 6146, 84251, 8189, 27332, 57099, 1869, 1112, 23327,
+  11264, 6001
+) %>% as.character()
+
+# ----------------- Load and Filter DEGs -----------------
+hf_data_list <- map2_dfr(deg_files, names(deg_files), function(file, label) {
+  read_csv(file, show_col_types = FALSE) %>%
+    mutate(
+      Entrez_ID = as.character(Entrez_ID),
+      Condition = label,
+      Drug = ifelse(str_detect(label, "CX"), "CX.5461", "DOX")
+    ) %>%
+    filter(Entrez_ID %in% entrez_ids)
+})
+
+# ----------------- Complete Combinations -----------------
+all_conditions <- names(deg_files)
+all_combos <- crossing(
+  Entrez_ID = entrez_ids,
+  Condition = all_conditions
+) %>%
+  mutate(
+    Drug = ifelse(str_detect(Condition, "CX"), "CX.5461", "DOX")
+  )
+
+# ----------------- Merge with Data -----------------
+complete_hf <- all_combos %>%
+  left_join(hf_data_list, by = c("Entrez_ID", "Condition", "Drug")) %>%
+  mutate(
+    logFC = ifelse(is.na(logFC), 0, logFC),
+    adj.P.Val = ifelse(is.na(adj.P.Val), 1, adj.P.Val)
+  )
+
+# ----------------- Gene Symbol Mapping -----------------
+complete_hf <- complete_hf %>%
+  mutate(
+    Gene = mapIds(org.Hs.eg.db, keys = Entrez_ID,
+                  column = "SYMBOL", keytype = "ENTREZID", multiVals = "first")
+  )
+
+# ----------------- Order Conditions -----------------
+complete_hf$Condition <- factor(complete_hf$Condition, levels = c(
+  "CX_0.1_3", "CX_0.1_24", "CX_0.1_48",
+  "CX_0.5_3", "CX_0.5_24", "CX_0.5_48",
+  "DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48",
+  "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48"
+))
+
+# ----------------- Wilcoxon Tests -----------------
+condition_pairs <- tibble(
+  cx = c("CX_0.1_3", "CX_0.1_24", "CX_0.1_48", "CX_0.5_3", "CX_0.5_24", "CX_0.5_48"),
+  dox = c("DOX_0.1_3", "DOX_0.1_24", "DOX_0.1_48", "DOX_0.5_3", "DOX_0.5_24", "DOX_0.5_48")
+)
+
+wilcox_results <- map2_dfr(condition_pairs$cx, condition_pairs$dox, function(cx_label, dox_label) {
+  cx_vals <- complete_hf %>% filter(Condition == cx_label) %>% pull(logFC)
+  dox_vals <- complete_hf %>% filter(Condition == dox_label) %>% pull(logFC)
+  
+  test <- tryCatch(wilcox.test(cx_vals, dox_vals), error = function(e) NULL)
+  pval <- if (!is.null(test)) test$p.value else NA
+  
+  tibble(
+    Condition = dox_label,
+    p_value = signif(pval, 3),
+    label = case_when(
+      pval < 0.001 ~ "***",
+      pval < 0.01  ~ "**",
+      pval < 0.05  ~ "*",
+      TRUE         ~ ""
+    ),
+    y_pos = max(c(cx_vals, dox_vals), na.rm = TRUE) + 0.5
+  )
+})
+
+# ----------------- Final Plot -----------------
+ggplot(complete_hf, aes(x = Condition, y = logFC, fill = Drug)) +
+  geom_boxplot(outlier.size = 0.6) +
+  geom_text(data = wilcox_results,
+            aes(x = Condition, y = y_pos, label = label),
+            inherit.aes = FALSE,
+            size = 4, vjust = 0) +
+  scale_fill_manual(values = c("CX.5461" = "blue", "DOX" = "red")) +
+  labs(
+    title = "LogFC of Heart Failure-Associated Genes",
+    x = "Condition",
+    y = "logFC",
+    fill = "Drug"
+  ) +
+  theme_bw(base_size = 14) +
+  theme(
+    plot.title = element_text(size = rel(1.5), hjust = 0.5),
+    axis.title = element_text(size = 14),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
+  )
+```
