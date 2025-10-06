@@ -281,7 +281,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -292,8 +292,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -302,13 +302,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-08-13
+<strong>Last updated:</strong> 2025-10-06
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Paul_CX_2025/</code> <span
@@ -331,33 +331,36 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025tree6ed035c1d8b029ccfaf58d40f680734edc5fc180targetblank6ed035ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treeeb03a5e966b07ab459e64a85275f04170d098baftargetblankeb03a5ea">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/mward-lab/Paul_CX_2025/tree/6ed035c1d8b029ccfaf58d40f680734edc5fc180" target="_blank">6ed035c</a>
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/eb03a5e966b07ab459e64a85275f04170d098baf" target="_blank">eb03a5e</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025tree6ed035c1d8b029ccfaf58d40f680734edc5fc180targetblank6ed035ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treeeb03a5e966b07ab459e64a85275f04170d098baftargetblankeb03a5ea"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -367,7 +370,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/mward-lab/Paul_CX_2025/tree/6ed035c1d8b029ccfaf58d40f680734edc5fc180" target="_blank">6ed035c</a>.
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/eb03a5e966b07ab459e64a85275f04170d098baf" target="_blank">eb03a5e</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -388,8 +391,30 @@ Ignored files:
     Ignored:    0.1 box.svg
     Ignored:    Rplot04.svg
 
+Untracked files:
+    Untracked:  GWAS_OddsRatio_results.csv
+    Untracked:  HF_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  analysis/Revision.Rmd
+    Untracked:  data/AC_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/AF_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/AF_Entrez_IDs.rds
+    Untracked:  data/Cleaned_AF_genes.csv
+    Untracked:  data/Cleaned_AF_genes_with_Entrez.csv
+    Untracked:  data/CorrMotif_AFGenes_OddsRatios.csv
+    Untracked:  data/CorrMotif_DDRGenes_OddsRatios.csv
+    Untracked:  data/CorrMotif_HeartGenes_OddsRatios.csv
+    Untracked:  data/DDR_DEG_OR_results.csv
+    Untracked:  data/DDR_DEG_overlap_stats.csv
+    Untracked:  data/DDR_DEGs_proportion_plotdata.csv
+    Untracked:  data/DDR_ForestPlot_Data.csv
+    Untracked:  data/DOX_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/HF_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/HeartSpecific_ForestPlot_Data.csv
+    Untracked:  data/Heart_DEG_overlap_stats.csv
+    Untracked:  figures/Heatmap_CX_0.1_24.pdf
+
 Unstaged changes:
-    Modified:   analysis/Figure_S4.Rmd
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -434,6 +459,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/mward-lab/Paul_CX_2025/eb03a5e966b07ab459e64a85275f04170d098baf/docs/index.html" target="_blank">eb03a5e</a>
+</td>
+<td>
+sayanpaul01
+</td>
+<td>
+2025-08-13
+</td>
+<td>
+Commit
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -3729,6 +3771,13 @@ dataset</a></strong></p></li>
 <li><p><strong><a
 href="https://mward-lab.github.io/Paul_CX_2025/Macrophage.html">Macrophage
 dataset</a></strong></p></li>
+</ul>
+</div>
+<div id="revision" class="section level2">
+<h2><strong>Revision</strong></h2>
+<ul>
+<li><strong><a
+href="https://mward-lab.github.io/Paul_CX_2025/Revision.html">Revision</a></strong></li>
 </ul>
 <div id="source-code" class="section level3">
 <h3>🔗 <strong>Source Code</strong></h3>

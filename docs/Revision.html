@@ -1,0 +1,3383 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Revision</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Paul_CX_2025</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Revision</h1>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2025-10-06
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Paul_CX_2025/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R
+Markdown file created these results, you’ll want to first commit it to
+the Git repo. If you’re still working on the analysis, you can ignore
+this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20250129code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20250129)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20250129code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20250129)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treeeb03a5e966b07ab459e64a85275f04170d098baftargetblankeb03a5ea">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/eb03a5e966b07ab459e64a85275f04170d098baf" target="_blank">eb03a5e</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcommwardlabPaulCX2025treeeb03a5e966b07ab459e64a85275f04170d098baftargetblankeb03a5ea"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/mward-lab/Paul_CX_2025/tree/eb03a5e966b07ab459e64a85275f04170d098baf" target="_blank">eb03a5e</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .RData
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    0.1 box.svg
+    Ignored:    Rplot04.svg
+
+Untracked files:
+    Untracked:  GWAS_OddsRatio_results.csv
+    Untracked:  HF_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  analysis/Revision.Rmd
+    Untracked:  data/AC_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/AF_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/AF_Entrez_IDs.rds
+    Untracked:  data/Cleaned_AF_genes.csv
+    Untracked:  data/Cleaned_AF_genes_with_Entrez.csv
+    Untracked:  data/CorrMotif_AFGenes_OddsRatios.csv
+    Untracked:  data/CorrMotif_DDRGenes_OddsRatios.csv
+    Untracked:  data/CorrMotif_HeartGenes_OddsRatios.csv
+    Untracked:  data/DDR_DEG_OR_results.csv
+    Untracked:  data/DDR_DEGs_proportion_plotdata.csv
+    Untracked:  data/DDR_ForestPlot_Data.csv
+    Untracked:  data/DOX_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/HF_Cardiotoxicity_ForestPlot_Data.csv
+    Untracked:  data/HeartSpecific_ForestPlot_Data.csv
+    Untracked:  data/Heart_DEG_overlap_stats.csv
+    Untracked:  figures/Heatmap_CX_0.1_24.pdf
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with
+<code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="forest-plot-heart-failure-risk-loci-enrichment"
+class="section level2">
+<h2><strong>📌 Forest Plot: Heart Failure Risk Loci
+Enrichment</strong></h2>
+<pre class="r"><code># 📦 Load Required Libraries
+# --- Libraries ---
+library(dplyr)</code></pre>
+<pre><code>Warning: package &#39;dplyr&#39; was built under R version 4.3.2</code></pre>
+<pre class="r"><code>library(tidyr)</code></pre>
+<pre><code>Warning: package &#39;tidyr&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code>library(tibble)
+library(ggplot2)
+
+# --- Step 1: Heart Failure Risk Loci (Entrez IDs) ---
+entrez_ids &lt;- c(
+  9709, 8882, 4023, 29959, 5496, 3992, 9415, 5308, 1026, 54437, 79068, 10221,
+  9031, 1187, 1952, 3705, 84722, 7273, 23293, 155382, 9531, 602, 27258, 84163,
+  81846, 79933, 56911, 64753, 93210, 1021, 283450, 5998, 57602, 114991, 7073,
+  3156, 100101267, 22996, 285025, 11080, 11124, 54810, 7531, 27241, 4774, 57794,
+  463, 91319, 6598, 9640, 2186, 26010, 80816, 571, 88, 51652, 64788, 90523, 2969,
+  7781, 80777, 10725, 23387, 817, 134728, 8842, 949, 6934, 129787, 10327, 202052,
+  2318, 5578, 6801, 6311, 10019, 80724, 217, 84909, 388591, 55101, 9839, 27161,
+  5310, 387119, 4641, 5587, 55188, 222553, 9960, 22852, 10087, 9570, 54497,
+  200942, 26249, 4137, 375056, 5409, 64116, 8291, 22876, 339855, 4864, 5142,
+  221692, 55023, 51426, 6146, 84251, 8189, 27332, 57099, 1869, 1112, 23327,
+  11264, 6001
+)
+
+# --- Step 2: Load DEG tables ---
+deg_files &lt;- list.files(&quot;data/DEGs/&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+deg_list  &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;Toptable_|\\.csv&quot;, &quot;&quot;, basename(deg_files))
+
+# --- Step 3: Fisher test function (save raw counts to table) ---
+fisher_or &lt;- function(df, sample_name) {
+  df &lt;- df %&gt;%
+    mutate(
+      DEG = adj.P.Val &lt; 0.05,
+      HF_risk = Entrez_ID %in% entrez_ids
+    )
+
+  a &lt;- sum(df$DEG &amp; df$HF_risk, na.rm = TRUE)
+  b &lt;- sum(df$DEG &amp; !df$HF_risk, na.rm = TRUE)
+  c &lt;- sum(!df$DEG &amp; df$HF_risk, na.rm = TRUE)
+  d &lt;- sum(!df$DEG &amp; !df$HF_risk, na.rm = TRUE)
+
+  test &lt;- fisher.test(matrix(c(a, b, c, d), nrow = 2))
+
+  tibble(
+    Sample = sample_name,
+    DE_Risk = a,
+    DE_nonRisk = b,
+    nonDE_Risk = c,
+    nonDE_nonRisk = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Step 4: Run Fisher tests for all DEG files ---
+results &lt;- bind_rows(mapply(fisher_or, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# --- Step 5: Extract metadata (Drug, Conc, Time) ---
+results &lt;- results %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Label = paste(Drug, Conc, sep = &quot;_&quot;),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))
+  )
+
+# --- Step 6: Forest plot (clean, like before) ---
+ggplot(results, aes(x = Label, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Time, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;Heart Failure Risk Loci Enrichment Across Conditions&quot;,
+    x = &quot;Condition (Drug_Conc)&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/For_HF-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># --- Step 7: Export results with raw numbers for supplement ---
+write.csv(results, &quot;data/HF_Cardiotoxicity_ForestPlot_Data.csv&quot;, row.names = FALSE)</code></pre>
+</div>
+<div id="forest-plot-dox-cardiotoxicity-loci-enrichment"
+class="section level2">
+<h2><strong>📌 Forest Plot: DOX Cardiotoxicity Loci
+Enrichment</strong></h2>
+<pre class="r"><code># --- Libraries ---
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+
+# --- Step 1: Define DOX cardiotoxicity risk loci (Entrez IDs) ---
+entrez_ids &lt;- c(
+  847, 873, 2064, 2878, 2944, 3038, 4846, 51196, 5880, 6687,
+  7799, 4292, 5916, 3077, 51310, 9154, 64078, 5244, 10057, 10060,
+  89845, 56853, 4625, 1573, 79890
+)
+
+# --- Step 2: Load DEG tables ---
+deg_files &lt;- list.files(&quot;data/DEGs/&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+deg_list  &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;Toptable_|\\.csv&quot;, &quot;&quot;, basename(deg_files))
+
+# --- Step 3: Fisher test function (now saves raw counts too) ---
+fisher_or &lt;- function(df, sample_name) {
+  df &lt;- df %&gt;%
+    mutate(
+      DEG = adj.P.Val &lt; 0.05,
+      DOXrisk = Entrez_ID %in% entrez_ids
+    )
+
+  a &lt;- sum(df$DEG &amp; df$DOXrisk, na.rm = TRUE)
+  b &lt;- sum(df$DEG &amp; !df$DOXrisk, na.rm = TRUE)
+  c &lt;- sum(!df$DEG &amp; df$DOXrisk, na.rm = TRUE)
+  d &lt;- sum(!df$DEG &amp; !df$DOXrisk, na.rm = TRUE)
+
+  test &lt;- fisher.test(matrix(c(a, b, c, d), nrow = 2))
+
+  tibble(
+    Sample = sample_name,
+    DE_Risk = a,
+    DE_nonRisk = b,
+    nonDE_Risk = c,
+    nonDE_nonRisk = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Step 4: Run Fisher tests for all DEG files ---
+results &lt;- bind_rows(mapply(fisher_or, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# --- Step 5: Extract metadata (Drug, Conc, Time) ---
+results &lt;- results %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Label = paste(Drug, Conc, sep = &quot;_&quot;),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))
+  )
+
+# --- Step 6: Forest plot (same clean look, 0–20 scale, stars only) ---
+ggplot(results, aes(x = Label, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Time, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;DOX Cardiotoxicity Loci Enrichment&quot;,
+    x = &quot;Condition (Drug_Conc)&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/For_DC-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># --- Step 7: Save results with raw counts for supplement ---
+write.csv(results, &quot;data/DOX_Cardiotoxicity_ForestPlot_Data.csv&quot;, row.names = FALSE)</code></pre>
+</div>
+<div id="forest-plot-ac-cardiotoxicity-loci-enrichment"
+class="section level2">
+<h2><strong>📌 Forest Plot: AC Cardiotoxicity Loci
+Enrichment</strong></h2>
+<pre class="r"><code># --- Libraries ---
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+
+# --- Step 1: AC Cardiotoxicity Risk Loci (Entrez IDs) ---
+Entrez_IDs &lt;- c(
+  6272, 8029, 11128, 79899, 54477, 121665, 5095, 22863, 57161, 4692,
+  8214, 23151, 56606, 108, 22999, 56895, 9603, 3181, 4023, 10499,
+  92949, 4363, 10057, 5243, 5244, 5880, 1535, 2950, 847, 5447,
+  3038, 3077, 4846, 3958, 23327, 29899, 23155, 80856, 55020, 78996,
+  23262, 150383, 9620, 79730, 344595, 5066, 6251, 3482, 9588, 339416,
+  7292, 55157, 87769, 23409, 720, 3107, 54535, 1590, 80059, 7991,
+  57110, 8803, 323, 54826, 5916, 23371, 283337, 64078, 80010, 1933,
+  10818, 51020
+)
+
+# --- Step 2: Load DEG tables ---
+deg_files &lt;- list.files(&quot;data/DEGs/&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+deg_list  &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;Toptable_|\\.csv&quot;, &quot;&quot;, basename(deg_files))
+
+# --- Step 3: Fisher test function (with raw counts) ---
+fisher_or &lt;- function(df, sample_name) {
+  df &lt;- df %&gt;%
+    mutate(
+      DEG = adj.P.Val &lt; 0.05,
+      AC_risk = Entrez_ID %in% Entrez_IDs
+    )
+
+  a &lt;- sum(df$DEG &amp; df$AC_risk, na.rm = TRUE)
+  b &lt;- sum(df$DEG &amp; !df$AC_risk, na.rm = TRUE)
+  c &lt;- sum(!df$DEG &amp; df$AC_risk, na.rm = TRUE)
+  d &lt;- sum(!df$DEG &amp; !df$AC_risk, na.rm = TRUE)
+
+  test &lt;- fisher.test(matrix(c(a, b, c, d), nrow = 2))
+
+  tibble(
+    Sample = sample_name,
+    DE_Risk = a,
+    DE_nonRisk = b,
+    nonDE_Risk = c,
+    nonDE_nonRisk = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Step 4: Run Fisher tests for all DEG files ---
+results &lt;- bind_rows(mapply(fisher_or, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# --- Step 5: Extract metadata (Drug, Conc, Time) ---
+results &lt;- results %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Label = paste(Drug, Conc, sep = &quot;_&quot;),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))
+  )
+
+# --- Step 6: Forest plot (scale 0–20, faceted by Time) ---
+ggplot(results, aes(x = Label, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Time, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;AC Cardiotoxicity Loci Enrichment Across Conditions&quot;,
+    x = &quot;Condition (Drug_Conc)&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/For_AC-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># --- Step 7: Export results table (with raw numbers + OR) ---
+write.csv(results, &quot;data/AC_Cardiotoxicity_ForestPlot_Data.csv&quot;, row.names = FALSE)</code></pre>
+</div>
+<div id="odds-ratios-for-corrmotif-groups-heart-specific-genes"
+class="section level2">
+<h2><strong>📌 Odds Ratios for CorrMotif Groups (Heart-specific
+genes)</strong></h2>
+<pre class="r"><code>library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(org.Hs.eg.db)</code></pre>
+<pre><code>Warning: package &#39;AnnotationDbi&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;BiocGenerics&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;Biobase&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;IRanges&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;S4Vectors&#39; was built under R version 4.3.2</code></pre>
+<pre class="r"><code>library(AnnotationDbi)
+
+# --- Load Heart-Specific Genes ---
+heart_genes &lt;- read.csv(&quot;data/Human_Heart_Genes.csv&quot;, stringsAsFactors = FALSE)
+heart_genes$Entrez_ID &lt;- mapIds(
+  org.Hs.eg.db,
+  keys = heart_genes$Gene,
+  column = &quot;ENTREZID&quot;,
+  keytype = &quot;SYMBOL&quot;,
+  multiVals = &quot;first&quot;
+)
+heart_entrez_ids &lt;- na.omit(heart_genes$Entrez_ID)
+
+# --- Load CorrMotif Groups ---
+# 0.1 µM
+prob_1_0.1 &lt;- as.character(read.csv(&quot;data/prob_1_0.1.csv&quot;)$Entrez_ID)
+prob_2_0.1 &lt;- as.character(read.csv(&quot;data/prob_2_0.1.csv&quot;)$Entrez_ID)
+prob_3_0.1 &lt;- as.character(read.csv(&quot;data/prob_3_0.1.csv&quot;)$Entrez_ID)
+
+# 0.5 µM
+prob_1_0.5 &lt;- as.character(read.csv(&quot;data/prob_1_0.5.csv&quot;)$Entrez_ID)
+prob_2_0.5 &lt;- as.character(read.csv(&quot;data/prob_2_0.5.csv&quot;)$Entrez_ID)
+prob_3_0.5 &lt;- as.character(read.csv(&quot;data/prob_3_0.5.csv&quot;)$Entrez_ID)
+prob_4_0.5 &lt;- as.character(read.csv(&quot;data/prob_4_0.5.csv&quot;)$Entrez_ID)
+prob_5_0.5 &lt;- as.character(read.csv(&quot;data/prob_5_0.5.csv&quot;)$Entrez_ID)
+
+# --- Annotate Groups ---
+df_0.1 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.1, prob_2_0.1, prob_3_0.1))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.1 ~ &quot;Non response (0.1)&quot;,
+      Entrez_ID %in% prob_2_0.1 ~ &quot;CX_DOX_1&quot;,
+      Entrez_ID %in% prob_3_0.1 ~ &quot;DOX_sp_1&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% heart_entrez_ids,
+                      &quot;Heart-specific Genes&quot;, &quot;Non-Heart-specific Genes&quot;),
+    Concentration = &quot;0.1&quot;
+  )
+
+df_0.5 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.5, prob_2_0.5, prob_3_0.5, prob_4_0.5, prob_5_0.5))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.5 ~ &quot;Non response (0.5)&quot;,
+      Entrez_ID %in% prob_2_0.5 ~ &quot;DOX_sp_2&quot;,
+      Entrez_ID %in% prob_3_0.5 ~ &quot;DOX_sp_3&quot;,
+      Entrez_ID %in% prob_4_0.5 ~ &quot;CX_DOX_2&quot;,
+      Entrez_ID %in% prob_5_0.5 ~ &quot;CX_DOX_3&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% heart_entrez_ids,
+                      &quot;Heart-specific Genes&quot;, &quot;Non-Heart-specific Genes&quot;),
+    Concentration = &quot;0.5&quot;
+  )
+
+df_combined &lt;- bind_rows(df_0.1, df_0.5)
+
+# --- Fisher Odds Ratio Function ---
+fisher_or_group &lt;- function(df_group, df_all, group_name, conc) {
+  # counts in group
+  a &lt;- sum(df_group$Category == &quot;Heart-specific Genes&quot;)
+  b &lt;- sum(df_group$Category == &quot;Non-Heart-specific Genes&quot;)
+
+  # counts in rest of groups at same conc
+  ref &lt;- df_all %&gt;% filter(Response_Group != group_name)
+  c &lt;- sum(ref$Category == &quot;Heart-specific Genes&quot;)
+  d &lt;- sum(ref$Category == &quot;Non-Heart-specific Genes&quot;)
+
+  mat &lt;- matrix(c(a, b, c, d), nrow = 2)
+  if (any(mat == 0)) mat &lt;- mat + 0.5  # continuity correction
+
+  test &lt;- fisher.test(mat)
+
+  tibble(
+    Response_Group = group_name,
+    Concentration  = conc,
+    a = a, b = b, c = c, d = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Run Fisher tests safely ---
+results &lt;- list()
+for (conc in unique(df_combined$Concentration)) {
+  conc_df &lt;- df_combined %&gt;% filter(Concentration == conc)
+  for (grp in unique(conc_df$Response_Group)) {
+    grp_df &lt;- conc_df %&gt;% filter(Response_Group == grp)
+    results[[paste(conc, grp)]] &lt;- fisher_or_group(grp_df, conc_df, grp, conc)
+  }
+}</code></pre>
+<pre><code>Warning in fisher.test(mat): &#39;x&#39; has been rounded to integer: Mean relative
+difference: 0.0001415629</code></pre>
+<pre class="r"><code>results &lt;- bind_rows(results)
+
+# --- Save Results Table ---
+write.csv(results, &quot;data/CorrMotif_HeartGenes_OddsRatios.csv&quot;, row.names = FALSE)
+
+# --- Forest Plot ---
+ggplot(results, aes(x = Response_Group, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Concentration, ncol = 1, scales = &quot;free_y&quot;) +  # facet by concentration instead of time
+  ylim(0, 20) +
+  labs(
+    title = &quot;Heart-Specific Gene Enrichment Across CorrMotif Groups&quot;,
+    x = &quot;Response Group&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/For_corHS-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-24-hr-0.5-µm"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 24 hr,
+0.5 µM</strong></h2>
+<pre class="r"><code>library(ggplot2)
+
+# --- Load Data ---
+CX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+DOX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_24$Entrez_ID &lt;- as.character(CX_0.5_24$Entrez_ID)
+DOX_0.5_24$Entrez_ID &lt;- as.character(DOX_0.5_24$Entrez_ID)
+
+# --- Merge on Entrez_ID ---
+merged_24h_0.5 &lt;- merge(
+  CX_0.5_24, DOX_0.5_24,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_24h_0.5$logFC_CX,
+  merged_24h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)  # scientific notation
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot with fixed label placement ---
+ggplot(merged_24h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.5, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (24 hr, 0.5 µM)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf, hjust = -0.1, vjust = 1.2,  # top-left corner inside panel
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_1-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-48-hr-0.5-µm"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 48 hr,
+0.5 µM</strong></h2>
+<pre class="r"><code>library(ggplot2)
+
+# --- Load Data ---
+CX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_48$Entrez_ID &lt;- as.character(CX_0.5_48$Entrez_ID)
+DOX_0.5_48$Entrez_ID &lt;- as.character(DOX_0.5_48$Entrez_ID)
+
+# --- Merge on Entrez_ID ---
+merged_48h_0.5 &lt;- merge(
+  CX_0.5_48, DOX_0.5_48,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_48h_0.5$logFC_CX,
+  merged_48h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)  # scientific notation
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot with fixed label placement ---
+ggplot(merged_48h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.5, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (48 hr, 0.5 µM)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf, hjust = -0.1, vjust = 1.2,  # top-left corner inside panel
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_2-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-24-hr-0.5-µm-dox-degs-only"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 24 hr,
+0.5 µM (DOX DEGs only)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+
+# --- Load Data ---
+CX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+DOX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_24$Entrez_ID &lt;- as.character(CX_0.5_24$Entrez_ID)
+DOX_0.5_24$Entrez_ID &lt;- as.character(DOX_0.5_24$Entrez_ID)
+
+# --- Extract DEGs from DOX (adj.P.Val &lt; 0.05) ---
+dox_degs &lt;- DOX_0.5_24$Entrez_ID[DOX_0.5_24$adj.P.Val &lt; 0.05]
+
+# --- Merge CX &amp; DOX, filter for DOX DEGs only ---
+merged_24h_0.5 &lt;- merge(
+  CX_0.5_24, DOX_0.5_24,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+merged_24h_0.5 &lt;- merged_24h_0.5[merged_24h_0.5$Entrez_ID %in% dox_degs, ]
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_24h_0.5$logFC_CX,
+  merged_24h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot ---
+ggplot(merged_24h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.6, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (24 hr, 0.5 µM, DOX DEGs only)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_3-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-48-hr-0.5-µm-dox-degs-only"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 48 hr,
+0.5 µM (DOX DEGs only)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+
+# --- Load Data ---
+CX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_48$Entrez_ID &lt;- as.character(CX_0.5_48$Entrez_ID)
+DOX_0.5_48$Entrez_ID &lt;- as.character(DOX_0.5_48$Entrez_ID)
+
+# --- Extract DEGs from DOX (adj.P.Val &lt; 0.05) ---
+dox_degs &lt;- DOX_0.5_48$Entrez_ID[DOX_0.5_48$adj.P.Val &lt; 0.05]
+
+# --- Merge CX &amp; DOX, filter for DOX DEGs only ---
+merged_48h_0.5 &lt;- merge(
+  CX_0.5_48, DOX_0.5_48,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+merged_48h_0.5 &lt;- merged_48h_0.5[merged_48h_0.5$Entrez_ID %in% dox_degs, ]
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_48h_0.5$logFC_CX,
+  merged_48h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot ---
+ggplot(merged_48h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.6, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (48 hr, 0.5 µM, DOX DEGs only)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_4-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-24-hr-0.5-µm-ddr-genes-only-cleaned-set"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 24 hr,
+0.5 µM (DDR genes only, cleaned set)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+# --- DDR gene set ---
+entrez_ids &lt;- c(
+  10111, 1017, 1019, 1020, 1021, 1026, 1027, 10912, 11011, 1111,
+  11200, 1385, 1643, 1647, 1869, 207, 2177, 25, 27113, 27244,
+  3014, 317, 355, 4193, 4292, 4361, 4609, 4616, 4683, 472, 50484,
+  5366, 5371, 54205, 545, 55367, 5591, 581, 5810, 5883, 5884,
+  5888, 5893, 5925, 595, 5981, 6118, 637, 672, 7157, 7799,
+  8243, 836, 841, 84126, 842, 8795, 891, 894, 896, 898,
+  9133, 9134, 983, 9874, 993, 995, 5916
+) %&gt;% as.character()
+
+# --- Load Data ---
+CX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+DOX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+
+CX_0.5_24$Entrez_ID &lt;- as.character(CX_0.5_24$Entrez_ID)
+DOX_0.5_24$Entrez_ID &lt;- as.character(DOX_0.5_24$Entrez_ID)
+
+# --- Merge and filter for DDR genes ---
+merged_ddr_24h_0.5 &lt;- merge(
+  CX_0.5_24, DOX_0.5_24,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+merged_ddr_24h_0.5 &lt;- merged_ddr_24h_0.5 %&gt;%
+  filter(Entrez_ID %in% entrez_ids)
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_ddr_24h_0.5$logFC_CX,
+  merged_ddr_24h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot ---
+ggplot(merged_ddr_24h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.8, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (24 hr, 0.5 µM, DDR genes only)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_5-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-48-hr-0.5-µm-ddr-genes-only"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 48 hr,
+0.5 µM (DDR genes only)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+# --- DDR gene set (Entrez IDs) ---
+entrez_ids &lt;- c(
+  10111, 1017, 1019, 1020, 1021, 1026, 1027, 10912, 11011, 1111,
+  11200, 1385, 1643, 1647, 1869, 207, 2177, 25, 27113, 27244,
+  3014, 317, 355, 4193, 4292, 4361, 4609, 4616, 4683, 472, 50484,
+  5366, 5371, 54205, 545, 55367, 5591, 581, 5810, 5883, 5884,
+  5888, 5893, 5925, 595, 5981, 6118, 637, 672, 7157, 7799,
+  8243, 836, 841, 84126, 842, 8795, 891, 894, 896, 898,
+  9133, 9134, 983, 9874, 993, 995, 5916
+) %&gt;% as.character()
+
+# --- Load Data ---
+CX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+CX_0.5_48$Entrez_ID &lt;- as.character(CX_0.5_48$Entrez_ID)
+DOX_0.5_48$Entrez_ID &lt;- as.character(DOX_0.5_48$Entrez_ID)
+
+# --- Merge and filter for DDR genes ---
+merged_ddr_48h_0.5 &lt;- merge(
+  CX_0.5_48, DOX_0.5_48,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+merged_ddr_48h_0.5 &lt;- merged_ddr_48h_0.5 %&gt;%
+  filter(Entrez_ID %in% entrez_ids)
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_ddr_48h_0.5$logFC_CX,
+  merged_ddr_48h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot ---
+ggplot(merged_ddr_48h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.8, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (48 hr, 0.5 µM, DDR genes only)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_6-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-24-hr-0.5-µm-heart-specific-genes-only"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 24 hr,
+0.5 µM (Heart-specific genes only)</strong></h2>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+# --- Load Heart-Specific Genes ---
+heart_genes &lt;- read.csv(&quot;data/Human_Heart_Genes.csv&quot;, stringsAsFactors = FALSE)
+heart_genes$Entrez_ID &lt;- mapIds(
+  org.Hs.eg.db,
+  keys = heart_genes$Gene,
+  column = &quot;ENTREZID&quot;,
+  keytype = &quot;SYMBOL&quot;,
+  multiVals = &quot;first&quot;
+)
+heart_entrez_ids &lt;- na.omit(heart_genes$Entrez_ID) %&gt;% as.character()
+
+# --- Load DEG Data ---
+CX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+DOX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+
+CX_0.5_24$Entrez_ID &lt;- as.character(CX_0.5_24$Entrez_ID)
+DOX_0.5_24$Entrez_ID &lt;- as.character(DOX_0.5_24$Entrez_ID)
+
+# --- Merge and filter for heart-specific genes ---
+merged_heart_24h_0.5 &lt;- merge(
+  CX_0.5_24, DOX_0.5_24,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+merged_heart_24h_0.5 &lt;- merged_heart_24h_0.5 %&gt;%
+  filter(Entrez_ID %in% heart_entrez_ids)
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_heart_24h_0.5$logFC_CX,
+  merged_heart_24h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot ---
+ggplot(merged_heart_24h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.8, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (24 hr, 0.5 µM, Heart-specific genes only)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_7-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="scatter-plot-dox-vs-veh-vs-cx-vs-veh-condition-48-hr-0.5-µm-heart-specific-genes-only"
+class="section level2">
+<h2><strong>📌 Scatter Plot: DOX vs VEH vs CX vs VEH Condition: 48 hr,
+0.5 µM (Heart-specific genes only)</strong></h2>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+# --- Load Heart-Specific Genes ---
+heart_genes &lt;- read.csv(&quot;data/Human_Heart_Genes.csv&quot;, stringsAsFactors = FALSE)
+heart_genes$Entrez_ID &lt;- mapIds(
+  org.Hs.eg.db,
+  keys = heart_genes$Gene,
+  column = &quot;ENTREZID&quot;,
+  keytype = &quot;SYMBOL&quot;,
+  multiVals = &quot;first&quot;
+)
+heart_entrez_ids &lt;- na.omit(heart_genes$Entrez_ID) %&gt;% as.character()
+
+# --- Load DEG Data ---
+CX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+CX_0.5_48$Entrez_ID &lt;- as.character(CX_0.5_48$Entrez_ID)
+DOX_0.5_48$Entrez_ID &lt;- as.character(DOX_0.5_48$Entrez_ID)
+
+# --- Merge and filter for heart-specific genes ---
+merged_heart_48h_0.5 &lt;- merge(
+  CX_0.5_48, DOX_0.5_48,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+merged_heart_48h_0.5 &lt;- merged_heart_48h_0.5 %&gt;%
+  filter(Entrez_ID %in% heart_entrez_ids)
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  merged_heart_48h_0.5$logFC_CX,
+  merged_heart_48h_0.5$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot ---
+ggplot(merged_heart_48h_0.5, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.8, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (48 hr, 0.5 µM, Heart-specific genes only)&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_8-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="proportion-of-ddr-degs-in-cx-and-dox-treated-samples"
+class="section level2">
+<h2><strong>📌 Proportion of DDR DEGs in CX and DOX treated
+samples</strong></h2>
+<pre class="r"><code># ------------------ Load Libraries ------------------
+library(tidyverse)</code></pre>
+<pre><code>Warning: package &#39;tidyverse&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;readr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>Warning: package &#39;purrr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>Warning: package &#39;stringr&#39; was built under R version 4.3.2</code></pre>
+<pre><code>Warning: package &#39;lubridate&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code>library(org.Hs.eg.db)
+
+# ------------------ Define DDR Gene Set ------------------
+ddr_entrez &lt;- c(
+  10111, 1017, 1019, 1020, 1021, 1026, 1027, 10912, 11011, 1111,
+  11200, 1385, 1643, 1647, 1869, 207, 2177, 25, 27113, 27244,
+  3014, 317, 355, 4193, 4292, 4361, 4609, 4616, 4683, 472, 50484,
+  5366, 5371, 54205, 545, 55367, 5591, 581, 5810, 5883, 5884,
+  5888, 5893, 5925, 595, 5981, 6118, 637, 672, 7157, 7799,
+  8243, 836, 841, 84126, 842, 8795, 891, 894, 896, 898,
+  9133, 9134, 983, 9874, 993, 995, 5916
+) %&gt;% as.character()
+
+# ------------------ Load DEG Data ------------------
+deg_list &lt;- list(
+  &quot;CX_0.1_3&quot;   = read.csv(&quot;data/DEGs/Toptable_CX_0.1_3.csv&quot;),
+  &quot;CX_0.1_24&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.1_24.csv&quot;),
+  &quot;CX_0.1_48&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.1_48.csv&quot;),
+  &quot;CX_0.5_3&quot;   = read.csv(&quot;data/DEGs/Toptable_CX_0.5_3.csv&quot;),
+  &quot;CX_0.5_24&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;),
+  &quot;CX_0.5_48&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;),
+  &quot;DOX_0.1_3&quot;  = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_3.csv&quot;),
+  &quot;DOX_0.1_24&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_24.csv&quot;),
+  &quot;DOX_0.1_48&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_48.csv&quot;),
+  &quot;DOX_0.5_3&quot;  = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_3.csv&quot;),
+  &quot;DOX_0.5_24&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;),
+  &quot;DOX_0.5_48&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+)
+
+# ------------------ Compute Proportions ------------------
+proportion_data &lt;- map_dfr(names(deg_list), function(sample) {
+  sig_df &lt;- deg_list[[sample]] %&gt;% filter(adj.P.Val &lt; 0.05)
+  sample_degs &lt;- unique(as.character(sig_df$Entrez_ID))
+
+  yes &lt;- sum(sample_degs %in% ddr_entrez)
+  no &lt;- length(sample_degs) - yes
+
+  data.frame(
+    Sample = sample,
+    Category = c(&quot;DDR_DEG&quot;, &quot;Non_DDR_DEG&quot;),
+    Count = c(yes, no)
+  )
+}) %&gt;%
+  group_by(Sample) %&gt;%
+  mutate(Proportion = Count / sum(Count) * 100)
+
+# ------------------ Set Order ------------------
+proportion_data$Sample &lt;- factor(proportion_data$Sample, levels = c(
+  &quot;CX_0.1_3&quot;, &quot;CX_0.1_24&quot;, &quot;CX_0.1_48&quot;,
+  &quot;CX_0.5_3&quot;, &quot;CX_0.5_24&quot;, &quot;CX_0.5_48&quot;,
+  &quot;DOX_0.1_3&quot;, &quot;DOX_0.1_24&quot;, &quot;DOX_0.1_48&quot;,
+  &quot;DOX_0.5_3&quot;, &quot;DOX_0.5_24&quot;, &quot;DOX_0.5_48&quot;
+))
+
+proportion_data$Category &lt;- factor(proportion_data$Category,
+                                   levels = c(&quot;DDR_DEG&quot;, &quot;Non_DDR_DEG&quot;))
+
+# ------------------ Statistical Testing (CX vs DOX) ------------------
+matched_pairs &lt;- list(
+  &quot;0.1_3&quot;  = c(&quot;CX_0.1_3&quot;, &quot;DOX_0.1_3&quot;),
+  &quot;0.1_24&quot; = c(&quot;CX_0.1_24&quot;, &quot;DOX_0.1_24&quot;),
+  &quot;0.1_48&quot; = c(&quot;CX_0.1_48&quot;, &quot;DOX_0.1_48&quot;),
+  &quot;0.5_3&quot;  = c(&quot;CX_0.5_3&quot;, &quot;DOX_0.5_3&quot;),
+  &quot;0.5_24&quot; = c(&quot;CX_0.5_24&quot;, &quot;DOX_0.5_24&quot;),
+  &quot;0.5_48&quot; = c(&quot;CX_0.5_48&quot;, &quot;DOX_0.5_48&quot;)
+)
+
+test_results &lt;- map_dfr(names(matched_pairs), function(label) {
+  cx &lt;- matched_pairs[[label]][1]
+  dox &lt;- matched_pairs[[label]][2]
+
+  cx_df &lt;- deg_list[[cx]] %&gt;% filter(adj.P.Val &lt; 0.05)
+  dox_df &lt;- deg_list[[dox]] %&gt;% filter(adj.P.Val &lt; 0.05)
+
+  a1 &lt;- sum(cx_df$Entrez_ID %in% ddr_entrez)
+  b1 &lt;- nrow(cx_df) - a1
+  a2 &lt;- sum(dox_df$Entrez_ID %in% ddr_entrez)
+  b2 &lt;- nrow(dox_df) - a2
+
+  mat &lt;- matrix(c(a1, b1, a2, b2), nrow = 2, byrow = TRUE)
+  test &lt;- if (min(mat) &lt; 5) fisher.test(mat) else chisq.test(mat)
+
+  data.frame(
+    Comparison = label,
+    CX_sample = cx,
+    DOX_sample = dox,
+    a1 = a1, b1 = b1, a2 = a2, b2 = b2,
+    P_value = test$p.value,
+    Stars = ifelse(test$p.value &lt; 0.05, &quot;*&quot;, &quot;&quot;)
+  )
+})</code></pre>
+<pre><code>Warning in chisq.test(mat): Chi-squared approximation may be incorrect</code></pre>
+<pre><code>Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+Warning in chisq.test(mat): Chi-squared approximation may be incorrect
+Warning in chisq.test(mat): Chi-squared approximation may be incorrect</code></pre>
+<pre class="r"><code>write.csv(test_results, &quot;data/DDR_DEG_overlap_stats.csv&quot;, row.names = FALSE)
+
+# ------------------ Plot ------------------
+ggplot(proportion_data, aes(x = Sample, y = Proportion, fill = Category)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  geom_text(
+    data = test_results %&gt;% filter(Stars != &quot;&quot;) %&gt;%
+      mutate(Sample = CX_sample, y_pos = 102),
+    aes(x = Sample, y = y_pos, label = Stars),
+    inherit.aes = FALSE, size = 6
+  ) +
+  scale_fill_manual(values = c(&quot;DDR_DEG&quot; = &quot;#e41a1c&quot;, &quot;Non_DDR_DEG&quot; = &quot;#377eb8&quot;)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1), limits = c(0, 105)) +
+  labs(
+    title = &quot;Proportion of DDR genes in CX and DOX DEG Set&quot;,
+    x = &quot;Sample&quot;,
+    y = &quot;Percentage of DEGs&quot;,
+    fill = &quot;Category&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5, face = &quot;bold&quot;),
+    legend.title = element_blank(),
+    panel.border = element_rect(color = &quot;black&quot;, fill = NA, linewidth = 1)
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_9-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="forest-plot-ddr-gene-enrichment" class="section level2">
+<h2><strong>📌 Forest Plot: DDR Gene Enrichment</strong></h2>
+<pre class="r"><code># --- Libraries ---
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+
+# --- Step 1: DDR Gene Set (Entrez IDs) ---
+ddr_entrez &lt;- c(
+  10111, 1017, 1019, 1020, 1021, 1026, 1027, 10912, 11011, 1111,
+  11200, 1385, 1643, 1647, 1869, 207, 2177, 25, 27113, 27244,
+  3014, 317, 355, 4193, 4292, 4361, 4609, 4616, 4683, 472, 50484,
+  5366, 5371, 54205, 545, 55367, 5591, 581, 5810, 5883, 5884,
+  5888, 5893, 5925, 595, 5981, 6118, 637, 672, 7157, 7799,
+  8243, 836, 841, 84126, 842, 8795, 891, 894, 896, 898,
+  9133, 9134, 983, 9874, 993, 995, 5916
+) %&gt;% as.character()
+
+# --- Step 2: Load DEG tables ---
+deg_files &lt;- list.files(&quot;data/DEGs/&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+deg_list  &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;Toptable_|\\.csv&quot;, &quot;&quot;, basename(deg_files))
+
+# --- Step 3: Fisher test function (save raw counts too) ---
+fisher_or &lt;- function(df, sample_name) {
+  df &lt;- df %&gt;%
+    mutate(
+      DEG = adj.P.Val &lt; 0.05,
+      DDR_gene = Entrez_ID %in% ddr_entrez
+    )
+
+  a &lt;- sum(df$DEG &amp; df$DDR_gene, na.rm = TRUE)   # DDR genes among DEGs
+  b &lt;- sum(df$DEG &amp; !df$DDR_gene, na.rm = TRUE)  # Non-DDR among DEGs
+  c &lt;- sum(!df$DEG &amp; df$DDR_gene, na.rm = TRUE)  # DDR genes not DEGs
+  d &lt;- sum(!df$DEG &amp; !df$DDR_gene, na.rm = TRUE) # Non-DDR not DEGs
+
+  test &lt;- fisher.test(matrix(c(a, b, c, d), nrow = 2))
+
+  tibble(
+    Sample = sample_name,
+    DE_DDR = a,
+    DE_nonDDR = b,
+    nonDE_DDR = c,
+    nonDE_nonDDR = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Step 4: Run Fisher tests for all DEG files ---
+results &lt;- bind_rows(mapply(fisher_or, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# --- Step 5: Extract metadata (Drug, Conc, Time) ---
+results &lt;- results %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Label = paste(Drug, Conc, sep = &quot;_&quot;),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;)) # enforce order
+  )
+
+# --- Step 6: Forest Plot ---
+ggplot(results, aes(x = Label, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(color = &quot;black&quot;, size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  facet_wrap(~Time, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +   # fixed OR scale
+  labs(
+    title = &quot;DDR Gene Enrichment Across Conditions&quot;,
+    x = &quot;Condition (Drug_Conc)&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/SC_10-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># --- Step 7: Export results (with raw numbers) ---
+write.csv(results, &quot;data/DDR_ForestPlot_Data.csv&quot;, row.names = FALSE)</code></pre>
+</div>
+<div
+id="proportion-of-heart-specific-degs-in-cx-and-dox-treated-samples"
+class="section level2">
+<h2><strong>📌 Proportion of Heart-Specific DEGs in CX and DOX treated
+samples</strong></h2>
+<pre class="r"><code># ------------------ Load Libraries ------------------
+library(tidyverse)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+# ------------------ Load Heart-Specific Genes ------------------
+heart_genes &lt;- read.csv(&quot;data/Human_Heart_Genes.csv&quot;, stringsAsFactors = FALSE)
+heart_genes$Entrez_ID &lt;- mapIds(
+  org.Hs.eg.db,
+  keys = heart_genes$Gene,
+  column = &quot;ENTREZID&quot;,
+  keytype = &quot;SYMBOL&quot;,
+  multiVals = &quot;first&quot;
+)
+heart_entrez_ids &lt;- na.omit(heart_genes$Entrez_ID) %&gt;% as.character()
+
+# ------------------ Load DEG Data ------------------
+deg_list &lt;- list(
+  &quot;CX_0.1_3&quot;   = read.csv(&quot;data/DEGs/Toptable_CX_0.1_3.csv&quot;),
+  &quot;CX_0.1_24&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.1_24.csv&quot;),
+  &quot;CX_0.1_48&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.1_48.csv&quot;),
+  &quot;CX_0.5_3&quot;   = read.csv(&quot;data/DEGs/Toptable_CX_0.5_3.csv&quot;),
+  &quot;CX_0.5_24&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;),
+  &quot;CX_0.5_48&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;),
+  &quot;DOX_0.1_3&quot;  = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_3.csv&quot;),
+  &quot;DOX_0.1_24&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_24.csv&quot;),
+  &quot;DOX_0.1_48&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_48.csv&quot;),
+  &quot;DOX_0.5_3&quot;  = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_3.csv&quot;),
+  &quot;DOX_0.5_24&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;),
+  &quot;DOX_0.5_48&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+)
+
+# ------------------ Compute Proportions ------------------
+proportion_data &lt;- map_dfr(names(deg_list), function(sample) {
+  sig_df &lt;- deg_list[[sample]] %&gt;% filter(adj.P.Val &lt; 0.05)
+  sample_degs &lt;- unique(as.character(sig_df$Entrez_ID))
+
+  yes &lt;- sum(sample_degs %in% heart_entrez_ids)
+  no &lt;- length(sample_degs) - yes
+
+  data.frame(
+    Sample = sample,
+    Category = c(&quot;Heart_DEG&quot;, &quot;Non_Heart_DEG&quot;),
+    Count = c(yes, no)
+  )
+}) %&gt;%
+  group_by(Sample) %&gt;%
+  mutate(Proportion = Count / sum(Count) * 100)
+
+# ------------------ Set Order ------------------
+proportion_data$Sample &lt;- factor(proportion_data$Sample, levels = c(
+  &quot;CX_0.1_3&quot;, &quot;CX_0.1_24&quot;, &quot;CX_0.1_48&quot;,
+  &quot;CX_0.5_3&quot;, &quot;CX_0.5_24&quot;, &quot;CX_0.5_48&quot;,
+  &quot;DOX_0.1_3&quot;, &quot;DOX_0.1_24&quot;, &quot;DOX_0.1_48&quot;,
+  &quot;DOX_0.5_3&quot;, &quot;DOX_0.5_24&quot;, &quot;DOX_0.5_48&quot;
+))
+
+proportion_data$Category &lt;- factor(proportion_data$Category,
+                                   levels = c(&quot;Heart_DEG&quot;, &quot;Non_Heart_DEG&quot;))
+
+# ------------------ Statistical Testing (CX vs DOX) ------------------
+matched_pairs &lt;- list(
+  &quot;0.1_3&quot;  = c(&quot;CX_0.1_3&quot;, &quot;DOX_0.1_3&quot;),
+  &quot;0.1_24&quot; = c(&quot;CX_0.1_24&quot;, &quot;DOX_0.1_24&quot;),
+  &quot;0.1_48&quot; = c(&quot;CX_0.1_48&quot;, &quot;DOX_0.1_48&quot;),
+  &quot;0.5_3&quot;  = c(&quot;CX_0.5_3&quot;, &quot;DOX_0.5_3&quot;),
+  &quot;0.5_24&quot; = c(&quot;CX_0.5_24&quot;, &quot;DOX_0.5_24&quot;),
+  &quot;0.5_48&quot; = c(&quot;CX_0.5_48&quot;, &quot;DOX_0.5_48&quot;)
+)
+
+test_results &lt;- map_dfr(names(matched_pairs), function(label) {
+  cx &lt;- matched_pairs[[label]][1]
+  dox &lt;- matched_pairs[[label]][2]
+
+  cx_df &lt;- deg_list[[cx]] %&gt;% filter(adj.P.Val &lt; 0.05)
+  dox_df &lt;- deg_list[[dox]] %&gt;% filter(adj.P.Val &lt; 0.05)
+
+  a1 &lt;- sum(cx_df$Entrez_ID %in% heart_entrez_ids)
+  b1 &lt;- nrow(cx_df) - a1
+  a2 &lt;- sum(dox_df$Entrez_ID %in% heart_entrez_ids)
+  b2 &lt;- nrow(dox_df) - a2
+
+  mat &lt;- matrix(c(a1, b1, a2, b2), nrow = 2, byrow = TRUE)
+  test &lt;- if (min(mat) &lt; 5) fisher.test(mat) else chisq.test(mat)
+
+  data.frame(
+    Comparison = label,
+    CX_sample = cx,
+    DOX_sample = dox,
+    P_value = test$p.value,
+    Stars = ifelse(test$p.value &lt; 0.05, &quot;*&quot;, &quot;&quot;)
+  )
+})
+
+write.csv(test_results, &quot;data/Heart_DEG_overlap_stats.csv&quot;, row.names = FALSE)
+
+# ------------------ Plot ------------------
+ggplot(proportion_data, aes(x = Sample, y = Proportion, fill = Category)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  geom_text(
+    data = test_results %&gt;% filter(Stars != &quot;&quot;) %&gt;%
+      mutate(Sample = CX_sample, y_pos = 102),
+    aes(x = Sample, y = y_pos, label = Stars),
+    inherit.aes = FALSE, size = 6
+  ) +
+  scale_fill_manual(values = c(&quot;Heart_DEG&quot; = &quot;#e41a1c&quot;, &quot;Non_Heart_DEG&quot; = &quot;#377eb8&quot;)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1), limits = c(0, 105)) +
+  labs(
+    title = &quot;Proportion of Heart-Specific DEGs in CX and DOX treated samples&quot;,
+    x = &quot;Sample&quot;,
+    y = &quot;Percentage of DEGs&quot;,
+    fill = &quot;Category&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5, face = &quot;bold&quot;),
+    legend.title = element_blank(),
+    panel.border = element_rect(color = &quot;black&quot;, fill = NA, linewidth = 1)
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_11-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="forest-plot-heart-specific-gene-enrichment"
+class="section level2">
+<h2><strong>📌 Forest Plot: Heart-Specific Gene Enrichment</strong></h2>
+<pre class="r"><code># --- Libraries ---
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+# --- Step 1: Load Heart-Specific Genes ---
+heart_genes &lt;- read.csv(&quot;data/Human_Heart_Genes.csv&quot;, stringsAsFactors = FALSE)
+heart_genes$Entrez_ID &lt;- mapIds(
+  org.Hs.eg.db,
+  keys = heart_genes$Gene,
+  column = &quot;ENTREZID&quot;,
+  keytype = &quot;SYMBOL&quot;,
+  multiVals = &quot;first&quot;
+)
+heart_entrez_ids &lt;- na.omit(heart_genes$Entrez_ID) %&gt;% as.character()
+
+# --- Step 2: Load DEG tables ---
+deg_files &lt;- list.files(&quot;data/DEGs/&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+deg_list  &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;Toptable_|\\.csv&quot;, &quot;&quot;, basename(deg_files))
+
+# --- Step 3: Fisher test function ---
+fisher_or &lt;- function(df, sample_name) {
+  df &lt;- df %&gt;%
+    mutate(
+      DEG = adj.P.Val &lt; 0.05,
+      HeartGene = Entrez_ID %in% heart_entrez_ids
+    )
+
+  a &lt;- sum(df$DEG &amp; df$HeartGene, na.rm = TRUE)
+  b &lt;- sum(df$DEG &amp; !df$HeartGene, na.rm = TRUE)
+  c &lt;- sum(!df$DEG &amp; df$HeartGene, na.rm = TRUE)
+  d &lt;- sum(!df$DEG &amp; !df$HeartGene, na.rm = TRUE)
+
+  test &lt;- fisher.test(matrix(c(a, b, c, d), nrow = 2))
+
+  tibble(
+    Sample = sample_name,
+    DE_Heart = a,
+    DE_nonHeart = b,
+    nonDE_Heart = c,
+    nonDE_nonHeart = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Step 4: Run Fisher tests ---
+results &lt;- bind_rows(mapply(fisher_or, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# --- Step 5: Extract metadata ---
+results &lt;- results %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Label = paste(Drug, Conc, sep = &quot;_&quot;),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))
+  )
+
+# --- Step 6: Forest plot ---
+ggplot(results, aes(x = Label, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Time, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;Heart-Specific Gene Enrichment Across Conditions&quot;,
+    x = &quot;Condition (Drug_Conc)&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/SC_12-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># --- Step 7: Export results with raw counts ---
+write.csv(results, &quot;data/HeartSpecific_ForestPlot_Data.csv&quot;, row.names = FALSE)</code></pre>
+</div>
+<div id="proportion-of-ddr-genes-corrmotif-groups"
+class="section level2">
+<h2><strong>📌 Proportion of DDR Genes (CorrMotif Groups)</strong></h2>
+<pre class="r"><code># ----------------- Load Required Libraries -----------------
+library(dplyr)
+library(ggplot2)
+
+# ----------------- Load DDR Genes -----------------
+ddr_entrez &lt;- c(
+  10111, 1017, 1019, 1020, 1021, 1026, 1027, 10912, 11011, 1111,
+  11200, 1385, 1643, 1647, 1869, 207, 2177, 25, 27113, 27244,
+  3014, 317, 355, 4193, 4292, 4361, 4609, 4616, 4683, 472, 50484,
+  5366, 5371, 54205, 545, 55367, 5591, 581, 5810, 5883, 5884,
+  5888, 5893, 5925, 595, 5981, 6118, 637, 672, 7157, 7799,
+  8243, 836, 841, 84126, 842, 8795, 891, 894, 896, 898,
+  9133, 9134, 983, 9874, 993, 995, 5916
+) %&gt;% as.character()
+
+# ----------------- Load CorrMotif Groups -----------------
+# 0.1 µM
+prob_1_0.1 &lt;- as.character(read.csv(&quot;data/prob_1_0.1.csv&quot;)$Entrez_ID)
+prob_2_0.1 &lt;- as.character(read.csv(&quot;data/prob_2_0.1.csv&quot;)$Entrez_ID)
+prob_3_0.1 &lt;- as.character(read.csv(&quot;data/prob_3_0.1.csv&quot;)$Entrez_ID)
+
+# 0.5 µM
+prob_1_0.5 &lt;- as.character(read.csv(&quot;data/prob_1_0.5.csv&quot;)$Entrez_ID)
+prob_2_0.5 &lt;- as.character(read.csv(&quot;data/prob_2_0.5.csv&quot;)$Entrez_ID)
+prob_3_0.5 &lt;- as.character(read.csv(&quot;data/prob_3_0.5.csv&quot;)$Entrez_ID)
+prob_4_0.5 &lt;- as.character(read.csv(&quot;data/prob_4_0.5.csv&quot;)$Entrez_ID)
+prob_5_0.5 &lt;- as.character(read.csv(&quot;data/prob_5_0.5.csv&quot;)$Entrez_ID)
+
+# ----------------- Annotate CorrMotif Groups -----------------
+df_0.1 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.1, prob_2_0.1, prob_3_0.1))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.1 ~ &quot;Non response (0.1)&quot;,
+      Entrez_ID %in% prob_2_0.1 ~ &quot;CX_DOX_1&quot;,
+      Entrez_ID %in% prob_3_0.1 ~ &quot;DOX_sp_1&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% ddr_entrez, &quot;DDR Genes&quot;, &quot;Non-DDR Genes&quot;),
+    Concentration = &quot;0.1&quot;
+  )
+
+df_0.5 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.5, prob_2_0.5, prob_3_0.5, prob_4_0.5, prob_5_0.5))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.5 ~ &quot;Non response (0.5)&quot;,
+      Entrez_ID %in% prob_2_0.5 ~ &quot;DOX_sp_2&quot;,
+      Entrez_ID %in% prob_3_0.5 ~ &quot;DOX_sp_3&quot;,
+      Entrez_ID %in% prob_4_0.5 ~ &quot;CX_DOX_2&quot;,
+      Entrez_ID %in% prob_5_0.5 ~ &quot;CX_DOX_3&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% ddr_entrez, &quot;DDR Genes&quot;, &quot;Non-DDR Genes&quot;),
+    Concentration = &quot;0.5&quot;
+  )
+
+# ----------------- Combine Data -----------------
+df_combined &lt;- bind_rows(df_0.1, df_0.5)
+
+# ----------------- Calculate Proportions -----------------
+proportion_data &lt;- df_combined %&gt;%
+  group_by(Concentration, Response_Group, Category) %&gt;%
+  summarise(Count = n(), .groups = &quot;drop&quot;) %&gt;%
+  group_by(Concentration, Response_Group) %&gt;%
+  mutate(Percentage = Count / sum(Count) * 100)
+
+# ----------------- Fisher&#39;s Exact Test -----------------
+run_fisher_test &lt;- function(df, ref_group) {
+  ref_counts &lt;- df %&gt;%
+    filter(Response_Group == ref_group) %&gt;%
+    dplyr::select(Category, Count) %&gt;%
+    {setNames(.$Count, .$Category)}
+
+  df %&gt;%
+    filter(Response_Group != ref_group) %&gt;%
+    group_by(Response_Group) %&gt;%
+    summarise(
+      p_value = {
+        group_counts &lt;- Count[Category %in% c(&quot;DDR Genes&quot;, &quot;Non-DDR Genes&quot;)]
+        if (length(group_counts) &lt; 2) group_counts &lt;- c(group_counts, 0)
+        contingency_table &lt;- matrix(c(
+          group_counts[1], group_counts[2],
+          ref_counts[&quot;DDR Genes&quot;], ref_counts[&quot;Non-DDR Genes&quot;]
+        ), nrow = 2)
+        fisher.test(contingency_table)$p.value
+      },
+      .groups = &quot;drop&quot;
+    ) %&gt;%
+    mutate(Significance = ifelse(!is.na(p_value) &amp; p_value &lt; 0.05, &quot;*&quot;, &quot;&quot;))
+}
+
+# Run Fisher’s test for each concentration
+fisher_0.1 &lt;- run_fisher_test(proportion_data %&gt;% filter(Concentration == &quot;0.1&quot;), &quot;Non response (0.1)&quot;)
+fisher_0.5 &lt;- run_fisher_test(proportion_data %&gt;% filter(Concentration == &quot;0.5&quot;), &quot;Non response (0.5)&quot;)
+
+fisher_all &lt;- bind_rows(
+  fisher_0.1 %&gt;% mutate(Concentration = &quot;0.1&quot;),
+  fisher_0.5 %&gt;% mutate(Concentration = &quot;0.5&quot;)
+)
+
+# ----------------- Merge Fisher Results -----------------
+proportion_data &lt;- proportion_data %&gt;%
+  left_join(fisher_all, by = c(&quot;Concentration&quot;, &quot;Response_Group&quot;))
+
+# ----------------- Reorder Groups -----------------
+proportion_data$Response_Group &lt;- factor(proportion_data$Response_Group, levels = c(
+  &quot;Non response (0.1)&quot;, &quot;CX_DOX_1&quot;, &quot;DOX_sp_1&quot;,
+  &quot;Non response (0.5)&quot;, &quot;DOX_sp_2&quot;, &quot;DOX_sp_3&quot;, &quot;CX_DOX_2&quot;, &quot;CX_DOX_3&quot;
+))
+
+# ----------------- Star Labels -----------------
+label_data &lt;- proportion_data %&gt;%
+  group_by(Concentration, Response_Group) %&gt;%
+  summarise(Significance = dplyr::first(Significance), .groups = &quot;drop&quot;) %&gt;%
+  filter(!is.na(Significance)) %&gt;%
+  mutate(y_pos = 100)
+
+# ----------------- Plot -----------------
+ggplot(proportion_data, aes(x = Response_Group, y = Percentage, fill = Category)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;) +
+  geom_text(
+    data = label_data,
+    aes(x = Response_Group, y = y_pos, label = Significance),
+    inherit.aes = FALSE,
+    size = 5,
+    color = &quot;black&quot;
+  ) +
+  facet_wrap(~ Concentration, scales = &quot;free_x&quot;) +
+  scale_fill_manual(values = c(&quot;DDR Genes&quot; = &quot;#e41a1c&quot;, &quot;Non-DDR Genes&quot; = &quot;#377eb8&quot;)) +
+  scale_y_continuous(limits = c(0, 110), expand = c(0, 0)) +
+  labs(
+    title = &quot;DDR Gene Proportions Across CorrMotif Groups&quot;,
+    x = &quot;Response Groups&quot;,
+    y = &quot;Percentage of Genes&quot;,
+    fill = &quot;Gene Category&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(size = 16, hjust = 0.5, face = &quot;bold&quot;),
+    axis.title.x = element_text(size = 14, face = &quot;bold&quot;),
+    axis.title.y = element_text(size = 14, face = &quot;bold&quot;),
+    axis.text.x = element_text(size = 11, angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 13),
+    legend.text = element_text(size = 12),
+    strip.text = element_text(size = 14, face = &quot;bold&quot;),
+    panel.border = element_rect(color = &quot;black&quot;, fill = NA, linewidth = 1.2),
+    panel.spacing = unit(1.2, &quot;lines&quot;)
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_13-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="odds-ratios-for-corrmotif-groups-ddr-genes"
+class="section level2">
+<h2><strong>📌 Odds Ratios for CorrMotif Groups (DDR
+genes)</strong></h2>
+<pre class="r"><code>library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+
+# --- Load DDR Gene Entrez IDs ---
+ddr_entrez &lt;- c(
+  10111, 1017, 1019, 1020, 1021, 1026, 1027, 10912, 11011, 1111,
+  11200, 1385, 1643, 1647, 1869, 207, 2177, 25, 27113, 27244,
+  3014, 317, 355, 4193, 4292, 4361, 4609, 4616, 4683, 472, 50484,
+  5366, 5371, 54205, 545, 55367, 5591, 581, 5810, 5883, 5884,
+  5888, 5893, 5925, 595, 5981, 6118, 637, 672, 7157, 7799,
+  8243, 836, 841, 84126, 842, 8795, 891, 894, 896, 898,
+  9133, 9134, 983, 9874, 993, 995, 5916
+) %&gt;% as.character()
+
+# --- Load CorrMotif Groups ---
+# 0.1 µM
+prob_1_0.1 &lt;- as.character(read.csv(&quot;data/prob_1_0.1.csv&quot;)$Entrez_ID)
+prob_2_0.1 &lt;- as.character(read.csv(&quot;data/prob_2_0.1.csv&quot;)$Entrez_ID)
+prob_3_0.1 &lt;- as.character(read.csv(&quot;data/prob_3_0.1.csv&quot;)$Entrez_ID)
+
+# 0.5 µM
+prob_1_0.5 &lt;- as.character(read.csv(&quot;data/prob_1_0.5.csv&quot;)$Entrez_ID)
+prob_2_0.5 &lt;- as.character(read.csv(&quot;data/prob_2_0.5.csv&quot;)$Entrez_ID)
+prob_3_0.5 &lt;- as.character(read.csv(&quot;data/prob_3_0.5.csv&quot;)$Entrez_ID)
+prob_4_0.5 &lt;- as.character(read.csv(&quot;data/prob_4_0.5.csv&quot;)$Entrez_ID)
+prob_5_0.5 &lt;- as.character(read.csv(&quot;data/prob_5_0.5.csv&quot;)$Entrez_ID)
+
+# --- Annotate Groups ---
+df_0.1 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.1, prob_2_0.1, prob_3_0.1))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.1 ~ &quot;Non response (0.1)&quot;,
+      Entrez_ID %in% prob_2_0.1 ~ &quot;CX_DOX_1&quot;,
+      Entrez_ID %in% prob_3_0.1 ~ &quot;DOX_sp_1&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% ddr_entrez, &quot;DDR Genes&quot;, &quot;Non-DDR Genes&quot;),
+    Concentration = &quot;0.1&quot;
+  )
+
+df_0.5 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.5, prob_2_0.5, prob_3_0.5, prob_4_0.5, prob_5_0.5))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.5 ~ &quot;Non response (0.5)&quot;,
+      Entrez_ID %in% prob_2_0.5 ~ &quot;DOX_sp_2&quot;,
+      Entrez_ID %in% prob_3_0.5 ~ &quot;DOX_sp_3&quot;,
+      Entrez_ID %in% prob_4_0.5 ~ &quot;CX_DOX_2&quot;,
+      Entrez_ID %in% prob_5_0.5 ~ &quot;CX_DOX_3&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% ddr_entrez, &quot;DDR Genes&quot;, &quot;Non-DDR Genes&quot;),
+    Concentration = &quot;0.5&quot;
+  )
+
+df_combined &lt;- bind_rows(df_0.1, df_0.5)
+
+# --- Fisher Odds Ratio Function ---
+fisher_or_group &lt;- function(df_group, df_all, group_name, conc) {
+  # counts in group
+  a &lt;- sum(df_group$Category == &quot;DDR Genes&quot;)
+  b &lt;- sum(df_group$Category == &quot;Non-DDR Genes&quot;)
+
+  # counts in rest of groups at same conc
+  ref &lt;- df_all %&gt;% filter(Response_Group != group_name)
+  c &lt;- sum(ref$Category == &quot;DDR Genes&quot;)
+  d &lt;- sum(ref$Category == &quot;Non-DDR Genes&quot;)
+
+  mat &lt;- matrix(c(a, b, c, d), nrow = 2)
+  if (any(mat == 0)) mat &lt;- mat + 0.5  # continuity correction
+
+  test &lt;- fisher.test(mat)
+
+  tibble(
+    Response_Group = group_name,
+    Concentration  = conc,
+    a = a, b = b, c = c, d = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Run Fisher tests ---
+results &lt;- list()
+for (conc in unique(df_combined$Concentration)) {
+  conc_df &lt;- df_combined %&gt;% filter(Concentration == conc)
+  for (grp in unique(conc_df$Response_Group)) {
+    grp_df &lt;- conc_df %&gt;% filter(Response_Group == grp)
+    results[[paste(conc, grp)]] &lt;- fisher_or_group(grp_df, conc_df, grp, conc)
+  }
+}
+results &lt;- bind_rows(results)
+
+# --- Save Results ---
+write.csv(results, &quot;data/CorrMotif_DDRGenes_OddsRatios.csv&quot;, row.names = FALSE)
+
+# --- Forest Plot ---
+ggplot(results, aes(x = Response_Group, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Concentration, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;DDR Gene Enrichment Across CorrMotif Groups&quot;,
+    x = &quot;Response Group&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )</code></pre>
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/SC_14-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="violin-boxplot-ts-score-in-12-deg-samples"
+class="section level2">
+<h2><strong>📌 Violin-Boxplot: TS Score in 12 DEG samples</strong></h2>
+<pre class="r"><code># 📦 Load Required Libraries
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# ✅ Step 1: Load DEG files
+deg_list &lt;- list(
+  &quot;CX_0.1_3&quot;   = read.csv(&quot;data/DEGs/Toptable_CX_0.1_3.csv&quot;),
+  &quot;CX_0.1_24&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.1_24.csv&quot;),
+  &quot;CX_0.1_48&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.1_48.csv&quot;),
+  &quot;CX_0.5_3&quot;   = read.csv(&quot;data/DEGs/Toptable_CX_0.5_3.csv&quot;),
+  &quot;CX_0.5_24&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;),
+  &quot;CX_0.5_48&quot;  = read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;),
+  &quot;DOX_0.1_3&quot;  = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_3.csv&quot;),
+  &quot;DOX_0.1_24&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_24.csv&quot;),
+  &quot;DOX_0.1_48&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.1_48.csv&quot;),
+  &quot;DOX_0.5_3&quot;  = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_3.csv&quot;),
+  &quot;DOX_0.5_24&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;),
+  &quot;DOX_0.5_48&quot; = read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+)
+
+# ✅ Step 2: Load TS data
+ts_data &lt;- read.csv(&quot;data/TS.csv&quot;) %&gt;%
+  mutate(Entrez_ID = as.character(Entrez_ID))
+
+# ✅ Step 3: Merge DEGs with TS scores
+ts_long &lt;- bind_rows(lapply(names(deg_list), function(name) {
+  df &lt;- deg_list[[name]] %&gt;% filter(adj.P.Val &lt; 0.05)
+  df$Sample &lt;- name
+  df
+})) %&gt;%
+  mutate(Entrez_ID = as.character(Entrez_ID)) %&gt;%
+  left_join(ts_data, by = &quot;Entrez_ID&quot;) %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Heart_Ventricle = as.numeric(Heart_Ventricle),
+    Conc = factor(Conc, levels = c(&quot;0.1&quot;,&quot;0.5&quot;)),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))   # ✅ enforce order
+  ) %&gt;%
+  filter(!is.na(Heart_Ventricle))</code></pre>
+<pre><code>Warning in left_join(., ts_data, by = &quot;Entrez_ID&quot;): Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 1904 of `x` matches multiple rows in `y`.
+ℹ Row 6237 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  &quot;many-to-many&quot;` to silence this warning.</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Heart_Ventricle = as.numeric(Heart_Ventricle)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre class="r"><code># ✅ Step 4: Define CX vs DOX comparison table
+comparison_table &lt;- expand.grid(
+  Conc = c(&quot;0.1&quot;,&quot;0.5&quot;),
+  Time = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;),
+  stringsAsFactors = FALSE
+)
+
+# ✅ Step 5: Run Wilcoxon tests
+star_df &lt;- lapply(1:nrow(comparison_table), function(i) {
+  conc &lt;- comparison_table$Conc[i]
+  time &lt;- comparison_table$Time[i]
+
+  cx_vals &lt;- ts_long$Heart_Ventricle[ts_long$Drug == &quot;CX&quot; &amp; ts_long$Conc == conc &amp; ts_long$Time == time]
+  dox_vals &lt;- ts_long$Heart_Ventricle[ts_long$Drug == &quot;DOX&quot; &amp; ts_long$Conc == conc &amp; ts_long$Time == time]
+
+  cx_vals &lt;- cx_vals[!is.na(cx_vals)]
+  dox_vals &lt;- dox_vals[!is.na(dox_vals)]
+
+  if (length(cx_vals) &gt; 2 &amp; length(dox_vals) &gt; 2) {
+    test_result &lt;- wilcox.test(cx_vals, dox_vals)
+    pval &lt;- test_result$p.value
+
+    if (pval &lt; 0.05) {
+      label &lt;- case_when(
+        pval &lt; 0.001 ~ &quot;***&quot;,
+        pval &lt; 0.01  ~ &quot;**&quot;,
+        TRUE ~ &quot;*&quot;
+      )
+      y_pos &lt;- max(c(cx_vals, dox_vals), na.rm = TRUE) + 0.4
+      return(data.frame(
+        Conc = conc, Time = factor(time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;)), # ✅ enforce order here too
+        label = label,
+        y_pos = y_pos
+      ))
+    }
+  }
+  return(NULL)
+}) %&gt;% bind_rows()
+
+# ✅ Step 6: Define colors
+drug_colors &lt;- c(&quot;CX&quot; = &quot;#1f78b4&quot;, &quot;DOX&quot; = &quot;#e31a1c&quot;)
+
+# ✅ Step 7: Violin + Boxplot
+p &lt;- ggplot(ts_long, aes(x = Drug, y = Heart_Ventricle, fill = Drug)) +
+  geom_violin(trim = FALSE, scale = &quot;width&quot;, color = &quot;black&quot;, alpha = 0.8) +
+  geom_boxplot(width = 0.2, color = &quot;black&quot;, fill = &quot;white&quot;, outlier.shape = NA) +
+  facet_grid(Conc ~ Time, scales = &quot;free_x&quot;) +
+  scale_fill_manual(values = drug_colors) +
+  scale_y_continuous(
+    limits = c(-10, max(ts_long$Heart_Ventricle, na.rm = TRUE) + 2),
+    breaks = seq(-10, 25, 5)
+  ) +
+  geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  geom_text(
+    data = star_df,
+    aes(x = 1.5, y = y_pos, label = label),
+    inherit.aes = FALSE,
+    size = 6,
+    fontface = &quot;bold&quot;
+  ) +
+  labs(
+    title = &quot;Violin-Boxplot: Heart Ventricle TS (CX vs DOX DEGs)&quot;,
+    y = &quot;Tissue specificity score (Heart Ventricle)&quot;,
+    x = &quot;&quot;
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(size = 12),
+    strip.text = element_text(size = 12, face = &quot;bold&quot;),
+    plot.title = element_text(size = 14, face = &quot;bold&quot;, hjust = 0.5),
+    legend.position = &quot;none&quot;
+  )
+
+print(p)</code></pre>
+<pre><code>Warning: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.</code></pre>
+<pre><code>Warning: Computation failed in `stat_ydensity()`.
+Caused by error in `$&lt;-.data.frame`:
+! replacement has 1 row, data has 0</code></pre>
+<pre><code>Warning: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.</code></pre>
+<p><img src="figure/Revision.Rmd/SC_15-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="dox-cardiotoxicity-gene-set-scatter-plot-cx-vs-dox-0.5-µm-24-hr"
+class="section level2">
+<h2><strong>📌 DOX-Cardiotoxicity Gene Set Scatter Plot: CX vs DOX (0.5
+µM, 24 hr)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+
+# --- Load Data ---
+CX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+DOX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_24$Entrez_ID &lt;- as.character(CX_0.5_24$Entrez_ID)
+DOX_0.5_24$Entrez_ID &lt;- as.character(DOX_0.5_24$Entrez_ID)
+
+# --- Merge on Entrez_ID ---
+merged_24h_0.5 &lt;- merge(
+  CX_0.5_24, DOX_0.5_24,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+# --- DOX-Cardiotoxicity Signature Entrez IDs ---
+Entrez_IDs &lt;- c(
+  847, 873, 2064, 2878, 2944, 3038, 4846, 51196, 5880, 6687,
+  7799, 4292, 5916, 3077, 51310, 9154, 64078, 5244, 10057, 10060,
+  89845, 56853, 4625, 1573, 79890
+)
+
+# --- Subset merged data ---
+cardio_set &lt;- merged_24h_0.5[merged_24h_0.5$Entrez_ID %in% Entrez_IDs, ]
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  cardio_set$logFC_CX,
+  cardio_set$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot (same style as 48 hr plot) ---
+ggplot(cardio_set, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.5, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (24 hr, 0.5 µM)&quot;,
+    subtitle = &quot;DOX-Cardiotoxicity Gene Set&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf, hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_16-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="dox-cardiotoxicity-gene-set-scatter-plot-cx-vs-dox-0.5-µm-48-hr"
+class="section level2">
+<h2><strong>📌 DOX-Cardiotoxicity Gene Set Scatter Plot: CX vs DOX (0.5
+µM, 48 hr)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+
+# --- Load Data ---
+CX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_48$Entrez_ID &lt;- as.character(CX_0.5_48$Entrez_ID)
+DOX_0.5_48$Entrez_ID &lt;- as.character(DOX_0.5_48$Entrez_ID)
+
+# --- Merge on Entrez_ID ---
+merged_48h_0.5 &lt;- merge(
+  CX_0.5_48, DOX_0.5_48,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+# --- DOX-Cardiotoxicity Signature Entrez IDs ---
+Entrez_IDs &lt;- c(
+  847, 873, 2064, 2878, 2944, 3038, 4846, 51196, 5880, 6687,
+  7799, 4292, 5916, 3077, 51310, 9154, 64078, 5244, 10057, 10060,
+  89845, 56853, 4625, 1573, 79890
+)
+
+# --- Subset merged data ---
+cardio_set_48 &lt;- merged_48h_0.5[merged_48h_0.5$Entrez_ID %in% Entrez_IDs, ]
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  cardio_set_48$logFC_CX,
+  cardio_set_48$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot (same publication style) ---
+ggplot(cardio_set_48, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.5, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (48 hr, 0.5 µM)&quot;,
+    subtitle = &quot;DOX-Cardiotoxicity Gene Set&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf, hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_17-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="heart-failure-gene-set-scatter-plot-cx-vs-dox-0.5-µm-24-hr"
+class="section level2">
+<h2><strong>📌 Heart Failure Gene Set Scatter Plot: CX vs DOX (0.5 µM,
+24 hr)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+# --- Load Data ---
+CX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_24.csv&quot;)
+DOX_0.5_24 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_24.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_24$Entrez_ID &lt;- as.character(CX_0.5_24$Entrez_ID)
+DOX_0.5_24$Entrez_ID &lt;- as.character(DOX_0.5_24$Entrez_ID)
+
+# --- Merge on Entrez_ID ---
+merged_24h_0.5 &lt;- merge(
+  CX_0.5_24, DOX_0.5_24,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+# --- Heart Failure Gene Set ---
+entrez_ids &lt;- c(
+  9709, 8882, 4023, 29959, 5496, 3992, 9415, 5308, 1026, 54437, 79068, 10221,
+  9031, 1187, 1952, 3705, 84722, 7273, 23293, 155382, 9531, 602, 27258, 84163,
+  81846, 79933, 56911, 64753, 93210, 1021, 283450, 5998, 57602, 114991, 7073,
+  3156, 100101267, 22996, 285025, 11080, 11124, 54810, 7531, 27241, 4774, 57794,
+  463, 91319, 6598, 9640, 2186, 26010, 80816, 571, 88, 51652, 64788, 90523, 2969,
+  7781, 80777, 10725, 23387, 817, 134728, 8842, 949, 6934, 129787, 10327, 202052,
+  2318, 5578, 6801, 6311, 10019, 80724, 217, 84909, 388591, 55101, 9839, 27161,
+  5310, 387119, 4641, 5587, 55188, 222553, 9960, 22852, 10087, 9570, 54497,
+  200942, 26249, 4137, 375056, 5409, 64116, 8291, 22876, 339855, 4864, 5142,
+  221692, 55023, 51426, 6146, 84251, 8189, 27332, 57099, 1869, 1112, 23327,
+  11264, 6001
+) %&gt;% as.character()
+
+# --- Subset merged data ---
+heart_set &lt;- merged_24h_0.5[merged_24h_0.5$Entrez_ID %in% entrez_ids, ]
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  heart_set$logFC_CX,
+  heart_set$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot (same style) ---
+ggplot(heart_set, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.5, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (24 hr, 0.5 µM)&quot;,
+    subtitle = &quot;Heart Failure Gene Set&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_18-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="heart-failure-gene-set-scatter-plot-cx-vs-dox-0.5-µm-48-hr"
+class="section level2">
+<h2><strong>📌 Heart Failure Gene Set Scatter Plot: CX vs DOX (0.5 µM,
+48 hr)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+# --- Load Data ---
+CX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_CX_0.5_48.csv&quot;)
+DOX_0.5_48 &lt;- read.csv(&quot;data/DEGs/Toptable_DOX_0.5_48.csv&quot;)
+
+# --- Ensure Entrez_ID is character ---
+CX_0.5_48$Entrez_ID &lt;- as.character(CX_0.5_48$Entrez_ID)
+DOX_0.5_48$Entrez_ID &lt;- as.character(DOX_0.5_48$Entrez_ID)
+
+# --- Merge on Entrez_ID ---
+merged_48h_0.5 &lt;- merge(
+  CX_0.5_48, DOX_0.5_48,
+  by = &quot;Entrez_ID&quot;, suffixes = c(&quot;_CX&quot;, &quot;_DOX&quot;)
+)
+
+# --- Heart Failure Gene Set ---
+entrez_ids &lt;- c(
+  9709, 8882, 4023, 29959, 5496, 3992, 9415, 5308, 1026, 54437, 79068, 10221,
+  9031, 1187, 1952, 3705, 84722, 7273, 23293, 155382, 9531, 602, 27258, 84163,
+  81846, 79933, 56911, 64753, 93210, 1021, 283450, 5998, 57602, 114991, 7073,
+  3156, 100101267, 22996, 285025, 11080, 11124, 54810, 7531, 27241, 4774, 57794,
+  463, 91319, 6598, 9640, 2186, 26010, 80816, 571, 88, 51652, 64788, 90523, 2969,
+  7781, 80777, 10725, 23387, 817, 134728, 8842, 949, 6934, 129787, 10327, 202052,
+  2318, 5578, 6801, 6311, 10019, 80724, 217, 84909, 388591, 55101, 9839, 27161,
+  5310, 387119, 4641, 5587, 55188, 222553, 9960, 22852, 10087, 9570, 54497,
+  200942, 26249, 4137, 375056, 5409, 64116, 8291, 22876, 339855, 4864, 5142,
+  221692, 55023, 51426, 6146, 84251, 8189, 27332, 57099, 1869, 1112, 23327,
+  11264, 6001
+) %&gt;% as.character()
+
+# --- Subset merged data ---
+heart_set_48 &lt;- merged_48h_0.5[merged_48h_0.5$Entrez_ID %in% entrez_ids, ]
+
+# --- Correlation ---
+cor_test &lt;- cor.test(
+  heart_set_48$logFC_CX,
+  heart_set_48$logFC_DOX,
+  method = &quot;pearson&quot;
+)
+
+r_val &lt;- round(cor_test$estimate, 3)
+p_val &lt;- formatC(cor_test$p.value, format = &quot;e&quot;, digits = 2)
+label_text &lt;- paste0(&quot;r = &quot;, r_val, &quot;\n&quot;, &quot;p = &quot;, p_val)
+
+# --- Scatter Plot (matching style) ---
+ggplot(heart_set_48, aes(x = logFC_CX, y = logFC_DOX)) +
+  geom_point(alpha = 0.5, color = &quot;black&quot;) +
+  geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;, se = FALSE) +
+  labs(
+    title = &quot;CX vs DOX logFC (48 hr, 0.5 µM)&quot;,
+    subtitle = &quot;Heart Failure Gene Set&quot;,
+    x = &quot;logFC (CX vs VEH)&quot;,
+    y = &quot;logFC (DOX vs VEH)&quot;
+  ) +
+  theme_minimal(base_size = 14) +
+  annotate(
+    &quot;text&quot;,
+    x = -Inf, y = Inf,
+    hjust = -0.1, vjust = 1.2,
+    label = label_text,
+    size = 5, fontface = &quot;bold&quot;
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_19-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="forest-plot-atrial-fibrillation-af-risk-loci-enrichment"
+class="section level2">
+<h2><strong>📌 Forest Plot: Atrial Fibrillation (AF) Risk Loci
+Enrichment</strong></h2>
+<pre class="r"><code># --- Libraries ---
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(readr)
+
+# --- Step 1: Load AF Risk Loci (Entrez IDs) ---
+# Option 1: If you saved it earlier
+# entrez_ids &lt;- readRDS(&quot;data/AF_Entrez_IDs.rds&quot;)
+
+# Option 2: Or load from mapped CSV (ensure column name is Entrez_ID)
+AF_genes &lt;- read.csv(&quot;data/Cleaned_AF_genes_with_Entrez.csv&quot;, stringsAsFactors = FALSE)
+entrez_ids &lt;- AF_genes$Entrez_ID %&gt;% as.character() %&gt;% unique() %&gt;% na.omit()
+
+cat(&quot;✅ Loaded&quot;, length(entrez_ids), &quot;AF Entrez IDs.\n&quot;)</code></pre>
+<pre><code>✅ Loaded 615 AF Entrez IDs.</code></pre>
+<pre class="r"><code># --- Step 2: Load DEG tables ---
+deg_files &lt;- list.files(&quot;data/DEGs/&quot;, pattern = &quot;Toptable_.*\\.csv&quot;, full.names = TRUE)
+if (length(deg_files) == 0) stop(&quot;❌ No DEG files found in data/DEGs/&quot;)
+deg_list  &lt;- lapply(deg_files, read.csv)
+names(deg_list) &lt;- gsub(&quot;Toptable_|\\.csv&quot;, &quot;&quot;, basename(deg_files))
+
+# --- Step 3: Fisher test function ---
+fisher_or &lt;- function(df, sample_name) {
+  if (!&quot;Entrez_ID&quot; %in% colnames(df)) return(NULL)
+
+  df &lt;- df %&gt;%
+    mutate(
+      DEG = adj.P.Val &lt; 0.05,
+      AF_risk = Entrez_ID %in% entrez_ids
+    )
+
+  a &lt;- sum(df$DEG &amp; df$AF_risk, na.rm = TRUE)
+  b &lt;- sum(df$DEG &amp; !df$AF_risk, na.rm = TRUE)
+  c &lt;- sum(!df$DEG &amp; df$AF_risk, na.rm = TRUE)
+  d &lt;- sum(!df$DEG &amp; !df$AF_risk, na.rm = TRUE)
+
+  # Fisher’s exact test
+  test &lt;- tryCatch(
+    fisher.test(matrix(c(a, b, c, d), nrow = 2)),
+    error = function(e) fisher.test(matrix(c(a, b, c, d), nrow = 2), simulate.p.value = TRUE)
+  )
+
+  tibble(
+    Sample = sample_name,
+    DE_Risk = a,
+    DE_nonRisk = b,
+    nonDE_Risk = c,
+    nonDE_nonRisk = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Step 4: Run Fisher tests for all DEG tables ---
+results &lt;- bind_rows(mapply(fisher_or, deg_list, names(deg_list), SIMPLIFY = FALSE))
+
+# --- Step 5: Extract metadata (Drug, Conc, Time) ---
+results &lt;- results %&gt;%
+  separate(Sample, into = c(&quot;Drug&quot;,&quot;Conc&quot;,&quot;Time&quot;), sep = &quot;_&quot;) %&gt;%
+  mutate(
+    Label = paste(Drug, Conc, sep = &quot;_&quot;),
+    Time = factor(Time, levels = c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))
+  )
+
+# --- Step 6: Forest plot ---
+p &lt;- ggplot(results, aes(x = Label, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Time, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;Atrial Fibrillation Risk Loci Enrichment Across Conditions&quot;,
+    x = &quot;Condition (Drug_Conc)&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )
+
+# --- Step 7: Display &amp; save ---
+print(p)</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+<p><img src="figure/Revision.Rmd/SC_20-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ggsave(&quot;plots/ForestPlot_AF_RiskLoci.png&quot;, plot = p, width = 7, height = 9, dpi = 300)
+
+# --- Step 8: Export raw enrichment data ---
+write.csv(results, &quot;data/AF_Cardiotoxicity_ForestPlot_Data.csv&quot;, row.names = FALSE)
+
+cat(&quot;✅ AF enrichment analysis complete. Results saved to data/AF_Cardiotoxicity_ForestPlot_Data.csv\n&quot;)</code></pre>
+<pre><code>✅ AF enrichment analysis complete. Results saved to data/AF_Cardiotoxicity_ForestPlot_Data.csv</code></pre>
+</div>
+<div id="odds-ratios-for-corrmotif-groups-af-genes"
+class="section level2">
+<h2><strong>📌 Odds Ratios for CorrMotif Groups (AF genes)</strong></h2>
+<pre class="r"><code>library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+
+# --- Load AF Gene Entrez IDs ---
+# Option 1: from mapped CSV
+AF_genes &lt;- read.csv(&quot;data/Cleaned_AF_genes_with_Entrez.csv&quot;, stringsAsFactors = FALSE)
+af_entrez &lt;- AF_genes$Entrez_ID %&gt;% as.character() %&gt;% unique() %&gt;% na.omit()
+
+# Option 2: if saved as RDS earlier
+# af_entrez &lt;- readRDS(&quot;data/AF_Entrez_IDs.rds&quot;)
+
+cat(&quot;✅ Loaded&quot;, length(af_entrez), &quot;AF Entrez IDs.\n&quot;)</code></pre>
+<pre><code>✅ Loaded 615 AF Entrez IDs.</code></pre>
+<pre class="r"><code># --- Load CorrMotif Groups ---
+# 0.1 µM
+prob_1_0.1 &lt;- as.character(read.csv(&quot;data/prob_1_0.1.csv&quot;)$Entrez_ID)
+prob_2_0.1 &lt;- as.character(read.csv(&quot;data/prob_2_0.1.csv&quot;)$Entrez_ID)
+prob_3_0.1 &lt;- as.character(read.csv(&quot;data/prob_3_0.1.csv&quot;)$Entrez_ID)
+
+# 0.5 µM
+prob_1_0.5 &lt;- as.character(read.csv(&quot;data/prob_1_0.5.csv&quot;)$Entrez_ID)
+prob_2_0.5 &lt;- as.character(read.csv(&quot;data/prob_2_0.5.csv&quot;)$Entrez_ID)
+prob_3_0.5 &lt;- as.character(read.csv(&quot;data/prob_3_0.5.csv&quot;)$Entrez_ID)
+prob_4_0.5 &lt;- as.character(read.csv(&quot;data/prob_4_0.5.csv&quot;)$Entrez_ID)
+prob_5_0.5 &lt;- as.character(read.csv(&quot;data/prob_5_0.5.csv&quot;)$Entrez_ID)
+
+# --- Annotate Groups ---
+df_0.1 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.1, prob_2_0.1, prob_3_0.1))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.1 ~ &quot;Non response (0.1)&quot;,
+      Entrez_ID %in% prob_2_0.1 ~ &quot;CX_DOX_1&quot;,
+      Entrez_ID %in% prob_3_0.1 ~ &quot;DOX_sp_1&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% af_entrez, &quot;AF Genes&quot;, &quot;Non-AF Genes&quot;),
+    Concentration = &quot;0.1&quot;
+  )
+
+df_0.5 &lt;- data.frame(Entrez_ID = unique(c(prob_1_0.5, prob_2_0.5, prob_3_0.5, prob_4_0.5, prob_5_0.5))) %&gt;%
+  mutate(
+    Response_Group = case_when(
+      Entrez_ID %in% prob_1_0.5 ~ &quot;Non response (0.5)&quot;,
+      Entrez_ID %in% prob_2_0.5 ~ &quot;DOX_sp_2&quot;,
+      Entrez_ID %in% prob_3_0.5 ~ &quot;DOX_sp_3&quot;,
+      Entrez_ID %in% prob_4_0.5 ~ &quot;CX_DOX_2&quot;,
+      Entrez_ID %in% prob_5_0.5 ~ &quot;CX_DOX_3&quot;
+    ),
+    Category = ifelse(Entrez_ID %in% af_entrez, &quot;AF Genes&quot;, &quot;Non-AF Genes&quot;),
+    Concentration = &quot;0.5&quot;
+  )
+
+# --- Combine all CorrMotif groups ---
+df_combined &lt;- bind_rows(df_0.1, df_0.5)
+
+# --- Fisher Odds Ratio Function ---
+fisher_or_group &lt;- function(df_group, df_all, group_name, conc) {
+  # counts in group
+  a &lt;- sum(df_group$Category == &quot;AF Genes&quot;)
+  b &lt;- sum(df_group$Category == &quot;Non-AF Genes&quot;)
+
+  # counts in rest of groups at same concentration
+  ref &lt;- df_all %&gt;% filter(Response_Group != group_name)
+  c &lt;- sum(ref$Category == &quot;AF Genes&quot;)
+  d &lt;- sum(ref$Category == &quot;Non-AF Genes&quot;)
+
+  mat &lt;- matrix(c(a, b, c, d), nrow = 2)
+  if (any(mat == 0)) mat &lt;- mat + 0.5  # continuity correction
+
+  test &lt;- fisher.test(mat)
+
+  tibble(
+    Response_Group = group_name,
+    Concentration  = conc,
+    a = a, b = b, c = c, d = d,
+    OR = unname(test$estimate),
+    Lower_CI = test$conf.int[1],
+    Upper_CI = test$conf.int[2],
+    Pval = test$p.value,
+    Stars = case_when(
+      test$p.value &lt; 0.001 ~ &quot;***&quot;,
+      test$p.value &lt; 0.01  ~ &quot;**&quot;,
+      test$p.value &lt; 0.05  ~ &quot;*&quot;,
+      TRUE ~ &quot;&quot;
+    )
+  )
+}
+
+# --- Run Fisher tests across groups ---
+results &lt;- list()
+for (conc in unique(df_combined$Concentration)) {
+  conc_df &lt;- df_combined %&gt;% filter(Concentration == conc)
+  for (grp in unique(conc_df$Response_Group)) {
+    grp_df &lt;- conc_df %&gt;% filter(Response_Group == grp)
+    results[[paste(conc, grp)]] &lt;- fisher_or_group(grp_df, conc_df, grp, conc)
+  }
+}
+results &lt;- bind_rows(results)
+
+# --- Save Results ---
+write.csv(results, &quot;data/CorrMotif_AFGenes_OddsRatios.csv&quot;, row.names = FALSE)
+cat(&quot;✅ Results saved to data/CorrMotif_AFGenes_OddsRatios.csv\n&quot;)</code></pre>
+<pre><code>✅ Results saved to data/CorrMotif_AFGenes_OddsRatios.csv</code></pre>
+<pre class="r"><code># --- Forest Plot ---
+p &lt;- ggplot(results, aes(x = Response_Group, y = OR, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange(aes(color = Pval &lt; 0.05), size = 0.9) +
+  geom_text(aes(label = Stars), hjust = -0.5, size = 5) +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;blue&quot;, &quot;FALSE&quot; = &quot;grey40&quot;)) +
+  coord_flip() +
+  facet_wrap(~Concentration, ncol = 1, scales = &quot;free_y&quot;) +
+  ylim(0, 20) +
+  labs(
+    title = &quot;AF Gene Enrichment Across CorrMotif Groups&quot;,
+    x = &quot;Response Group&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = &quot;none&quot;,
+    strip.text = element_text(face = &quot;bold&quot;, size = 12)
+  )
+
+p</code></pre>
+<p><img src="figure/Revision.Rmd/SC_21-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div
+id="cx-5461-sensitivity-comparison-all-values-in-µm-unified-naming-ld50-µm"
+class="section level2">
+<h2><strong>📌CX-5461 Sensitivity Comparison (All values in µM) Unified
+naming: LD50 (µM)</strong></h2>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+## === iPSC-CM LD50 (µM) ===
+ipsc_vals &lt;- c(6.4, 10.9, 10.0)
+ipsc_df &lt;- data.frame(
+  CellLine = c(&quot;iPSC-CM_1&quot;, &quot;iPSC-CM_2&quot;, &quot;iPSC-CM_3&quot;),
+  LD50 = ipsc_vals,
+  Group = &quot;iPSC-CM&quot;
+)
+
+## === Sanij et al. (GI50 nM → µM, renamed as LD50) ===
+sanij_data &lt;- data.frame(
+  CellLine = c(&quot;OVCAR3&quot;,&quot;FUOV1&quot;,&quot;COLO704&quot;,&quot;TOV112D&quot;,&quot;CH1&quot;,&quot;A2780&quot;,&quot;RMGI&quot;,&quot;2008&quot;,&quot;SKOV3&quot;,&quot;OVCA432&quot;,
+               &quot;OAW42&quot;,&quot;ES2&quot;,&quot;EFO27&quot;,&quot;IGROV1&quot;,&quot;Caov3&quot;,&quot;Colo720E&quot;,&quot;MCAS&quot;,&quot;OVCAR5&quot;,&quot;OVCAR4&quot;,&quot;OVCAR8&quot;,
+               &quot;JHOC5&quot;,&quot;JHOM1&quot;,&quot;KURAMOCHI&quot;,&quot;JHOC7&quot;,&quot;JHOS3&quot;,&quot;RMGII&quot;,&quot;OAW28&quot;,&quot;OV90&quot;),
+  Mean_nM = c(12,25.33,31.5,49.67,73.5,82.33,143,106.7,301.3,206.7,
+              226.7,181.3,417,422.3,409.3,413.5,357.6,100.5,613.3,859,
+              731,861.2,1082,3267,3177,3370,3850,5170)
+) %&gt;%
+  dplyr::mutate(
+    LD50 = Mean_nM / 1000,  # convert to µM
+    Group = ifelse(Mean_nM &lt; 2000, &quot;Sensitive&quot;, &quot;Resistant&quot;)
+  ) %&gt;%
+  dplyr::select(CellLine, LD50, Group)
+
+## === Cornelison et al. (IC50 µM, renamed as LD50) ===
+cornelison &lt;- data.frame(
+  CellLine = c(&quot;A2780ip2&quot;,&quot;A2780cp20&quot;,&quot;SKOV3ip1&quot;,&quot;SKOV3TRip2&quot;,
+               &quot;HeyA8&quot;,&quot;HeyA8MDR&quot;,&quot;PEO1&quot;,&quot;PEO4&quot;,&quot;OV90&quot;,&quot;OVCAR3&quot;,
+               &quot;OAW42&quot;,&quot;OVSAHO&quot;,&quot;CAOV3&quot;,&quot;COV362&quot;,&quot;ES2&quot;,&quot;HIO-180&quot;),
+  LD50 = c(0.032,0.146,0.595,0.109,
+           2.05,0.191,0.525,1.20,1.06,2.00,
+           0.300,0.636,0.955,0.645,0.294,5.49),
+  Group = c(rep(&quot;Sensitive&quot;,15),&quot;Resistant&quot;)
+)
+
+## === Combine all datasets ===
+all_data &lt;- dplyr::bind_rows(sanij_data, cornelison, ipsc_df)
+
+## === Plot (linear scale) ===
+ggplot(all_data, aes(x = Group, y = LD50, fill = Group)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.6, width = 0.6,
+               color = &quot;black&quot;, linewidth = 0.4) +
+  geom_point(aes(color = Group),
+             position = position_nudge(x = 0),
+             size = 3, alpha = 0.9, show.legend = FALSE) +
+  scale_fill_manual(values = c(&quot;Sensitive&quot;=&quot;#4A90E2&quot;,
+                               &quot;Resistant&quot;=&quot;#B0B0B0&quot;,
+                               &quot;iPSC-CM&quot;=&quot;#E74C3C&quot;)) +
+  scale_color_manual(values = c(&quot;Sensitive&quot;=&quot;#4A90E2&quot;,
+                                &quot;Resistant&quot;=&quot;#B0B0B0&quot;,
+                                &quot;iPSC-CM&quot;=&quot;#E74C3C&quot;)) +
+  labs(
+    title = expression(&quot;CX-5461 Sensitivity (LD&quot;[50]*&quot;, µM)&quot;),
+    x = &quot;&quot;,
+    y = expression(&quot;LD&quot;[50]*&quot; (µM)&quot;)
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = &quot;right&quot;,
+    plot.title = element_text(hjust = 0.5, face = &quot;bold&quot;),
+    axis.text = element_text(color = &quot;black&quot;)
+  )</code></pre>
+<p><img src="figure/Revision.Rmd/SC_22-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="elbow-plots-only-cx-5461-dox-vs-veh-0.1-0.5-µm-3-24-48-h"
+class="section level2">
+<h2><strong>📌Elbow plots only — CX-5461 / DOX vs VEH 0.1 &amp; 0.5 µM ×
+3, 24, 48 h</strong></h2>
+<pre class="r"><code>suppressPackageStartupMessages({
+  library(dplyr)
+  library(readr)
+  library(stringr)
+  library(tibble)
+  library(tidyr)
+})
+
+# ------------------------------------------------------------
+# INPUT FILES
+# ------------------------------------------------------------
+log2cpm_file &lt;- &quot;data/Feature_count_Matrix_Log2CPM_filtered.csv&quot;
+meta_file    &lt;- &quot;data/Metadata.csv&quot;
+
+# ------------------------------------------------------------
+# LOAD DATA
+# ------------------------------------------------------------
+log2cpm &lt;- read.csv(log2cpm_file, check.names = FALSE)
+colnames(log2cpm) &lt;- gsub(&quot;^X&quot;, &quot;&quot;, trimws(colnames(log2cpm)))
+
+Metadata &lt;- read.csv(meta_file, check.names = FALSE)
+Metadata$Sample_name &lt;- gsub(&quot;^([0-9]+)\\.([0-9]+)&quot;, &quot;\\1-\\2&quot;, Metadata$Sample_name)
+
+id_col &lt;- grep(&quot;^Entrez|ENTREZ&quot;, colnames(log2cpm), value = TRUE)[1]
+rownames(log2cpm) &lt;- log2cpm[[id_col]]
+
+# ------------------------------------------------------------
+# FUNCTION: plot elbow for one condition
+# ------------------------------------------------------------
+plot_elbow_one &lt;- function(drug_label = &quot;CX-5461&quot;, conc = 0.1, time_h = 3) {
+  deg_prefix &lt;- ifelse(drug_label == &quot;CX-5461&quot;, &quot;CX&quot;, &quot;DOX&quot;)
+  deg_file &lt;- sprintf(&quot;data/DEGs/Toptable_%s_%s_%s.csv&quot;, deg_prefix, conc, time_h)
+
+  if (!file.exists(deg_file)) {
+    message(&quot;Missing DEG file: &quot;, deg_file)
+    return()
+  }
+
+  deg &lt;- read.csv(deg_file)
+  sig &lt;- deg %&gt;% filter(adj.P.Val &lt; 0.05) %&gt;% pull(Entrez_ID) %&gt;% unique()
+  if (length(sig) == 0) {
+    message(&quot;No DEGs in &quot;, deg_file)
+    return()
+  }
+
+  samples &lt;- Metadata %&gt;%
+    filter(Drug %in% c(drug_label, &quot;VEH&quot;),
+           Conc. == conc,
+           Time == time_h) %&gt;%
+    pull(Sample_name)
+
+  matched &lt;- intersect(samples, colnames(log2cpm))
+  if (length(matched) == 0) {
+    message(&quot;No matching samples for &quot;, drug_label, &quot; &quot;, conc, &quot;µM &quot;, time_h, &quot;h&quot;)
+    return()
+  }
+
+  M &lt;- log2cpm[rownames(log2cpm) %in% sig, matched, drop = FALSE]
+  M &lt;- as.matrix(M)
+  if (nrow(M) &lt; 3) {
+    message(&quot;Too few genes (&lt;3) for elbow plot: &quot;, drug_label, &quot; &quot;, conc, &quot;µM &quot;, time_h, &quot;h&quot;)
+    return()
+  }
+
+  # ---- K-means elbow ----
+  set.seed(123)
+  max_k &lt;- min(10, nrow(M) - 1)
+  wss &lt;- sapply(1:max_k, function(k)
+    kmeans(M, centers = k, nstart = 10, iter.max = 50)$tot.withinss)
+
+  plot(1:max_k, wss, type = &quot;b&quot;, pch = 19, col = &quot;darkblue&quot;,
+       xlab = &quot;Number of Clusters (K)&quot;,
+       ylab = &quot;Total Within-Cluster SS&quot;,
+       main = sprintf(&quot;Elbow — %s (%.1f µM, %dh) vs VEH&quot;, drug_label, conc, time_h))
+}
+
+# ------------------------------------------------------------
+# EXECUTE — Generate all 12 elbow plots sequentially
+# ------------------------------------------------------------
+
+# CX-5461
+for (cc in c(0.1, 0.5)) {
+  for (tt in c(3, 24, 48)) {
+    message(&quot;&gt;&gt;&gt; CX-5461 &quot;, cc, &quot; µM &quot;, tt, &quot; h&quot;)
+    plot_elbow_one(&quot;CX-5461&quot;, cc, tt)
+    dev.flush(); Sys.sleep(1)
+  }
+}</code></pre>
+<p><img src="figure/Revision.Rmd/SC_23-1.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_23-2.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_23-3.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_23-4.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># DOX
+for (cc in c(0.1, 0.5)) {
+  for (tt in c(3, 24, 48)) {
+    message(&quot;&gt;&gt;&gt; DOX &quot;, cc, &quot; µM &quot;, tt, &quot; h&quot;)
+    plot_elbow_one(&quot;DOX&quot;, cc, tt)
+    dev.flush(); Sys.sleep(1)
+  }
+}</code></pre>
+<p><img src="figure/Revision.Rmd/SC_23-5.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_23-6.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_23-7.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code>Warning: Quick-TRANSfer stage steps exceeded maximum (= 491400)
+Warning: Quick-TRANSfer stage steps exceeded maximum (= 491400)</code></pre>
+<p><img src="figure/Revision.Rmd/SC_23-8.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_23-9.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cx-5461-dox-vs-veh-heatmaps-0.1-0.5-µm-3-24-48-h"
+class="section level2">
+<h2><strong>📌CX-5461 &amp; DOX vs VEH Heatmaps (0.1 / 0.5 µM ; 3 / 24 /
+48 h)</strong></h2>
+<pre class="r"><code>suppressPackageStartupMessages({
+  library(ComplexHeatmap)
+  library(circlize)
+  library(dplyr)
+  library(readr)
+  library(tibble)
+  library(tidyr)
+  library(RColorBrewer)
+  library(stringr)
+})</code></pre>
+<pre><code>Warning: package &#39;ComplexHeatmap&#39; was built under R version 4.3.1</code></pre>
+<pre><code>Warning: package &#39;circlize&#39; was built under R version 4.3.3</code></pre>
+<pre class="r"><code># ------------------------------------------------------------
+# INPUT FILES
+# ------------------------------------------------------------
+log2cpm_file &lt;- &quot;data/Feature_count_Matrix_Log2CPM_filtered.csv&quot;
+meta_file    &lt;- &quot;data/Metadata.csv&quot;
+
+# ------------------------------------------------------------
+# LOAD DATA
+# ------------------------------------------------------------
+log2cpm &lt;- read.csv(log2cpm_file, check.names = FALSE)
+colnames(log2cpm) &lt;- gsub(&quot;^X&quot;, &quot;&quot;, trimws(colnames(log2cpm)))
+
+Metadata &lt;- read.csv(meta_file, check.names = FALSE)
+Metadata$Sample_name &lt;- gsub(&quot;^([0-9]+)\\.([0-9]+)&quot;, &quot;\\1-\\2&quot;, Metadata$Sample_name)
+
+id_col &lt;- grep(&quot;^Entrez|ENTREZ&quot;, colnames(log2cpm), value = TRUE)[1]
+rownames(log2cpm) &lt;- log2cpm[[id_col]]
+
+# ------------------------------------------------------------
+# COLORS &amp; MAPS
+# ------------------------------------------------------------
+rename_map &lt;- c(&quot;17-3&quot;=&quot;1&quot;,&quot;75-1&quot;=&quot;2&quot;,&quot;84-1&quot;=&quot;3&quot;,&quot;90-1&quot;=&quot;4&quot;,&quot;87-1&quot;=&quot;5&quot;,&quot;78-1&quot;=&quot;6&quot;)
+indv_colors &lt;- setNames(brewer.pal(6, &quot;Dark2&quot;), as.character(1:6))
+trt_colors  &lt;- c(&quot;CX-5461&quot;=&quot;#8B006D&quot;, &quot;DOX&quot;=&quot;#DF707E&quot;, &quot;VEH&quot;=&quot;#41B333&quot;)
+conc_colors &lt;- c(&quot;0.1&quot;=&quot;lightblue&quot;, &quot;0.5&quot;=&quot;lightcoral&quot;)
+time_colors &lt;- c(&quot;3&quot;=&quot;purple&quot;, &quot;24&quot;=&quot;pink&quot;, &quot;48&quot;=&quot;tomato3&quot;)
+
+cluster_map &lt;- list(
+  &quot;CX_0.1_3&quot;=NA, &quot;CX_0.1_24&quot;=3, &quot;CX_0.1_48&quot;=3,
+  &quot;CX_0.5_3&quot;=NA, &quot;CX_0.5_24&quot;=3, &quot;CX_0.5_48&quot;=3,
+  &quot;DOX_0.1_3&quot;=NA, &quot;DOX_0.1_24&quot;=3, &quot;DOX_0.1_48&quot;=3,
+  &quot;DOX_0.5_3&quot;=3,  &quot;DOX_0.5_24&quot;=3, &quot;DOX_0.5_48&quot;=3
+)
+
+# ------------------------------------------------------------
+# FUNCTION — DRAW AND SHOW HEATMAP
+# ------------------------------------------------------------
+plot_heatmap_show &lt;- function(drug_label=&quot;CX-5461&quot;, conc=0.1, time_h=3) {
+  deg_prefix &lt;- ifelse(drug_label == &quot;CX-5461&quot;, &quot;CX&quot;, &quot;DOX&quot;)
+  deg_file &lt;- sprintf(&quot;data/DEGs/Toptable_%s_%s_%s.csv&quot;, deg_prefix, conc, time_h)
+  key &lt;- sprintf(&quot;%s_%s_%s&quot;, deg_prefix, conc, time_h)
+  row_k &lt;- cluster_map[[key]]
+
+  if (!file.exists(deg_file)) {
+    message(&quot;❌ Missing DEG file: &quot;, deg_file)
+    return()
+  }
+
+  deg &lt;- read.csv(deg_file)
+  sig &lt;- deg %&gt;% filter(adj.P.Val &lt; 0.05) %&gt;% pull(Entrez_ID) %&gt;% unique()
+  if (length(sig) == 0) {
+    message(&quot;⚠️ No DEGs for &quot;, key)
+    return()
+  }
+
+  samples &lt;- Metadata %&gt;%
+    filter(Drug %in% c(drug_label,&quot;VEH&quot;),
+           Conc. == conc,
+           Time == time_h) %&gt;%
+    pull(Sample_name)
+
+  matched &lt;- intersect(samples, colnames(log2cpm))
+  if (length(matched) == 0) {
+    message(&quot;⚠️ No matching samples for &quot;, key)
+    return()
+  }
+
+  M &lt;- log2cpm[rownames(log2cpm) %in% sig, matched, drop=FALSE]
+  if (nrow(M) == 0) {
+    message(&quot;⚠️ Empty matrix for &quot;, key)
+    return()
+  }
+
+  M &lt;- as.matrix(M)
+  colnames(M) &lt;- str_replace_all(colnames(M), rename_map)
+
+  # --- Annotation
+  annot_df &lt;- tibble(timeset = colnames(M)) %&gt;%
+    mutate(sample = timeset) %&gt;%
+    separate(timeset, into=c(&quot;indv&quot;,&quot;trt&quot;,&quot;conc&quot;,&quot;time&quot;), sep=&quot;_&quot;, remove=FALSE) %&gt;%
+    mutate(trt=factor(trt,levels=c(drug_label,&quot;VEH&quot;)),
+           indv=factor(indv,levels=as.character(1:6)),
+           conc=factor(conc,levels=c(&quot;0.1&quot;,&quot;0.5&quot;)),
+           time=factor(time,levels=c(&quot;3&quot;,&quot;24&quot;,&quot;48&quot;))) %&gt;%
+    column_to_rownames(&quot;sample&quot;)
+
+  top_ha &lt;- HeatmapAnnotation(
+    df=annot_df[,c(&quot;trt&quot;,&quot;indv&quot;,&quot;time&quot;)],
+    col=list(trt=trt_colors, indv=indv_colors, time=time_colors)
+  )
+
+  # --- Color scale
+  q &lt;- quantile(as.numeric(M), c(0.01, 0.5, 0.99), na.rm=TRUE)
+  col_fun &lt;- colorRamp2(c(q[1], q[2], q[3]), c(&quot;blue&quot;,&quot;white&quot;,&quot;red&quot;))
+
+  # --- Plotting
+  message(&quot;✅ Displaying: &quot;, key,
+          ifelse(is.na(row_k), &quot; (no clusters)&quot;, paste0(&quot; (k=&quot;, row_k, &quot;)&quot;)))
+
+  if (is.na(row_k)) {
+    ht &lt;- Heatmap(
+      M,
+      top_annotation=top_ha,
+      show_column_names=TRUE,
+      show_row_names=FALSE,
+      cluster_columns=TRUE,
+      cluster_rows=FALSE,
+      col=col_fun,
+      use_raster=TRUE,
+      raster_device=&quot;png&quot;,
+      raster_quality=2,
+      column_title=sprintf(&quot;%s (%.1f µM ; %dh) vs VEH — log2CPM&quot;,
+                           drug_label, conc, time_h),
+      row_title=NULL
+    )
+  } else {
+    ht &lt;- Heatmap(
+      M,
+      top_annotation=top_ha,
+      show_column_names=TRUE,
+      show_row_names=FALSE,
+      cluster_columns=TRUE,
+      cluster_rows=FALSE,
+      row_km=row_k,
+      col=col_fun,
+      use_raster=TRUE,
+      raster_device=&quot;png&quot;,
+      raster_quality=2,
+      column_title=sprintf(&quot;%s (%.1f µM ; %dh) vs VEH — log2CPM&quot;,
+                           drug_label, conc, time_h),
+      row_title=&quot;Cluster&quot;
+    )
+  }
+
+  draw(ht)
+}
+
+# ------------------------------------------------------------
+# RUN ALL COMBOS
+# ------------------------------------------------------------
+for (drug in c(&quot;CX-5461&quot;,&quot;DOX&quot;)) {
+  for (cc in c(0.1,0.5)) {
+    for (tt in c(3,24,48)) {
+      message(&quot;\n&gt;&gt;&gt; &quot;, drug, &quot; &quot;, cc, &quot; µM &quot;, tt, &quot; h&quot;)
+      plot_heatmap_show(drug, cc, tt)
+    }
+  }
+}</code></pre>
+<p><img src="figure/Revision.Rmd/SC_24-1.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-2.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-3.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-4.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-5.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-6.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-7.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-8.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-9.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-10.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-11.png" width="960" style="display: block; margin: auto;" /><img src="figure/Revision.Rmd/SC_24-12.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>message(&quot;\n🎨 All heatmaps displayed sequentially.&quot;)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.3.0 (2023-04-21 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 11 x64 (build 26100)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] grid      stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] RColorBrewer_1.1-3    circlize_0.4.16       ComplexHeatmap_2.18.0
+ [4] lubridate_1.9.4       forcats_1.0.0         stringr_1.5.1        
+ [7] purrr_1.0.4           readr_2.1.5           tidyverse_2.0.0      
+[10] org.Hs.eg.db_3.18.0   AnnotationDbi_1.64.1  IRanges_2.36.0       
+[13] S4Vectors_0.40.2      Biobase_2.62.0        BiocGenerics_0.48.1  
+[16] ggplot2_3.5.2         tibble_3.2.1          tidyr_1.3.1          
+[19] dplyr_1.1.4          
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.1        farver_2.1.2            blob_1.2.4             
+ [4] Biostrings_2.70.3       bitops_1.0-9            fastmap_1.2.0          
+ [7] RCurl_1.98-1.17         promises_1.3.2          digest_0.6.34          
+[10] timechange_0.3.0        lifecycle_1.0.4         cluster_2.1.8.1        
+[13] KEGGREST_1.42.0         RSQLite_2.3.9           magrittr_2.0.3         
+[16] compiler_4.3.0          rlang_1.1.3             sass_0.4.10            
+[19] tools_4.3.0             yaml_2.3.10             knitr_1.50             
+[22] labeling_0.4.3          bit_4.6.0               workflowr_1.7.1        
+[25] withr_3.0.2             git2r_0.36.2            colorspace_2.1-0       
+[28] scales_1.3.0            iterators_1.0.14        cli_3.6.1              
+[31] rmarkdown_2.29          crayon_1.5.3            generics_0.1.3         
+[34] rstudioapi_0.17.1       rjson_0.2.23            httr_1.4.7             
+[37] tzdb_0.5.0              DBI_1.2.3               cachem_1.1.0           
+[40] zlibbioc_1.48.2         splines_4.3.0           parallel_4.3.0         
+[43] XVector_0.42.0          matrixStats_1.5.0       vctrs_0.6.5            
+[46] Matrix_1.6-1.1          jsonlite_2.0.0          hms_1.1.3              
+[49] GetoptLong_1.0.5        bit64_4.6.0-1           clue_0.3-66            
+[52] magick_2.8.6            foreach_1.5.2           jquerylib_0.1.4        
+[55] glue_1.7.0              codetools_0.2-20        shape_1.4.6.1          
+[58] stringi_1.8.3           gtable_0.3.6            later_1.3.2            
+[61] GenomeInfoDb_1.38.8     munsell_0.5.1           pillar_1.10.2          
+[64] htmltools_0.5.8.1       GenomeInfoDbData_1.2.11 R6_2.6.1               
+[67] doParallel_1.0.17       rprojroot_2.0.4         evaluate_1.0.3         
+[70] lattice_0.22-7          png_0.1-8               memoise_2.0.1          
+[73] httpuv_1.6.15           bslib_0.9.0             Rcpp_1.0.12            
+[76] nlme_3.1-168            mgcv_1.9-3              xfun_0.52              
+[79] GlobalOptions_0.1.2     fs_1.6.3                pkgconfig_2.0.3        </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
